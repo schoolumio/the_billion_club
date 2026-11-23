@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { BadgeCheck, BookOpen, Briefcase, FileBarChart, FileSearch, Gavel, Landmark, PieChart, Shuffle } from "lucide-react";
 import { Callout, Card, PageHero, SectionHeading, StatusBadge } from "@/components/ui/primitives";
 import { AllocationChart } from "@/components/charts/AllocationChart";
-import { SCENARIOS, runModel, formatNaira } from "@/lib/finance/model";
+import { ADOPTED, runModel, formatNaira } from "@/lib/finance/model";
 
 export const metadata: Metadata = { title: "Transparency & accountability", description: "Contribution accounting, fund allocation, audits, selection methodology, award verification and governance." };
 
@@ -19,7 +19,7 @@ const SECTIONS = [
 ];
 
 export default function Transparency() {
-  const s = SCENARIOS[2];
+  const s = ADOPTED;
   const r = runModel(s.inputs);
   return (
     <>
@@ -60,7 +60,7 @@ export default function Transparency() {
         <div className="container-x">
           <div className="flex flex-wrap items-end justify-between gap-4">
             <SectionHeading eyebrow="Report preview" title="What a monthly allocation report will look like." />
-            <StatusBadge kind="demo" label="Demonstration — based on Scenario C projection" />
+            <StatusBadge kind="demo" label="Demonstration — based on the 60/40 model projection" />
           </div>
           <Card className="mt-10 !p-8">
             <div className="flex flex-wrap justify-between gap-4 border-b border-navy-100 pb-6">

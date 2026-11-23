@@ -2,53 +2,69 @@
 
 > Not legal, tax or investment advice. A briefing document for founders and their professional advisers.
 
-## 1. The concept, refined
+## 1. The adopted model (founder decisions)
 
-| Element | Original concept | Refined position |
+| Element | Decision |
+|---|---|
+| Registration | **Unlimited** |
+| Daily places | **10 million per day** at ₦100, first come first served, one per verified person; the day closes when full |
+| Split | **60% to winners / 40% to the team**, of money actually collected |
+| Awards | **30 winners a month: 3 × ₦1bn grand + 27 × ≈₦556m enterprise** (at full capacity) |
+| Business fund | **Kept at 12%** — jobs are created whatever winners decide |
+| Selection entries | Proposed: one entry per day a place is held (awaiting approval) |
+| Launch | No collection until licences, custody and professional opinions are in place |
+
+### Full-capacity month (10M places × ₦100 × 30 days = ₦30bn)
+
+| Fund | Share | Monthly |
 |---|---|---|
-| Community | 10M members × ₦100/day | Kept as the **target**, always labelled as such |
-| Inflow | ₦1bn/day, ₦30bn/month | Correct at **100% participation, before costs** |
-| Awards | 30 × ₦1bn per month | Not fundable alongside any other commitment — see §2 |
-| Differentiator | Ecosystem: businesses, jobs, suppliers | Kept and made central; legally separated funds |
-| Launch | — | **No collection until licences, custody and opinions are in place** |
+| **Winners** | **60%** | **₦18.0bn** |
+| Business development fund | 12% | ₦3.6bn |
+| Government levies & taxes *(estimate)* | 8% | ₦2.4bn |
+| Emergency reserve | 6% | ₦1.8bn |
+| Community development | 5% | ₦1.5bn |
+| Staff, technology, support | 5% | ₦1.5bn |
+| Bank & payment charges | 3% | ₦0.9bn |
+| Audit & oversight | 1% | ₦0.3bn |
+| **Team total** | **40%** | **₦12.0bn** |
 
-## 2. Critical financial finding
+### The golden rule: awards follow money already collected
 
-30 × ₦1bn = ₦30bn = **100% of projected gross inflow**. That leaves nothing for payment processing, statutory levies and tax, audit, operations, reserves, business development capital or community investment — and it assumes every member pays every day. At 80% participation the scheme would be ₦6bn short every month.
+| Places sold | Collected | Award structure |
+|---|---|---|
+| 100% | ₦30bn | 3 × ₦1bn + 27 × ₦556m |
+| 80% | ₦24bn | 3 × ₦1bn + 27 × ₦422m |
+| 60% | ₦18bn | 3 × ₦1bn + 27 × ₦289m |
+| 1M members/day | ₦3bn | 30 × ₦60m (pool below ₦5bn → equal shares) |
 
-**Paying committed awards out of future growth is the structure of a Ponzi scheme**, which Nigerian law prohibits. The core rule we adopt: *awards are set from verified, already-collected inflow, never from projections.*
+Implemented and unit-tested in `src/lib/finance/model.ts` (`ADOPTED_ALLOCATION`, `tieredAwards`, `adoptedAwards`).
 
-### Scenarios (all in `src/lib/finance/model.ts`, unit-tested)
+## 2. Why the alternatives were rejected
 
-| | Awards | Award pool | Verdict | Trade-off |
-|---|---|---|---|---|
-| A — As proposed | 30 × ₦1bn | 100% | Not viable | Nothing else funded; deficit below 100% participation |
-| B — Keep ₦1bn | 12 × ₦1bn | 40% | Viable with conditions | Fewer beneficiaries; count floats with inflow |
-| **C — Tiered (recommended)** | 3 × ₦1bn + 27 × ₦333m | 40% | Recommended | Keeps 30 beneficiaries and the ₦1bn headline |
-| D — Larger base | 30 × ₦1bn | 40% | Requires growth | Needs 25M members, ₦250/day, or ≈₦18bn/month co-funding |
+| Model | Winners | Verdict | Reason |
+|---|---|---|---|
+| A — 30 × ₦1bn | 100% | Not viable | Nothing left for any cost; shortfall whenever a place goes unsold. Paying promises from future money is a Ponzi structure. |
+| B — 30 × ₦900m (10% charge) | 90% | Not viable | ₦3bn is consumed by bank charges and estimated levies before staff, audit or reserve |
+| C — 3 × ₦1bn + 27 × ₦333m | 40% | Viable | Strong ecosystem, but awards judged too small |
+| **D — 3 × ₦1bn + 27 × ₦556m** | **60%** | **Adopted** | Balances attractive awards with solvency and the jobs ecosystem |
 
-### Proposed allocation policy (share of gross inflow)
-
-Awards 40% · Business development capital 20% · Community development 10% · Reserve 8% · Regulatory levies & tax 8% *(placeholder)* · Payment processing 3% *(placeholder)* · Operations 9% · Audit, assurance & governance 2%.
-
-### Other risks and proposed mitigations
+### Risks specific to the adopted model
 
 | Risk | Mitigation |
 |---|---|
-| Micro-payment fees and failures on 365 × ₦100 payments | Weekly/monthly pre-funding recorded daily; e-mandate direct debit |
-| Participation volatility | Award tiers recalculated monthly from verified inflow; reserve target of 3 months' awards |
-| Odds (~1 in 333,333/month) misread as likely wealth | Plain odds disclosure; ecosystem benefits for non-selected members |
-| Mischaracterisation (lottery vs investment vs savings) | Multi-entity structure; five money types never blurred (below) |
-| Concentration / failure of awarded wealth | Optional business development support; financial-literacy onboarding |
-| Fraud and impersonation | No agent cash collection; in-app fraud reporting; public warnings |
-| Governance capture | Independent board majority, member advisory council, conflicts register |
+| Levies/taxes exceed the 8% estimate | Obtain the tax opinion first; the team share has little slack |
+| **Opening-time rush**: millions of payments in minutes | Virtual waiting room, atomic place counter, idempotent payments, pre-funded wallets via a licensed partner, load testing at 10× expected peak |
+| Fairness: urban/fast-internet members win the rush | USSD channel parity, bot protection, one place per verified identity; consider a fixed opening time announced in advance |
+| Scarcity marketing seen as pressure selling | Show factual availability only; no countdowns or "last chance" copy; ARCON vetting |
+| Mischaracterisation as a lottery | "Daily places", not "tickets"; multi-entity structure; the business and community funds are real and audited |
+| Award concentration | Optional business support; financial-literacy onboarding for winners |
 
 ### Five kinds of money
-1. **Member contribution** — not an investment, no promised return.
-2. **Prize / award** — regulated according to licensing route.
-3. **Business investment** — risk-bearing, separately regulated vehicle.
-4. **Community development fund** — non-repayable grants.
-5. **Operating expense** — capped and published.
+1. **Member contribution**: the ₦100 for a daily place. Not an investment, no promised return.
+2. **Prize / award**: 60% pool, regulated according to the licensing route.
+3. **Business investment**: 12% fund in a separately regulated vehicle.
+4. **Community development fund**: 5%, non-repayable grants.
+5. **Operating expense**: 9% combined (bank, staff, audit), capped and published.
 
 ## 3. Regulatory questions (Nigeria)
 
@@ -85,7 +101,7 @@ Full map and checklist: `/compliance` page and `src/lib/content/compliance.ts`. 
 /how-it-works          Seven-step journey with safeguards and status labels
 /ecosystem             Interactive flywheel + value-flow table
 /business-development  Services, venture pathway, beneficiary rights
-/financial-model       Critical finding, four scenarios, allocation policy, calculator, money types
+/financial-model       Adopted 60/40 model, daily places, awards-follow-collections tables, alternatives, calculator
 /transparency          Actual-zero counters, nine reporting commitments, report preview (demo)
 /impact                Seven indicators (actual = 0), demo impact dashboard
 /about                 Vision, mission, philosophy, leadership placeholders, governance, partner contact

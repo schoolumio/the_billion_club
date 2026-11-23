@@ -41,6 +41,15 @@ tests/                 node:test unit tests
 3. Selection: commit-reveal seed, hashed eligibility snapshot, independent observer sign-off, immutable record.
 4. Gate behind a feature flag plus a recorded compliance sign-off.
 
+## Daily places (10 million per day)
+Not yet implemented; it depends on payments approval. Proposed design:
+- `daily_places(day, member_id)` with a **unique constraint on (day, member_id)** (one place per person per day) and a counter enforced atomically (Redis `INCR` with a ceiling, reconciled to Postgres).
+- Place is **reserved → paid → confirmed**; unpaid reservations expire after N minutes and return to the pool.
+- **Virtual waiting room** in front of the purchase flow at opening time; rate limits per identity and device; bot detection.
+- Pre-funded wallet debits (via a licensed partner) avoid millions of card authorisations in the opening minutes.
+- USSD channel draws from the same counter for fairness.
+- Each confirmed place = one selection entry for the month (pending approval of the methodology).
+
 ## Scaling path
 Stateless app servers behind a load balancer; PgBouncer; read replicas for reporting; partition `contributions` by month (≈300M rows/month at full target); move aggregates to materialised views refreshed by a job; Redis for rate limiting and sessions revocation list; queue (e.g. SQS) for webhooks and notifications; CDN for static pages.
 

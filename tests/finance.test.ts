@@ -1,39 +1,65 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { CONCEPT_INPUTS, SCENARIOS, allocationTotal, runModel, formatNaira, formatOdds, RECOMMENDED_MAX_AWARD_SHARE } from "../src/lib/finance/model.ts";
+import { ADOPTED, ADOPTED_ALLOCATION, CONCEPT_INPUTS, SCENARIOS, adoptedAwards, allocationTotal, runModel, tieredAwards, formatNaira, formatOdds } from "../src/lib/finance/model.ts";
 
-test("concept inflow is ₦1bn/day and ₦30bn/month", () => {
+test("10M daily places × ₦100 × 30 days = ₦30bn", () => {
   const r = runModel(CONCEPT_INPUTS);
   assert.equal(r.grossDaily, 1_000_000_000);
   assert.equal(r.grossMonthly, 30_000_000_000);
 });
 
-test("30 × ₦1bn consumes 100% of inflow and is flagged infeasible", () => {
-  const r = runModel(CONCEPT_INPUTS);
-  assert.equal(r.awardShareOfGross, 1);
-  assert.equal(r.nonAwardFunds, 0);
-  assert.equal(r.feasible, false);
+test("daily cap limits inflow even with more registered members", () => {
+  const r = runModel({ ...CONCEPT_INPUTS, members: 25_000_000 });
+  assert.equal(r.placesPerDay, 10_000_000);
+  assert.equal(r.capReached, true);
+  assert.equal(r.grossMonthly, 30_000_000_000);
 });
 
-test("at 80% participation the concept is in deficit", () => {
+test("below the cap, places = members × participation", () => {
   const r = runModel({ ...CONCEPT_INPUTS, participationRate: 0.8 });
-  assert.ok(r.nonAwardFunds < 0);
+  assert.equal(r.placesPerDay, 8_000_000);
+  assert.equal(r.capReached, false);
+});
+
+test("original concept consumes 100% of inflow", () => {
+  const r = runModel(CONCEPT_INPUTS);
+  assert.equal(r.awardShareOfGross, 1);
+  assert.equal(r.feasible, false);
 });
 
 test("every scenario allocation sums to 100%", () => {
   for (const s of SCENARIOS) assert.equal(allocationTotal(s.allocation), 100, s.id);
 });
 
-test("recommended scenarios keep awards within their pool", () => {
-  for (const s of SCENARIOS.filter((x) => x.id !== "concept")) {
-    const r = runModel(s.inputs);
-    const awardCost = s.awards.reduce((t, a) => t + a.count * a.amount, 0);
-    assert.ok(awardCost <= (r.grossMonthly * s.allocation.awards) / 100 + 1, s.id);
-  }
+test("adopted policy is 60/40 with 12% business fund", () => {
+  assert.equal(ADOPTED_ALLOCATION.awards, 60);
+  assert.equal(100 - ADOPTED_ALLOCATION.awards, 40);
+  assert.equal(ADOPTED_ALLOCATION.business, 12);
 });
 
-test("membership required for 30 × ₦1bn at 40% pool is 25 million", () => {
-  assert.equal(runModel(CONCEPT_INPUTS).membersRequired(RECOMMENDED_MAX_AWARD_SHARE), 25_000_000);
+test("full capacity: 3 × ₦1bn + 27 × ≈₦556m = ₦18bn", () => {
+  const a = adoptedAwards(runModel(ADOPTED.inputs).grossMonthly);
+  assert.equal(a.pool, 18_000_000_000);
+  assert.equal(a.tiered, true);
+  assert.equal(a.grand.count * a.grand.amount, 3_000_000_000);
+  assert.equal(Math.round(a.enterprise.amount / 1e6), 556);
+  assert.equal(a.grand.count * a.grand.amount + a.enterprise.count * a.enterprise.amount, a.pool);
+});
+
+test("awards never exceed the pool and fall back to equal shares below ₦5bn", () => {
+  for (const pool of [1e9, 4.9e9, 5e9, 9e9, 18e9]) {
+    const a = tieredAwards(pool);
+    const total = a.grand.count * a.grand.amount + a.enterprise.count * a.enterprise.amount;
+    assert.ok(Math.abs(total - pool) < 1, String(pool));
+    assert.equal(a.grand.count + a.enterprise.count, 30);
+  }
+  assert.equal(tieredAwards(1.8e9).tiered, false);
+  assert.equal(tieredAwards(1.8e9).enterprise.amount, 60_000_000);
+});
+
+test("80% of places sold → 3 × ₦1bn + 27 × ≈₦422m", () => {
+  const a = adoptedAwards(runModel({ ...ADOPTED.inputs, participationRate: 0.8 }).grossMonthly);
+  assert.equal(Math.round(a.enterprise.amount / 1e6), 422);
 });
 
 test("formatting helpers", () => {

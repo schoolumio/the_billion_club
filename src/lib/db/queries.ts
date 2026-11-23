@@ -12,10 +12,11 @@ export interface MemberProfile {
 export const getMember = (id: string) => one<MemberProfile>(`SELECT * FROM users WHERE id = $1`, [id]);
 
 export async function memberSummary(id: string) {
-  const r = await one<{ total: string; n: string; last30: string; first: Date | null; last: Date | null }>(
+  const r = await one<{ total: string; n: string; last30: string; month_days: string; first: Date | null; last: Date | null }>(
     `SELECT COALESCE(sum(amount_kobo) FILTER (WHERE status <> 'failed'),0) total,
             count(*) FILTER (WHERE status <> 'failed') n,
             count(DISTINCT contribution_date) FILTER (WHERE contribution_date > current_date - 30 AND status <> 'failed') last30,
+            count(DISTINCT contribution_date) FILTER (WHERE contribution_date >= date_trunc('month', current_date) AND status <> 'failed') month_days,
             min(contribution_date) first, max(contribution_date) last
      FROM contributions WHERE user_id = $1`, [id]);
   const streak = await one<{ streak: number }>(
@@ -25,7 +26,7 @@ export async function memberSummary(id: string) {
      WHERE mx >= current_date - 1`, [id]);
   return {
     total: koboToNaira(r?.total), count: Number(r?.n ?? 0), activeDays30: Number(r?.last30 ?? 0),
-    first: r?.first ?? null, last: r?.last ?? null, streak: streak?.streak ?? 0,
+    monthEntries: Number(r?.month_days ?? 0), first: r?.first ?? null, last: r?.last ?? null, streak: streak?.streak ?? 0,
   };
 }
 

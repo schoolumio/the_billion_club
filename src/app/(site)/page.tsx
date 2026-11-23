@@ -5,23 +5,21 @@ import { Card, Eyebrow, LinkButton, SectionHeading, StatusBadge, Callout } from 
 import { Reveal } from "@/components/ui/Reveal";
 import { EcosystemDiagram } from "@/components/home/EcosystemDiagram";
 import { AllocationChart } from "@/components/charts/AllocationChart";
-import { SCENARIOS, runModel, formatNaira, formatOdds } from "@/lib/finance/model";
+import { ADOPTED, runModel, formatNaira, formatOdds } from "@/lib/finance/model";
 import { ROADMAP } from "@/lib/content/roadmap";
 import { HOW_IT_WORKS } from "@/lib/content/how";
 
 export const metadata: Metadata = { title: { absolute: "The Billion Club — 10 million people. One shared vision." } };
 
 const targets = [
-  { value: "10,000,000", label: "Members", note: "Community target" },
-  { value: "₦100", label: "Per member, per day", note: "Proposed contribution" },
-  { value: "₦1bn", label: "Potential daily inflow", note: "At full participation" },
-  { value: "₦30bn", label: "Potential monthly inflow", note: "30-day month" },
+  { value: "10,000,000", label: "Daily places", note: "Unlimited registration" },
+  { value: "₦100", label: "Per daily place", note: "Proposed contribution" },
+  { value: "30", label: "Winners every month", note: "3 × ₦1bn + 27 × ₦556m" },
+  { value: "60%", label: "Of every naira to winners", note: "40% builds the ecosystem" },
 ];
 
 export default function Home() {
-  const tiered = SCENARIOS.find((s) => s.id === "tiered")!;
-  const concept = SCENARIOS.find((s) => s.id === "concept")!;
-  const r = runModel(tiered.inputs);
+  const r = runModel(ADOPTED.inputs);
 
   return (
     <>
@@ -132,7 +130,7 @@ export default function Home() {
           <Reveal className="mt-14">
             <div className="grid items-stretch gap-4 lg:grid-cols-[1fr_auto_1fr_auto_1.2fr]">
               {[
-                { k: "10,000,000", l: "members" },
+                { k: "10,000,000", l: "daily places" },
                 { k: "×", l: "" },
                 { k: "₦100", l: "per day" },
                 { k: "=", l: "" },
@@ -148,7 +146,7 @@ export default function Home() {
                 ),
               )}
             </div>
-            <p className="mt-4 flex items-center gap-2 text-xs text-navy-500"><StatusBadge kind="projection" /> Mathematical potential at 100% daily participation, before any costs.</p>
+            <p className="mt-4 flex items-center gap-2 text-xs text-navy-500"><StatusBadge kind="projection" /> Maximum daily inflow when every place is sold, before any costs. Registration is unlimited; places are capped at 10 million a day.</p>
           </Reveal>
         </div>
       </section>
@@ -228,22 +226,22 @@ export default function Home() {
             <SectionHeading
               eyebrow="Financial integrity"
               title="We did the maths. In public."
-              lead="Thirty awards of ₦1 billion each would cost ₦30 billion a month — every naira of the projected inflow, with nothing left for payment processing, taxes, audits, reserves or the businesses that make this initiative different. So we modelled the alternatives openly."
+              lead="Sixty percent of every month's collections goes to thirty winners. Forty percent pays the costs of running honestly — and funds businesses, jobs and community projects so members benefit even if they are never selected. Awards always follow money already collected, never promises."
             />
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              <Card className="border-red-200 !bg-red-50/40">
-                <p className="text-xs font-semibold uppercase tracking-wider text-red-800">Scenario A · As proposed</p>
-                <p className="mt-3 font-display text-3xl text-navy-950">100%</p>
-                <p className="mt-1 text-sm text-navy-600">of inflow consumed by awards. {concept.verdict}.</p>
-              </Card>
               <Card className="border-gold-300 !bg-gold-50/60">
-                <p className="text-xs font-semibold uppercase tracking-wider text-gold-800">Scenario C · Recommended</p>
-                <p className="mt-3 font-display text-3xl text-navy-950">30 awards</p>
-                <p className="mt-1 text-sm text-navy-600">3 × ₦1bn + 27 × ₦333m, within a 40% award pool.</p>
+                <p className="text-xs font-semibold uppercase tracking-wider text-gold-800">Winners · 60%</p>
+                <p className="mt-3 font-display text-3xl text-navy-950">₦18bn</p>
+                <p className="mt-1 text-sm text-navy-600">3 × ₦1bn grand awards + 27 × ₦556m enterprise awards.</p>
+              </Card>
+              <Card className="!border-navy-900 !bg-navy-950 text-white">
+                <p className="text-xs font-semibold uppercase tracking-wider text-gold-300">Team · 40%</p>
+                <p className="mt-3 font-display text-3xl">₦12bn</p>
+                <p className="mt-1 text-sm text-navy-200">Including a ₦3.6bn business fund that creates jobs whatever winners decide.</p>
               </Card>
             </div>
             <p className="mt-6 text-sm text-navy-600">
-              At full participation, an eligible member&apos;s chance of selection in a month would be about <strong className="tabular">{formatOdds(r.monthlySelectionOdds)}</strong>.
+              With every daily place sold, a member who holds a place every day has about a <strong className="tabular">{formatOdds(r.monthlySelectionOdds)}</strong> chance of selection each month.
               That is exactly why the ecosystem — jobs, contracts, community investment — must benefit the members who are never selected.
             </p>
             <LinkButton href="/financial-model" variant="navy" arrow className="mt-8">Explore the financial model</LinkButton>
@@ -251,11 +249,11 @@ export default function Home() {
           <Reveal>
             <Card className="!p-8">
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <p className="font-medium text-navy-950">Recommended monthly allocation</p>
-                <StatusBadge kind="proposed" />
+                <p className="font-medium text-navy-950">Monthly allocation · 60/40 model</p>
+                <StatusBadge kind="proposed" label="Adopted · pending approval" />
               </div>
-              <p className="mt-1 text-sm text-navy-500">Of a projected {formatNaira(r.grossMonthly, { compact: true })} monthly inflow</p>
-              <div className="mt-6"><AllocationChart allocation={tiered.allocation} gross={r.grossMonthly} /></div>
+              <p className="mt-1 text-sm text-navy-500">Of a projected {formatNaira(r.grossMonthly, { compact: true })} monthly inflow when all 10 million daily places are sold</p>
+              <div className="mt-6"><AllocationChart allocation={ADOPTED.allocation} gross={r.grossMonthly} /></div>
             </Card>
           </Reveal>
         </div>

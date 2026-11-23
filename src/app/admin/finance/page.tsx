@@ -2,13 +2,13 @@ import { requirePermission } from "@/lib/auth/session";
 import { adminKpis, reconciliation } from "@/lib/db/queries";
 import { DemoTag, PageTitle, Panel, Stat, Table, fmtDate, td } from "@/components/app/ui";
 import { AllocationChart } from "@/components/charts/AllocationChart";
-import { SCENARIOS, formatNaira } from "@/lib/finance/model";
+import { ADOPTED_ALLOCATION, formatNaira } from "@/lib/finance/model";
 import { koboToNaira } from "@/lib/db";
 
 export default async function Finance() {
   await requirePermission("admin:finance");
   const [k, rec] = await Promise.all([adminKpis(), reconciliation(14)]);
-  const policy = SCENARIOS[2].allocation;
+  const policy = ADOPTED_ALLOCATION;
   const recRate = k.txns ? (k.reconciled / (k.txns - k.failed)) * 100 : 0;
   return (
     <>
@@ -36,7 +36,7 @@ export default async function Finance() {
         </Panel>
         <Panel title="Fund allocation monitoring (month to date)">
           <AllocationChart allocation={policy} gross={k.contribMtd} />
-          <p className="mt-4 text-xs text-navy-500">Applies the proposed Scenario C policy to month-to-date simulated inflow. No funds have been allocated or moved.</p>
+          <p className="mt-4 text-xs text-navy-500">Applies the adopted 60/40 policy to month-to-date simulated inflow. No funds have been allocated or moved.</p>
         </Panel>
       </div>
     </>

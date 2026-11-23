@@ -34,9 +34,9 @@ export default async function MemberOverview({ searchParams }: { searchParams: P
 
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <Stat label="Total recorded" value={formatNaira(sum.total)} hint={<>{sum.count} simulated entries <DemoTag /></>} icon={<Wallet className="h-4 w-4 text-gold-600" />} />
-        <Stat label="Active days (30d)" value={`${sum.activeDays30}/30`} hint="Days with a recorded contribution" icon={<CalendarCheck className="h-4 w-4 text-gold-600" />} />
+        <Stat label="Places held (30d)" value={`${sum.activeDays30}/30`} hint="Days you secured a daily place" icon={<CalendarCheck className="h-4 w-4 text-gold-600" />} />
         <Stat label="Current streak" value={`${sum.streak} days`} hint={sum.last ? `Last entry ${fmtDate(sum.last)}` : "No entries yet"} icon={<Flame className="h-4 w-4 text-gold-600" />} />
-        <Stat tone="navy" label="Eligibility" value={<span className="text-xl">Not yet determined</span>} hint="Selection rules are awaiting regulatory approval" icon={<Hourglass className="h-4 w-4 text-gold-300" />} />
+        <Stat tone="navy" label="Entries this month" value={sum.monthEntries} hint="Proposed: one entry per day you hold a place · selection rules awaiting approval" icon={<Hourglass className="h-4 w-4 text-gold-300" />} />
       </div>
 
       <div className="mt-6 grid gap-6 xl:grid-cols-[1.6fr_1fr]">

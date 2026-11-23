@@ -44,36 +44,42 @@ export const BUCKETS: Bucket[] = [
 export type Allocation = Record<BucketKey, number>; // percentages, sum = 100
 
 export interface ModelInputs {
+  /** Registered members. Registration is unlimited. */
   members: number;
+  /** Daily places available. Once filled, the day closes. */
+  dailyCap: number;
   dailyContribution: number; // naira
-  /** Share of members contributing on an average day, 0–1. */
+  /** Share of registered members who try to take a place on an average day, 0–1. */
   participationRate: number;
   daysPerMonth: number;
-  awardAmount: number; // naira per beneficiary
+  awardAmount: number; // naira per beneficiary (used for custom what-if analysis)
   awardCount: number; // beneficiaries per month
 }
 
 export interface ModelResult {
+  /** Places actually taken per day = min(members × participation, cap). */
+  placesPerDay: number;
+  capReached: boolean;
   grossMonthly: number;
   grossDaily: number;
   awardCost: number;
   awardShareOfGross: number; // 0–1+, can exceed 1
   nonAwardFunds: number; // may be negative
   feasible: boolean;
-  /** Max awards fundable at the chosen award size if award pool = `poolShare` of gross. */
   fundableAwards: (poolShare: number) => number;
-  /** Award size fundable for the chosen award count if award pool = `poolShare`. */
   fundableAwardSize: (poolShare: number) => number;
-  /** Members required so award cost equals `poolShare` of gross. */
+  /** Places per day required so award cost equals `poolShare` of gross. */
   membersRequired: (poolShare: number) => number;
-  /** Probability a single eligible member is selected in a given month. */
+  /** Approximate probability a member holding a place every day is selected in a month. */
   monthlySelectionOdds: number;
-  /** Contribution per member per month, at full participation. */
   perMemberMonthly: number;
 }
 
+export const DAILY_PLACES = 10_000_000;
+
 export const CONCEPT_INPUTS: ModelInputs = {
   members: 10_000_000,
+  dailyCap: DAILY_PLACES,
   dailyContribution: 100,
   participationRate: 1,
   daysPerMonth: 30,
@@ -81,13 +87,19 @@ export const CONCEPT_INPUTS: ModelInputs = {
   awardCount: 30,
 };
 
+export function placesTaken(i: Pick<ModelInputs, "members" | "participationRate" | "dailyCap">) {
+  return Math.min(Math.round(i.members * i.participationRate), i.dailyCap);
+}
+
 export function runModel(i: ModelInputs): ModelResult {
-  const grossDaily = i.members * i.dailyContribution * i.participationRate;
+  const placesPerDay = placesTaken(i);
+  const grossDaily = placesPerDay * i.dailyContribution;
   const grossMonthly = grossDaily * i.daysPerMonth;
   const awardCost = i.awardAmount * i.awardCount;
   const awardShareOfGross = grossMonthly > 0 ? awardCost / grossMonthly : Infinity;
-  const activeMembers = Math.max(1, Math.round(i.members * i.participationRate));
   return {
+    placesPerDay,
+    capReached: i.members * i.participationRate >= i.dailyCap,
     grossDaily,
     grossMonthly,
     awardCost,
@@ -97,20 +109,65 @@ export function runModel(i: ModelInputs): ModelResult {
     fundableAwards: (s) => (i.awardAmount > 0 ? Math.floor((grossMonthly * s) / i.awardAmount) : 0),
     fundableAwardSize: (s) => (i.awardCount > 0 ? (grossMonthly * s) / i.awardCount : 0),
     membersRequired: (s) => {
-      const perMember = i.dailyContribution * i.participationRate * i.daysPerMonth * s;
-      return perMember > 0 ? Math.ceil(awardCost / perMember) : Infinity;
+      const perPlace = i.dailyContribution * i.daysPerMonth * s;
+      return perPlace > 0 ? Math.ceil(awardCost / perPlace) : Infinity;
     },
-    monthlySelectionOdds: Math.min(1, i.awardCount / activeMembers),
+    monthlySelectionOdds: Math.min(1, i.awardCount / Math.max(1, placesPerDay)),
     perMemberMonthly: i.dailyContribution * i.daysPerMonth,
   };
 }
 
+/* ----------------------------- adopted policy ---------------------------- */
+
 /**
- * Upper bound we recommend for the award pool as a share of gross inflow.
- * Above this, the model cannot fund processing, statutory obligations,
- * reserves and the ecosystem commitments that distinguish the initiative.
+ * ADOPTED POLICY (founder decision): 60% of verified monthly inflow to
+ * winners, 40% to the organisation's ring-fenced funds and costs.
+ * Awards are always computed from money ALREADY COLLECTED — never promised in advance.
  */
-export const RECOMMENDED_MAX_AWARD_SHARE = 0.4;
+export const RECOMMENDED_MAX_AWARD_SHARE = 0.6;
+
+export const ADOPTED_ALLOCATION: Allocation = {
+  awards: 60,
+  business: 12,
+  community: 5,
+  reserve: 6,
+  regulatory: 8,
+  processing: 3,
+  operations: 5,
+  assurance: 1,
+};
+
+export const AWARD_TIERS = {
+  winners: 30,
+  grandCount: 3,
+  grandAmount: 1_000_000_000,
+  enterpriseCount: 27,
+  /** Below this monthly award pool, the 30 awards are shared equally instead of tiered. */
+  minPoolForGrand: 5_000_000_000,
+} as const;
+
+export interface TierResult {
+  pool: number;
+  tiered: boolean;
+  grand: { count: number; amount: number };
+  enterprise: { count: number; amount: number };
+}
+
+/** Award structure produced by a given monthly award pool. */
+export function tieredAwards(pool: number): TierResult {
+  const t = AWARD_TIERS;
+  if (pool >= t.minPoolForGrand) {
+    return { pool, tiered: true, grand: { count: t.grandCount, amount: t.grandAmount }, enterprise: { count: t.enterpriseCount, amount: (pool - t.grandCount * t.grandAmount) / t.enterpriseCount } };
+  }
+  return { pool, tiered: false, grand: { count: 0, amount: 0 }, enterprise: { count: t.winners, amount: pool / t.winners } };
+}
+
+/** Awards for a month, from gross collected inflow under the adopted policy. */
+export function adoptedAwards(grossMonthly: number): TierResult {
+  return tieredAwards((grossMonthly * ADOPTED_ALLOCATION.awards) / 100);
+}
+
+/* -------------------------------- scenarios ------------------------------ */
 
 export interface Scenario {
   id: string;
@@ -118,85 +175,75 @@ export interface Scenario {
   tagline: string;
   inputs: ModelInputs;
   allocation: Allocation;
-  verdict: "Not viable" | "Viable with conditions" | "Recommended" | "Requires growth";
-  /** Award structure description. */
+  verdict: "Not viable" | "Viable with conditions" | "Adopted";
   awards: { count: number; amount: number; label: string }[];
   tradeOffs: string[];
 }
 
-const BALANCED: Allocation = {
-  awards: 40,
-  business: 20,
-  community: 10,
-  reserve: 8,
-  regulatory: 8,
-  processing: 3,
-  operations: 9,
-  assurance: 2,
-};
-
 export const SCENARIOS: Scenario[] = [
   {
     id: "concept",
-    name: "A · The concept as proposed",
+    name: "A · Original concept",
     tagline: "30 awards of ₦1 billion from ₦30 billion",
     inputs: CONCEPT_INPUTS,
     allocation: { awards: 100, business: 0, community: 0, reserve: 0, regulatory: 0, processing: 0, operations: 0, assurance: 0 },
     verdict: "Not viable",
     awards: [{ count: 30, amount: 1_000_000_000, label: "Grand awards" }],
     tradeOffs: [
-      "Consumes 100% of gross inflow — and only if all 10 million members pay every single day.",
-      "Leaves nothing for payment processing, which is unavoidable on every transaction.",
-      "No funds for statutory levies, taxes, audit, staff, reserves or business development.",
-      "Any shortfall in participation immediately creates an unfunded award obligation.",
+      "Consumes 100% of inflow — nothing left for bank charges, taxes, staff, audit or reserves.",
+      "No funding for the business and jobs ecosystem that makes the initiative different.",
+      "Any day with unsold places creates an unfunded promise.",
     ],
   },
   {
-    id: "balanced",
-    name: "B · Keep ₦1 billion, fund fewer awards",
-    tagline: "12 awards of ₦1 billion, full ecosystem funded",
-    inputs: { ...CONCEPT_INPUTS, awardCount: 12 },
-    allocation: BALANCED,
-    verdict: "Viable with conditions",
-    awards: [{ count: 12, amount: 1_000_000_000, label: "Grand awards" }],
+    id: "ninety",
+    name: "B · 90% to winners",
+    tagline: "30 awards of ₦900 million, 10% charge",
+    inputs: { ...CONCEPT_INPUTS, awardAmount: 900_000_000 },
+    allocation: { awards: 90, business: 0, community: 0, reserve: 0, regulatory: 7, processing: 3, operations: 0, assurance: 0 },
+    verdict: "Not viable",
+    awards: [{ count: 30, amount: 900_000_000, label: "Awards" }],
     tradeOffs: [
-      "Preserves the headline ₦1 billion award that defines the brand.",
-      "Reduces monthly beneficiaries from 30 to 12 (at 100% participation).",
-      "At 80% participation the pool funds 9 awards — the award count must float with real inflow.",
+      "₦3bn left is consumed by bank charges and estimated levies before any staff are paid.",
+      "No reserve, no audit budget, no business fund — the scheme becomes a plain lottery.",
     ],
   },
   {
-    id: "tiered",
-    name: "C · Keep 30 beneficiaries, tier the awards",
+    id: "conservative",
+    name: "C · 40% to winners",
     tagline: "3 × ₦1 billion + 27 × ₦333 million",
     inputs: { ...CONCEPT_INPUTS, awardAmount: 400_000_000 },
-    allocation: BALANCED,
-    verdict: "Recommended",
+    allocation: { awards: 40, business: 20, community: 10, reserve: 8, regulatory: 8, processing: 3, operations: 9, assurance: 2 },
+    verdict: "Viable with conditions",
     awards: [
       { count: 3, amount: 1_000_000_000, label: "Grand awards" },
       { count: 27, amount: 333_333_333, label: "Enterprise awards" },
     ],
     tradeOffs: [
-      "Keeps 30 beneficiaries per month and three ₦1 billion awards.",
-      "Every award still capitalises a serious enterprise — ₦333 million is a substantial SME.",
-      "Award tiers scale automatically with verified inflow, protecting solvency.",
+      "Strongest funding for businesses, jobs and community projects.",
+      "Smaller awards make the proposition less compelling to members.",
     ],
   },
   {
-    id: "expanded",
-    name: "D · Full target through a larger base",
-    tagline: "30 × ₦1 billion with 25 million members",
-    inputs: { ...CONCEPT_INPUTS, members: 25_000_000 },
-    allocation: BALANCED,
-    verdict: "Requires growth",
-    awards: [{ count: 30, amount: 1_000_000_000, label: "Grand awards" }],
+    id: "adopted",
+    name: "D · 60% winners / 40% team",
+    tagline: "3 × ₦1 billion + 27 × ₦556 million every month",
+    inputs: { ...CONCEPT_INPUTS, awardAmount: 600_000_000 },
+    allocation: ADOPTED_ALLOCATION,
+    verdict: "Adopted",
+    awards: [
+      { count: 3, amount: 1_000_000_000, label: "Grand awards" },
+      { count: 27, amount: 555_555_556, label: "Enterprise awards" },
+    ],
     tradeOffs: [
-      "Achieves the original 30 × ₦1 billion while funding the whole ecosystem.",
-      "Requires 25 million daily contributors — or ₦250/day from 10 million — or ₦18 billion/month in sponsor co-funding.",
-      "Best treated as a long-term milestone unlocked by growth, not a launch promise.",
+      "Keeps 30 winners every month and three ₦1 billion grand awards.",
+      "Funds a ₦3.6bn/month business fund so jobs are created whatever winners decide.",
+      "Award amounts follow money actually collected — smaller in months with unsold places.",
     ],
   },
 ];
+
+export const ADOPTED = SCENARIOS.find((s) => s.id === "adopted")!;
 
 export function allocate(gross: number, a: Allocation): Record<BucketKey, number> {
   const out = {} as Record<BucketKey, number>;

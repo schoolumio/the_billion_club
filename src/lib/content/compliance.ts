@@ -66,7 +66,7 @@ export const REG_AREAS: RegArea[] = [
     question: "Can our campaigns legally say what we want them to say?",
     authorities: ["Advertising Regulatory Council of Nigeria (ARCON)"],
     instruments: ["ARCON Act 2022", "Nigerian Code of Advertising Practice"],
-    needed: ["Pre-exposure vetting of adverts", "No guaranteed-wealth or misleading claims", "Clear target vs actual labelling"],
+    needed: ["Pre-exposure vetting of adverts", "No guaranteed-wealth or misleading claims", "Clear target vs actual labelling", "Daily-places scarcity shown factually — no countdowns or pressure selling"],
   },
   {
     area: "Corporate governance",
