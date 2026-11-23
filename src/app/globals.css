@@ -1,0 +1,122 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Fraunces Variable", ui-serif, Georgia, "Times New Roman", serif;
+
+  --color-navy-50: #f2f5fb;
+  --color-navy-100: #e3e9f5;
+  --color-navy-200: #c3cfe6;
+  --color-navy-300: #94a7cd;
+  --color-navy-400: #5f79ad;
+  --color-navy-500: #3a5590;
+  --color-navy-600: #253f77;
+  --color-navy-700: #1a3061;
+  --color-navy-800: #12244c;
+  --color-navy-900: #0b1834;
+  --color-navy-950: #060e22;
+
+  --color-gold-50: #fcf8ec;
+  --color-gold-100: #f7eed2;
+  --color-gold-200: #eedb9f;
+  --color-gold-300: #e3c46a;
+  --color-gold-400: #d8ae3f;
+  --color-gold-500: #c89a24;
+  --color-gold-600: #a67b18;
+  --color-gold-700: #845e15;
+  --color-gold-800: #6b4c17;
+
+  --color-ink: #0b1220;
+  --color-mist: #f6f7f9;
+
+  /* Chart palette — validated (light surface) with the dataviz validator */
+  --color-series-1: #2a6fd6;
+  --color-series-2: #d4a017;
+  --color-series-3: #1baf7a;
+  --color-series-4: #7a5fd6;
+  --color-series-5: #e3694a;
+
+  /* Status colours — always paired with icon + label */
+  --color-good: #0f8a4f;
+  --color-warning: #b76e00;
+  --color-critical: #c2312f;
+
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+  --animate-float: float 9s ease-in-out infinite;
+  --animate-spin-slow: spin 60s linear infinite;
+  --animate-pulse-ring: pulse-ring 3.2s ease-out infinite;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes pulse-ring {
+    0% { transform: scale(0.9); opacity: 0.55; }
+    100% { transform: scale(1.6); opacity: 0; }
+  }
+}
+
+@layer base {
+  html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+  body {
+    background: #ffffff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    font-variation-settings: "SOFT" 30, "WONK" 0;
+    letter-spacing: -0.02em;
+  }
+  ::selection { background: var(--color-gold-200); color: var(--color-navy-950); }
+  :focus-visible { outline: 2px solid var(--color-gold-500); outline-offset: 3px; border-radius: 4px; }
+}
+
+@layer base {
+  .grid > * { min-width: 0; }
+}
+
+@layer components {
+  .container-x { width: 100%; max-width: 80rem; margin-inline: auto; padding-inline: 1rem; }
+  @media (min-width: 640px) { .container-x { padding-inline: 1.5rem; } }
+  @media (min-width: 1024px) { .container-x { padding-inline: 2rem; } }
+
+  .tabular { font-variant-numeric: tabular-nums; }
+
+  .gold-text {
+    background: linear-gradient(100deg, #f3dc95 0%, #d8ae3f 40%, #f7e7b4 60%, #c89a24 100%);
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hairline { border-color: color-mix(in oklab, var(--color-navy-900) 9%, transparent); }
+  .grid-bg {
+    background-image:
+      linear-gradient(to right, rgb(255 255 255 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(255 255 255 / 0.05) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+  .grid-bg-light {
+    background-image:
+      linear-gradient(to right, rgb(11 24 52 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(11 24 52 / 0.05) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .reveal { opacity: 0; transform: translateY(16px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+  .reveal.is-visible { opacity: 1; transform: none; }
+  .prose-tbc p { margin-top: 1rem; line-height: 1.75; color: var(--color-navy-700); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.001ms !important; animation-iteration-count: 1 !important; transition-duration: 0.001ms !important; scroll-behavior: auto !important; }
+  .reveal { opacity: 1; transform: none; }
+}
+
+@media print {
+  header, footer, .no-print { display: none !important; }
+}
