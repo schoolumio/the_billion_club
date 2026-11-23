@@ -8,13 +8,30 @@ import bcrypt from "bcryptjs";
 import { loadEnv } from "./env.ts";
 
 loadEnv();
-if (process.env.NODE_ENV === "production" && !process.argv.includes("--force")) {
+const ifEmpty = process.argv.includes("--if-empty");
+
+if (ifEmpty) {
+  // Deployment mode: only seed when explicitly enabled AND the database has no users.
+  if (process.env.SEED_DEMO_DATA !== "true" || !process.env.DATABASE_URL) {
+    console.log("→ demo seeding not enabled (set SEED_DEMO_DATA=true to load demonstration accounts)");
+    process.exit(0);
+  }
+} else if (process.env.NODE_ENV === "production" && !process.argv.includes("--force")) {
   console.error("Refusing to seed demo data in production. Pass --force if you really mean it.");
   process.exit(1);
 }
 
 const db = new pg.Client({ connectionString: process.env.DATABASE_URL });
 await db.connect();
+
+if (ifEmpty) {
+  const { rows } = await db.query<{ n: string }>("SELECT count(*) n FROM users");
+  if (Number(rows[0].n) > 0) {
+    console.log(`✓ database already has ${rows[0].n} users — skipping demo seed`);
+    await db.end();
+    process.exit(0);
+  }
+}
 
 // Deterministic PRNG so demo data is stable between runs.
 let s = 20261123;

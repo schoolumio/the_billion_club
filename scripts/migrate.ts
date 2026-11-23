@@ -5,6 +5,10 @@ import pg from "pg";
 import { loadEnv } from "./env.ts";
 
 loadEnv();
+if (!process.env.DATABASE_URL) {
+  console.warn("⚠ DATABASE_URL is not set — skipping migrations. Public pages will work; sign-in and dashboards will not.");
+  process.exit(0);
+}
 const client = new pg.Client({ connectionString: process.env.DATABASE_URL });
 await client.connect();
 await client.query(`CREATE TABLE IF NOT EXISTS _migrations (name text PRIMARY KEY, applied_at timestamptz NOT NULL DEFAULT now())`);
