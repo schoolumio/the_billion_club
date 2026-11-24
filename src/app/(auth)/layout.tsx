@@ -1,12 +1,10 @@
 import Link from "next/link";
 import { Logo } from "@/components/ui/Logo";
-import { PreLaunchBar } from "@/components/site/PreLaunchBar";
 
 export default function AuthLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <PreLaunchBar />
-      <main id="main" className="grid min-h-dvh pt-9 sm:pt-8 lg:grid-cols-2">
+      <main id="main" className="grid min-h-dvh lg:grid-cols-2">
         <aside className="relative hidden overflow-hidden bg-navy-950 p-12 text-white lg:flex lg:flex-col lg:justify-between">
           <div className="grid-bg absolute inset-0 [mask-image:radial-gradient(ellipse_at_bottom_left,black,transparent_70%)]" aria-hidden />
           <div className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-gold-500/15 blur-3xl" aria-hidden />

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { AppShell, type NavItem } from "@/components/app/AppShell";
-import { PreLaunchBar } from "@/components/site/PreLaunchBar";
 import { requirePermission } from "@/lib/auth/session";
 import { logoutAction } from "@/lib/auth/actions";
 import { can, type Permission } from "@/lib/auth/roles";
@@ -21,7 +20,6 @@ export default async function Layout({ children }: { children: React.ReactNode }
   const s = await requirePermission("admin:view");
   return (
     <>
-      <PreLaunchBar />
       <AppShell nav={NAV.filter((n) => can(s.role, n.perm)).map((n) => ({ href: n.href, label: n.label, icon: n.icon }))} area="Administration" user={{ name: s.name, email: s.email, role: s.role }} logout={logoutAction} switchLink={{ href: "/dashboard", label: "Member view →" }}>
         {children}
       </AppShell>

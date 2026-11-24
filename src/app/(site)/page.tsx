@@ -24,7 +24,7 @@ export default function Home() {
   return (
     <>
       {/* HERO */}
-      <section className="relative overflow-hidden bg-navy-950 pt-32 text-white sm:pt-40">
+      <section className="relative overflow-hidden bg-navy-950 pt-28 text-white sm:pt-36">
         <div className="grid-bg absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,black_20%,transparent_75%)]" aria-hidden />
         <div className="absolute left-1/2 top-[-20rem] h-[44rem] w-[44rem] -translate-x-1/2 rounded-full bg-navy-600/30 blur-3xl" aria-hidden />
         <div className="absolute -right-32 bottom-0 h-[28rem] w-[28rem] rounded-full bg-gold-500/10 blur-3xl" aria-hidden />

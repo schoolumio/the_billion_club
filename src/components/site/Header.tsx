@@ -21,7 +21,7 @@ export function Header() {
   const solid = scrolled || open;
 
   return (
-    <header className={clsx("fixed inset-x-0 top-9 z-50 transition-all duration-500 sm:top-8", solid ? "bg-white/90 shadow-[0_1px_0_rgba(11,24,52,0.08)] backdrop-blur-xl" : "bg-transparent")}>
+    <header className={clsx("fixed inset-x-0 top-0 z-50 transition-all duration-500", solid ? "bg-white/90 shadow-[0_1px_0_rgba(11,24,52,0.08)] backdrop-blur-xl" : "bg-transparent")}>
       <div className="container-x flex h-[4.5rem] items-center justify-between gap-6">
         <Link href="/" aria-label="The Billionaire Circle — home" className="shrink-0">
           <Logo tone={solid ? "dark" : "light"} />
@@ -65,7 +65,7 @@ export function Header() {
         </div>
       </div>
       {open && (
-        <nav id="mobile-nav" aria-label="Mobile" className="max-h-[calc(100dvh-7rem)] overflow-y-auto border-t border-navy-100 bg-white xl:hidden">
+        <nav id="mobile-nav" aria-label="Mobile" className="max-h-[calc(100dvh-4.5rem)] overflow-y-auto border-t border-navy-100 bg-white xl:hidden">
           <ul className="container-x grid gap-1 py-4">
             {[...NAV, { href: "/compliance", label: "Regulatory readiness" }].map((n) => (
               <li key={n.href}>

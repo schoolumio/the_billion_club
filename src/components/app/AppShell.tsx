@@ -56,8 +56,8 @@ export function AppShell({ nav, user, area, children, logout, switchLink }: {
   );
 
   return (
-    <div className="min-h-dvh bg-mist pt-9 sm:pt-8">
-      <aside className="fixed bottom-0 left-0 top-9 z-40 hidden w-64 bg-navy-950 sm:top-8 lg:block">{sidebar}</aside>
+    <div className="min-h-dvh bg-mist">
+      <aside className="fixed bottom-0 left-0 top-0 z-40 hidden w-64 bg-navy-950 lg:block">{sidebar}</aside>
       {open && (
         <div className="fixed inset-0 z-50 lg:hidden">
           <button className="absolute inset-0 bg-navy-950/60" aria-label="Close menu" onClick={() => setOpen(false)} />
@@ -65,7 +65,7 @@ export function AppShell({ nav, user, area, children, logout, switchLink }: {
         </div>
       )}
       <div className="lg:pl-64">
-        <header className="sticky top-9 z-30 flex h-16 items-center justify-between border-b border-navy-100 bg-white/90 px-4 backdrop-blur sm:top-8 sm:px-8">
+        <header className="sticky top-0 z-30 flex h-16 items-center justify-between border-b border-navy-100 bg-white/90 px-4 backdrop-blur sm:px-8">
           <button className="rounded-lg p-2 text-navy-800 lg:hidden" onClick={() => setOpen(true)} aria-label="Open menu"><Menu className="h-5 w-5" /></button>
           <p className="hidden text-sm text-navy-500 lg:block">Signed in as <span className="font-medium text-navy-900">{user.email}</span></p>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-violet-50 px-3 py-1 text-xs font-semibold text-violet-800 ring-1 ring-inset ring-violet-200">

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import { AppShell, type NavItem } from "@/components/app/AppShell";
-import { PreLaunchBar } from "@/components/site/PreLaunchBar";
 import { requirePermission } from "@/lib/auth/session";
 import { logoutAction } from "@/lib/auth/actions";
 import { can } from "@/lib/auth/roles";
@@ -19,7 +18,6 @@ export default async function Layout({ children }: { children: React.ReactNode }
   const s = await requirePermission("member:dashboard");
   return (
     <>
-      <PreLaunchBar />
       <AppShell nav={NAV} area="Member space" user={{ name: s.name, email: s.email, role: s.role }} logout={logoutAction}
         switchLink={can(s.role, "admin:view") ? { href: "/admin", label: "Open administration →" } : undefined}>
         {children}

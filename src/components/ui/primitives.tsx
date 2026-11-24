@@ -109,7 +109,7 @@ export function Card({ className, children, ...rest }: ComponentProps<"div">) {
 
 export function PageHero({ eyebrow, title, lead, children }: { eyebrow: string; title: ReactNode; lead: ReactNode; children?: ReactNode }) {
   return (
-    <section className="relative overflow-hidden bg-navy-950 pb-20 pt-36 text-white sm:pb-24 sm:pt-44">
+    <section className="relative overflow-hidden bg-navy-950 pb-20 pt-32 text-white sm:pb-24 sm:pt-40">
       <div className="grid-bg absolute inset-0 [mask-image:radial-gradient(ellipse_at_top,black,transparent_75%)]" aria-hidden />
       <div className="absolute -right-40 -top-40 h-[32rem] w-[32rem] rounded-full bg-gold-500/10 blur-3xl" aria-hidden />
       <div className="container-x relative">
