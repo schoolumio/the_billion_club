@@ -36,7 +36,7 @@ export function LogoMark({ className, title }: { className?: string; title?: str
  * Full lockup. `tone="light"` = gold wordmark for navy backgrounds (as supplied);
  * `tone="dark"` = navy wordmark for white backgrounds (gold text on white fails contrast).
  */
-export function Logo({ tone = "dark", className, tagline = true, stacked = false }: { tone?: "dark" | "light"; className?: string; tagline?: boolean; stacked?: boolean }) {
+export function Logo({ tone = "dark", className, tagline = true, stacked = false, compactOnMobile = false }: { tone?: "dark" | "light"; className?: string; tagline?: boolean; stacked?: boolean; compactOnMobile?: boolean }) {
   return (
     <span className={clsx("inline-flex items-center gap-3", className)}>
       <LogoMark className="h-10 w-10 shrink-0 sm:h-11 sm:w-11" />
@@ -45,10 +45,10 @@ export function Logo({ tone = "dark", className, tagline = true, stacked = false
           className={clsx("block font-display font-bold uppercase tracking-[0.04em]", stacked ? "whitespace-nowrap text-[0.86rem] leading-[1.15] !tracking-[0.02em]" : "text-[0.95rem] sm:text-[1.05rem]", tone === "dark" ? "text-navy-900" : "text-[#d4af37]")}
           style={{ fontVariationSettings: '"SOFT" 0, "WONK" 0' }}
         >
-          {stacked ? <>The Billionaire<br />Circle</> : "The Billionaire Circle"}
+          {stacked ? <>The Billionaire<br />Circle</> : compactOnMobile ? <><span className="whitespace-nowrap">The Billionaire</span><br className="sm:hidden" /><span className="hidden sm:inline"> </span>Circle</> : "The Billionaire Circle"}
         </span>
         {tagline && (
-          <span className={clsx("mt-1.5 block border-t pt-1.5 text-[0.58rem] font-medium uppercase tracking-[0.16em]", tone === "dark" ? "border-gold-300 text-navy-500" : "border-[#e7d192]/70 text-white/85")}>
+          <span className={clsx(compactOnMobile ? "hidden sm:block" : "block", "mt-1.5 border-t pt-1.5 text-[0.58rem] font-medium uppercase tracking-[0.16em]", tone === "dark" ? "border-gold-300 text-navy-500" : "border-[#e7d192]/70 text-white/85")}>
             Together, we build billionaires.
           </span>
         )}

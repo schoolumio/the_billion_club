@@ -1,13 +1,18 @@
 export const NAV = [
   { href: "/how-it-works", label: "How it works" },
   { href: "/ecosystem", label: "Ecosystem" },
-  { href: "/business-development", label: "Business arm", secondary: true },
   { href: "/financial-model", label: "Financial model" },
   { href: "/transparency", label: "Transparency" },
-  { href: "/impact", label: "Impact", secondary: true },
-  { href: "/about", label: "About" },
   { href: "/faq", label: "FAQ" },
-  { href: "/leaderboard", label: "Leaderboard", secondary: true },
+] as const;
+
+/** Shown under "More" on desktop and listed in full in the mobile menu. */
+export const NAV_MORE = [
+  { href: "/business-development", label: "Business arm" },
+  { href: "/impact", label: "Impact" },
+  { href: "/leaderboard", label: "Leaderboard" },
+  { href: "/about", label: "About us" },
+  { href: "/compliance", label: "Regulatory readiness" },
 ] as const;
 
 export const FOOTER = {

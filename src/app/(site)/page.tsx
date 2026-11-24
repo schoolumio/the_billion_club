@@ -138,7 +138,7 @@ export default function Home() {
               ].map((x, i) =>
                 x.l ? (
                   <Card key={i} className="flex flex-col justify-center !p-8">
-                    <p className="font-display text-4xl text-navy-950 tabular sm:text-5xl">{x.k}</p>
+                    <p className="font-display text-4xl text-navy-950 tabular sm:text-5xl lg:text-[2.05rem] xl:text-5xl">{x.k}</p>
                     <p className="mt-2 text-sm uppercase tracking-wider text-navy-500">{x.l}</p>
                   </Card>
                 ) : (
