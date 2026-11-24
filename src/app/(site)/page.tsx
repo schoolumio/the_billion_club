@@ -316,10 +316,10 @@ export default function Home() {
             <h2 className="mt-5 text-4xl font-medium leading-tight sm:text-5xl">Together, we build wealth. <span className="gold-text">Together, we change lives.</span></h2>
           </div>
           <div className="space-y-5">
-            <p className="text-lg text-navy-200">Register your interest to receive verified updates as we progress through approvals. Registration is free and involves no payment.</p>
+            <p className="text-lg text-navy-200">Join the free founding-community waitlist, get your personal referral link and help us reach 10 million verified members before launch. No payment, ever, to join.</p>
             <div className="flex flex-col gap-3 sm:flex-row">
-              <LinkButton href="/register" arrow>Register interest</LinkButton>
-              <LinkButton href="/about#partner" variant="outline-light">Partner with us</LinkButton>
+              <LinkButton href="/join" arrow>Join the waitlist</LinkButton>
+              <LinkButton href="/leaderboard" variant="outline-light">Community leaderboard</LinkButton>
             </div>
             <Callout tone="gold" title="Protect yourself" className="!border-gold-400/30 !bg-white/5 [&_p]:!text-gold-100 [&_div]:!text-navy-200">
               We are not collecting money. Anyone asking you to pay to join The Billionaire Circle is not acting for us.

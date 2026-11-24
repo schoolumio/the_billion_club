@@ -7,6 +7,7 @@ export const NAV = [
   { href: "/impact", label: "Impact", secondary: true },
   { href: "/about", label: "About" },
   { href: "/faq", label: "FAQ" },
+  { href: "/leaderboard", label: "Leaderboard", secondary: true },
 ] as const;
 
 export const FOOTER = {
@@ -21,11 +22,15 @@ export const FOOTER = {
     { href: "/financial-model", label: "Financial model & scenarios" },
     { href: "/compliance", label: "Legal & regulatory readiness" },
     { href: "/faq", label: "Frequently asked questions" },
+    { href: "/referral-policy", label: "Referral programme policy" },
+    { href: "/privacy", label: "Privacy notice" },
+    { href: "/terms", label: "Waitlist terms" },
   ],
   Organisation: [
     { href: "/about", label: "About us" },
     { href: "/brand", label: "Brand & presentation kit" },
+    { href: "/join", label: "Join the waitlist" },
+    { href: "/leaderboard", label: "Community leaderboard" },
     { href: "/login", label: "Member sign in" },
-    { href: "/register", label: "Register interest" },
   ],
 };

@@ -11,6 +11,14 @@ export const PERMISSIONS = {
   "admin:audit": ["admin", "auditor"],
   "admin:support": ["admin", "support"],
   "admin:support:write": ["admin", "support"],
+  "admin:waitlist": ["admin", "auditor", "support"],
+  "admin:referrals": ["admin", "auditor", "support"],
+  "admin:referrals:write": ["admin"],
+  "admin:referral-config": ["admin", "auditor"],
+  "admin:referral-config:write": ["admin"],
+  "admin:rewards": ["admin", "auditor"],
+  "admin:rewards:write": ["admin"],
+  "admin:campaigns": ["admin", "support"],
 } as const satisfies Record<string, readonly Role[]>;
 
 export type Permission = keyof typeof PERMISSIONS;

@@ -21,6 +21,7 @@ const MONEY_TYPES = [
   { Icon: HandCoins, t: "Prize or award", b: "Paid to members selected under the approved process — 60% of each month's verified inflow. Its legal treatment depends on the licensing route." },
   { Icon: Layers, t: "Business investment", b: "The 12% business fund. Risk-bearing capital in a separately regulated vehicle — never mixed with the award pool." },
   { Icon: Landmark, t: "Community development fund", b: "The 5% community fund. Non-repayable grants for skills and local projects. Not a return to members." },
+  { Icon: Coins, t: "Referral reward (proposed)", b: "1% of each day's actual pool, shared in proportion to verified direct referrals. Not a commission on anyone's money beyond that day, never multi-level, inactive until approved." },
   { Icon: Receipt, t: "Operating expense", b: "Bank charges, staff, technology, audit. Capped at 9% of inflow and published in full." },
 ];
 
@@ -64,7 +65,8 @@ export default function FinancialModel() {
                 {[
                   ["Business development fund", 12, "Jobs whatever winners decide"],
                   ["Government levies & taxes", 8, "Estimate — pending tax opinion"],
-                  ["Emergency reserve", 6, "Protects winners in slow months"],
+                  ["Emergency reserve", 5, "Protects winners in slow months"],
+                  ["Referral rewards (proposed)", 1, "Shared by verified direct referrals"],
                   ["Community development", 5, "Training & local projects"],
                   ["Staff, technology, support", 5, "Running the organisation"],
                   ["Bank & payment charges", 3, "On every payment"],
@@ -184,8 +186,8 @@ export default function FinancialModel() {
 
       <section className="bg-mist py-20 sm:py-28">
         <div className="container-x">
-          <SectionHeading eyebrow="Clear definitions" title="Five kinds of money. Never blurred." lead="Confusing these categories is how well-meaning schemes become illegal ones. We keep them legally, operationally and in reporting completely separate." />
-          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
+          <SectionHeading eyebrow="Clear definitions" title="Six kinds of money. Never blurred." lead="Confusing these categories is how well-meaning schemes become illegal ones. We keep them legally, operationally and in reporting completely separate." />
+          <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {MONEY_TYPES.map((m) => (
               <Card key={m.t} className="!p-6"><m.Icon className="h-6 w-6 text-gold-600" aria-hidden /><h3 className="mt-4 text-lg font-medium text-navy-950">{m.t}</h3><p className="mt-2 text-sm leading-relaxed text-navy-600">{m.b}</p></Card>
             ))}

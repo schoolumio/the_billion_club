@@ -7,6 +7,8 @@
 | `AUTH_SECRET` | yes | ≥32 random bytes, stored in a secrets manager |
 | `NEXT_PUBLIC_SITE_URL` | yes | Canonical URL for SEO metadata and sitemap |
 | `DB_POOL_MAX` | no | Default 10 |
+| `CRON_SECRET` | yes (for referrals) | Long random string; Vercel Cron sends it automatically |
+| `RESEND_API_KEY` / `EMAIL_FROM` | recommended | Email verification delivery. Without it, verification links show in-app (demo only) |
 | `SEED_DEMO_DATA` | no | `true` loads demo accounts on deploy when the database is empty |
 
 ## Vercel (configured)

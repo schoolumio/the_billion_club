@@ -3,9 +3,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState, type ReactNode } from "react";
 import { clsx } from "clsx";
-import { Briefcase, Factory, FlaskConical, Headset, Landmark, LayoutDashboard, LifeBuoy, LogOut, Menu, ReceiptText, ScrollText, ShieldAlert, UserRoundCheck, Users } from "lucide-react";
+import { Briefcase, Coins, Factory, FlaskConical, Gift, Headset, Landmark, LayoutDashboard, LifeBuoy, LogOut, Megaphone, Menu, ReceiptText, ScrollText, Settings2, ShieldAlert, Sprout, UserRoundCheck, UserSearch, Users } from "lucide-react";
 
-const ICONS = { LayoutDashboard, ReceiptText, Briefcase, LifeBuoy, UserRoundCheck, Users, Landmark, Factory, ShieldAlert, ScrollText, Headset };
+const ICONS = { LayoutDashboard, ReceiptText, Briefcase, LifeBuoy, UserRoundCheck, Users, Landmark, Factory, ShieldAlert, ScrollText, Headset, Gift, Megaphone, Sprout, UserSearch, Settings2, Coins };
 import { Logo } from "@/components/ui/Logo";
 
 export interface NavItem { href: string; label: string; icon: keyof typeof ICONS }

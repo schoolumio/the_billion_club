@@ -20,3 +20,16 @@
 | Award payouts | ⛔ Not implemented by design | — |
 | Leadership profiles | 📝 Placeholder | Awaiting real, consented information |
 | Partnership email | 📝 Placeholder | — |
+| **Waitlist & referrals** | | |
+| Waitlist landing page, registration, attribution | ✅ Production-ready | Add CAPTCHA and SMS OTP before mass campaigns |
+| Email verification | ✅ Built | Needs `RESEND_API_KEY`; otherwise demo links shown in-app |
+| Referral links, QR, cards, flyers, share buttons | ✅ Production-ready | |
+| Member referral dashboard, levels, appeals, privacy | ✅ Production-ready | |
+| Leaderboard (opt-in names) | ✅ Production-ready | |
+| Fraud scoring & human review | ✅ Production-ready | Tune thresholds with real data |
+| Admin growth, review, settings, campaigns, exports | ✅ Production-ready | |
+| Scheduled aggregation (cron) | ✅ Built | Daily on Vercel Hobby; move to incremental worker at scale |
+| Referral rewards calculation engine | ✅ Built, **inactive** | Requires legal approval, funding and founder approval of the 1% source |
+| Referral reward payouts | ⛔ Not implemented by design | Payments module disabled |
+| Phone/SMS verification | 📝 Interface only | Needs licensed SMS provider |
+

@@ -8,6 +8,11 @@ export const metadata: Metadata = { title: "Administration", robots: { index: fa
 
 const NAV: (NavItem & { perm: Permission })[] = [
   { href: "/admin", label: "Overview", icon: "LayoutDashboard", perm: "admin:view" },
+  { href: "/admin/waitlist", label: "Waitlist & growth", icon: "Sprout", perm: "admin:waitlist" },
+  { href: "/admin/referrals", label: "Referral review", icon: "UserSearch", perm: "admin:referrals" },
+  { href: "/admin/rewards", label: "Referral rewards", icon: "Coins", perm: "admin:rewards" },
+  { href: "/admin/campaigns", label: "Campaigns & promo", icon: "Megaphone", perm: "admin:campaigns" },
+  { href: "/admin/referral-settings", label: "Referral settings", icon: "Settings2", perm: "admin:referral-config" },
   { href: "/admin/members", label: "Members", icon: "Users", perm: "admin:members" },
   { href: "/admin/finance", label: "Finance & reconciliation", icon: "Landmark", perm: "admin:finance" },
   { href: "/admin/programmes", label: "Beneficiaries & ventures", icon: "Factory", perm: "admin:finance" },

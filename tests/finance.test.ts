@@ -31,7 +31,9 @@ test("every scenario allocation sums to 100%", () => {
   for (const s of SCENARIOS) assert.equal(allocationTotal(s.allocation), 100, s.id);
 });
 
-test("adopted policy is 60/40 with 12% business fund", () => {
+test("adopted policy is 60/40 with 12% business fund and a 1% referral allocation", () => {
+  assert.equal(ADOPTED_ALLOCATION.referral, 1);
+  assert.equal(100 - ADOPTED_ALLOCATION.referral, 99, "the remaining 99% stays with the approved model");
   assert.equal(ADOPTED_ALLOCATION.awards, 60);
   assert.equal(100 - ADOPTED_ALLOCATION.awards, 40);
   assert.equal(ADOPTED_ALLOCATION.business, 12);

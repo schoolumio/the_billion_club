@@ -6,6 +6,8 @@
 import pg from "pg";
 import bcrypt from "bcryptjs";
 import { loadEnv } from "./env.ts";
+import { REFRESH_STATS_SQL } from "../src/lib/referrals/sql.ts";
+import { DEFAULT_CONFIG } from "../src/lib/referrals/config.ts";
 
 loadEnv();
 const ifEmpty = process.argv.includes("--if-empty");
@@ -43,7 +45,7 @@ const FIRST = ["Adaeze", "Tunde", "Ngozi", "Ibrahim", "Funmilayo", "Chinedu", "A
 const LAST = ["Okafor", "Adeyemi", "Bello", "Eze", "Abubakar", "Ogunleye", "Nwosu", "Danjuma", "Okonkwo", "Balogun", "Ibekwe", "Lawal", "Umeh", "Garba", "Afolabi"];
 
 console.log("→ clearing previous demonstration data");
-await db.query(`TRUNCATE audit_logs, fraud_alerts, support_tickets, contributions, announcements, opportunities, ventures, compliance_items, users RESTART IDENTITY CASCADE`);
+await db.query(`TRUNCATE audit_logs, fraud_alerts, support_tickets, contributions, announcements, opportunities, ventures, compliance_items, email_outbox, referral_snapshots, campaigns, promo_materials, users RESTART IDENTITY CASCADE`);
 
 const hash = (p: string) => bcrypt.hashSync(p, 11);
 const staff = [
@@ -147,10 +149,75 @@ const comp: [string, string, string, string][] = [
   ["Advertising", "Pre-exposure vetting of campaign materials", "ARCON", "not_started"],
   ["Corporate", "Incorporate operating company and foundation; adopt governance charter", "Corporate Affairs Commission (CAC)", "in_progress"],
   ["Telecoms", "USSD / SMS short-code provisioning via licensed aggregators", "NCC", "not_started"],
+  ["Referral programme", "Opinion: are referral rewards funded by referees' contributions a pyramid/Ponzi feature, regulated promotion or lottery prize?", "External counsel · SEC · FCCPC · gaming regulators", "not_started"],
+  ["Referral programme", "Tax treatment of referral rewards (withholding, PIT) and payout KYC thresholds", "NRS / State IRS · CBN-licensed PSP", "not_started"],
+  ["Referral programme", "Consent, cookie and leaderboard-display review; DPIA update for referral tracking", "NDPC", "in_progress"],
+  ["Referral programme", "Approval of member-facing promotional materials and referrer conduct rules", "ARCON · FCCPC", "not_started"],
 ];
 for (const c of comp) {
   await db.query(`INSERT INTO compliance_items(area,requirement,authority,status,owner) VALUES($1,$2,$3,$4,'Unassigned (demo)')`, c);
 }
+
+console.log("→ sample referral programme data (is_demo)");
+await db.query(`UPDATE users SET email_normalized = lower(email) WHERE email_normalized IS NULL`);
+await db.query(`UPDATE users SET email_verified_at = created_at + interval '10 minutes' WHERE verification IN ('verified','pending') OR role <> 'member'`);
+await db.query(`INSERT INTO referral_config_versions(config, change_note) VALUES ($1, 'Initial configuration — proposed 1% of daily contribution pool; rewards inactive pending legal approval')`,
+  [JSON.stringify({ ...DEFAULT_CONFIG, baseUrl: process.env.NEXT_PUBLIC_SITE_URL || DEFAULT_CONFIG.baseUrl })]);
+
+// Sample referral graph: a power-law of referrers among synthetic members, plus the featured demo member.
+const members = (await db.query(`SELECT id, created_at, email_verified_at, status FROM users WHERE email LIKE 'synthetic.%' ORDER BY member_no`)).rows;
+const featured = ids["member@demo.tbc"];
+const referrers = [featured, ...members.slice(0, 18).map((m) => m.id)];
+const weights = referrers.map((_, i) => (i === 0 ? 6 : 12 / (i + 1)));
+const wsum = weights.reduce((a, b) => a + b, 0);
+const pickReferrer = () => { let r = rnd() * wsum; for (let i = 0; i < weights.length; i++) { r -= weights[i]; if (r <= 0) return referrers[i]; } return referrers[0]; };
+const FLAGS = [["SAME_DEVICE_AS_REFERRER", "NAME_MATCHES_REFERRER"], ["IP_VELOCITY", "SAME_NETWORK_AS_REFERRER"], ["DISPOSABLE_EMAIL", "DEVICE_REUSED"]];
+let made = 0;
+for (const m of members.slice(18)) {
+  if (rnd() < 0.22) continue; // organic
+  const referrer = pickReferrer();
+  if (referrer === m.id) continue;
+  const roll = rnd();
+  const status = !m.email_verified_at ? "pending" : roll < 0.84 ? "verified" : roll < 0.93 ? "under_review" : "rejected";
+  const flags = status === "verified" || status === "pending" ? [] : FLAGS[Math.floor(rnd() * FLAGS.length)];
+  const code = (await db.query(`SELECT referral_code FROM users WHERE id = $1`, [referrer])).rows[0].referral_code;
+  await db.query(`UPDATE users SET referred_by = $1 WHERE id = $2`, [referrer, m.id]);
+  const r = await db.query(
+    `INSERT INTO referrals(referrer_id, referred_id, code_used, source, status, risk_score, risk_flags, decision_reason, verified_at, is_demo, created_at)
+     VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9,true,$10) RETURNING id`,
+    [referrer, m.id, code, rnd() < 0.8 ? "link" : "manual_code", status, flags.length ? 45 + Math.floor(rnd() * 40) : Math.floor(rnd() * 15), flags,
+     status === "rejected" ? "Sample: duplicate identity — same person as an existing member" : null,
+     status === "verified" ? m.email_verified_at : null, m.created_at]);
+  await db.query(`INSERT INTO referral_events(referral_id, to_status, reason, created_at) VALUES ($1,'pending','Registered (sample)',$2)`, [r.rows[0].id, m.created_at]);
+  if (status !== "pending") await db.query(`INSERT INTO referral_events(referral_id, from_status, to_status, reason, created_at) VALUES ($1,'pending',$2,$3,$4)`, [r.rows[0].id, status, status === "verified" ? "Email verified (sample)" : `Flagged: ${flags.join(", ")} (sample)`, m.email_verified_at ?? m.created_at]);
+  if (status === "under_review") await db.query(`INSERT INTO fraud_alerts(user_id, rule, severity, description) VALUES ($1,'REFERRAL_RISK','medium',$2)`, [m.id, `Sample: referral flagged — ${flags.join(", ")}`]);
+  made++;
+}
+const rejectedFeatured = (await db.query(`SELECT id FROM referrals WHERE referrer_id = $1 AND status = 'rejected' LIMIT 1`, [featured])).rows[0];
+if (rejectedFeatured) await db.query(`INSERT INTO referral_appeals(referral_id, user_id, reason) VALUES ($1,$2,'Sample appeal: this is my cousin; we share a phone at home but they are a separate person.')`, [rejectedFeatured.id, featured]);
+for (const r of referrers) {
+  for (let d = 0; d < 30; d++) {
+    const clicks = Math.floor(rnd() * (r === featured ? 9 : 5));
+    if (clicks) await db.query(`INSERT INTO referral_daily_activity(referrer_id, day, channel, kind, count) VALUES ($1, current_date - $2::int, $3, 'click', $4) ON CONFLICT DO NOTHING`, [r, d, pick(["link", "link", "lagos-launch", "campus-ambassadors"]), clicks]);
+  }
+  for (const ch of ["whatsapp", "copy", "facebook", "x", "telegram", "email", "card_download"]) {
+    const n = Math.floor(rnd() * (ch === "whatsapp" ? 14 : 4));
+    if (n) await db.query(`INSERT INTO referral_daily_activity(referrer_id, day, channel, kind, count) VALUES ($1, current_date - $2::int, $3, 'share', $4) ON CONFLICT DO NOTHING`, [r, Math.floor(rnd() * 20), ch, n]);
+  }
+}
+await db.query(`UPDATE users SET leaderboard_opt_in = true WHERE id = ANY($1::uuid[])`, [referrers.filter((_, i) => i % 3 !== 1)]);
+await db.query(`INSERT INTO campaigns(slug, name, description) VALUES
+  ('lagos-launch','Lagos founding community (sample)','Sample campaign for community events in Lagos.'),
+  ('campus-ambassadors','Campus ambassadors (sample)','Sample campaign for university communities.')`);
+await db.query(`INSERT INTO promo_materials(kind, title, body, campaign_slug, published) VALUES
+  ('whatsapp','Personal invitation','Hi! I''ve joined The Billionaire Circle founding community — a movement to build wealth together and create jobs across Nigeria. It''s free to join and it''s not an investment. Join with my link: {link}', NULL, true),
+  ('whatsapp','Short invitation','Join me in The Billionaire Circle founding community. Free to join. {link}', NULL, true),
+  ('social','Movement caption','10 million people. One shared vision. I''m part of The Billionaire Circle founding community, building a movement for shared prosperity and jobs in Nigeria. Free to join, not an investment. #TBC #TogetherWeBuild {link}', NULL, true),
+  ('description','One-line description','The Billionaire Circle is a pre-launch community movement to build wealth together, fund businesses and create jobs across Nigeria. Join the free waitlist: {link}', NULL, true),
+  ('email','Email invitation','Hello,\n\nI''ve joined the founding community of The Billionaire Circle (TBC), a movement to build shared wealth and create jobs across Nigeria. It hasn''t launched yet, joining the waitlist is free, and it is not an investment.\n\nYou can read about it and join here: {link}\n\nBest wishes,\n{name}', NULL, true),
+  ('social','Lagos launch caption (sample campaign)','Lagos, let''s build the circle together. Join The Billionaire Circle founding community, free: {link}', 'lagos-launch', true)`);
+for (const sql of REFRESH_STATS_SQL) await db.query(sql);
+console.log(`  ${made} sample referrals`);
 
 console.log("→ demo fraud alerts and tickets");
 const syn = (await db.query(`SELECT id FROM users WHERE email LIKE 'synthetic.%' ORDER BY member_no LIMIT 12`)).rows.map((r) => r.id);

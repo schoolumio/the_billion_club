@@ -49,8 +49,8 @@ export function Header() {
           <Link href="/login" className={clsx("hidden rounded-full px-4 py-2 text-sm font-semibold sm:inline-flex", solid ? "text-navy-900 hover:bg-navy-50" : "text-white hover:bg-white/10")}>
             Sign in
           </Link>
-          <Link href="/register" className="hidden rounded-full bg-gold-500 px-5 py-2.5 text-sm font-semibold text-navy-950 transition hover:bg-gold-400 sm:inline-flex">
-            Register interest
+          <Link href="/join" className="hidden rounded-full bg-gold-500 px-5 py-2.5 text-sm font-semibold text-navy-950 transition hover:bg-gold-400 sm:inline-flex">
+            Join the waitlist
           </Link>
           <button
             type="button"
@@ -76,7 +76,7 @@ export function Header() {
             ))}
             <li className="mt-2 grid grid-cols-2 gap-2">
               <Link href="/login" className="rounded-full border border-navy-200 px-4 py-3 text-center text-sm font-semibold text-navy-900">Sign in</Link>
-              <Link href="/register" className="rounded-full bg-gold-500 px-4 py-3 text-center text-sm font-semibold text-navy-950">Register interest</Link>
+              <Link href="/join" className="rounded-full bg-gold-500 px-4 py-3 text-center text-sm font-semibold text-navy-950">Join the waitlist</Link>
             </li>
           </ul>
         </nav>

@@ -17,6 +17,7 @@ export type BucketKey =
   | "business"
   | "community"
   | "reserve"
+  | "referral"
   | "regulatory"
   | "processing"
   | "operations"
@@ -26,7 +27,7 @@ export interface Bucket {
   key: BucketKey;
   label: string;
   /** What kind of money this is — kept distinct on purpose. */
-  nature: "Award" | "Business investment" | "Community fund" | "Reserve" | "Statutory" | "Operating expense";
+  nature: "Award" | "Business investment" | "Community fund" | "Reserve" | "Referral reward" | "Statutory" | "Operating expense";
   description: string;
 }
 
@@ -35,6 +36,7 @@ export const BUCKETS: Bucket[] = [
   { key: "business", label: "Business development capital", nature: "Business investment", description: "Ring-fenced capital for feasibility-tested ventures, held and managed under a separately regulated structure." },
   { key: "community", label: "Community development fund", nature: "Community fund", description: "Grants for skills, local infrastructure and supplier development — not repayable, not a return to members." },
   { key: "reserve", label: "Emergency & liquidity reserve", nature: "Reserve", description: "Protects award obligations and member refunds if participation falls below forecast." },
+  { key: "referral", label: "Referral rewards (proposed)", nature: "Referral reward", description: "1% of each day's actual contribution pool, shared by members in proportion to their verified, eligible direct referrals. Inactive until legally approved." },
   { key: "regulatory", label: "Regulatory levies & taxes", nature: "Statutory", description: "PLACEHOLDER — final rates depend on licensing route and formal tax opinion." },
   { key: "processing", label: "Payment processing", nature: "Operating expense", description: "Collection, settlement and payout costs. Micro-payments are expensive; see batching proposal." },
   { key: "operations", label: "Operations & administration", nature: "Operating expense", description: "Staff, technology, KYC, support, security and member communications." },
@@ -130,7 +132,9 @@ export const ADOPTED_ALLOCATION: Allocation = {
   awards: 60,
   business: 12,
   community: 5,
-  reserve: 6,
+  /** Reduced from 6% to fund the 1% referral allocation — PROPOSED, awaiting founder approval. */
+  reserve: 5,
+  referral: 1,
   regulatory: 8,
   processing: 3,
   operations: 5,
@@ -186,7 +190,7 @@ export const SCENARIOS: Scenario[] = [
     name: "A · Original concept",
     tagline: "30 awards of ₦1 billion from ₦30 billion",
     inputs: CONCEPT_INPUTS,
-    allocation: { awards: 100, business: 0, community: 0, reserve: 0, regulatory: 0, processing: 0, operations: 0, assurance: 0 },
+    allocation: { awards: 100, business: 0, community: 0, reserve: 0, referral: 0, regulatory: 0, processing: 0, operations: 0, assurance: 0 },
     verdict: "Not viable",
     awards: [{ count: 30, amount: 1_000_000_000, label: "Grand awards" }],
     tradeOffs: [
@@ -200,7 +204,7 @@ export const SCENARIOS: Scenario[] = [
     name: "B · 90% to winners",
     tagline: "30 awards of ₦900 million, 10% charge",
     inputs: { ...CONCEPT_INPUTS, awardAmount: 900_000_000 },
-    allocation: { awards: 90, business: 0, community: 0, reserve: 0, regulatory: 7, processing: 3, operations: 0, assurance: 0 },
+    allocation: { awards: 90, business: 0, community: 0, reserve: 0, referral: 0, regulatory: 7, processing: 3, operations: 0, assurance: 0 },
     verdict: "Not viable",
     awards: [{ count: 30, amount: 900_000_000, label: "Awards" }],
     tradeOffs: [
@@ -213,7 +217,7 @@ export const SCENARIOS: Scenario[] = [
     name: "C · 40% to winners",
     tagline: "3 × ₦1 billion + 27 × ₦333 million",
     inputs: { ...CONCEPT_INPUTS, awardAmount: 400_000_000 },
-    allocation: { awards: 40, business: 20, community: 10, reserve: 8, regulatory: 8, processing: 3, operations: 9, assurance: 2 },
+    allocation: { awards: 40, business: 20, community: 10, reserve: 8, referral: 0, regulatory: 8, processing: 3, operations: 9, assurance: 2 },
     verdict: "Viable with conditions",
     awards: [
       { count: 3, amount: 1_000_000_000, label: "Grand awards" },

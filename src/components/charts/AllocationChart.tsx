@@ -3,7 +3,7 @@ import { BUCKETS, allocate, formatNaira, type Allocation, type BucketKey } from 
 /** Four groups — order validated for colour-vision-deficiency separation. */
 export const GROUPS: { key: string; label: string; color: string; members: BucketKey[] }[] = [
   { key: "award", label: "Beneficiary awards", color: "var(--color-series-2)", members: ["awards"] },
-  { key: "eco", label: "Ecosystem (business + community)", color: "var(--color-series-1)", members: ["business", "community"] },
+  { key: "eco", label: "Ecosystem (business, community, referrals)", color: "var(--color-series-1)", members: ["business", "community", "referral"] },
   { key: "protect", label: "Reserves & statutory", color: "var(--color-series-3)", members: ["reserve", "regulatory"] },
   { key: "ops", label: "Operating costs", color: "var(--color-series-4)", members: ["processing", "operations", "assurance"] },
 ];

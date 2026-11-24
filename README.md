@@ -40,6 +40,8 @@ Requires Node 22.6+ (scripts use `--experimental-strip-types`) and PostgreSQL 14
 
 ## What's in the box
 
+**Waitlist & referrals** — `/join` landing page, personal referral links/QR/cards, member referral dashboard, promotion kit, leaderboard, admin growth/review/settings/rewards/campaigns, policies.
+
 **Public site** — Home · How it works · Ecosystem (interactive flywheel) · Business development arm · Financial model (scenarios + interactive calculator) · Transparency centre · Community impact · About · FAQ · Legal & regulatory readiness · Brand kit · Register / sign in.
 
 **Member dashboard** — profile, verification status, contribution statement with pagination, totals and streaks, eligibility status, announcements, opportunities (jobs, suppliers, training, business), business development updates, support centre with ticketing.
@@ -52,4 +54,5 @@ Requires Node 22.6+ (scripts use `--experimental-strip-types`) and PostgreSQL 14
 - [`docs/ARCHITECTURE.md`](docs/ARCHITECTURE.md) — technical architecture, security, data model, integration modules
 - [`docs/FEATURE-STATUS.md`](docs/FEATURE-STATUS.md) — what is production-ready vs simulated vs proposed
 - [`docs/DEPLOYMENT.md`](docs/DEPLOYMENT.md) — deployment and pre-launch hardening checklist
+- [`docs/REFERRAL-PROGRAMME.md`](docs/REFERRAL-PROGRAMME.md) — waitlist & referral programme: spec, maths, legal issues, attribution, fraud, admin manual
 - [`docs/PRESENTATION.md`](docs/PRESENTATION.md) — a guided walkthrough for investor / government presentations

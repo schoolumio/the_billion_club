@@ -8,6 +8,8 @@ export const metadata: Metadata = { title: "Member dashboard", robots: { index: 
 
 const NAV: NavItem[] = [
   { href: "/dashboard", label: "Overview", icon: "LayoutDashboard" },
+  { href: "/dashboard/referrals", label: "Invite & referrals", icon: "Gift" },
+  { href: "/dashboard/promote", label: "Promotion kit", icon: "Megaphone" },
   { href: "/dashboard/contributions", label: "Contributions", icon: "ReceiptText" },
   { href: "/dashboard/opportunities", label: "Opportunities", icon: "Briefcase" },
   { href: "/dashboard/support", label: "Support centre", icon: "LifeBuoy" },

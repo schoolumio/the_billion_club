@@ -84,6 +84,19 @@ export const REG_AREAS: RegArea[] = [
   },
 ];
 
+REG_AREAS.push({
+  area: "Referral rewards",
+  question: "Could paying members for recruiting others — funded from those members' contributions — be treated as a pyramid or Ponzi feature, a regulated sales promotion, a lottery prize or an investment return?",
+  authorities: ["Securities and Exchange Commission (SEC)", "FCCPC", "State gaming regulators / NLRC", "EFCC"],
+  instruments: ["Investments and Securities Act 2025 (Ponzi/pyramid provisions)", "FCCPA 2018 (unfair and deceptive practices; promotions)", "State lottery laws", "Nigeria Tax Act 2025 (treatment of rewards)", "NDPA 2023 (referral tracking, cookies, leaderboard)"],
+  needed: [
+    "Written opinion on the single-level, 1%-of-actual-contributions design before any activation",
+    "Confirmation that rewards may be paid at all, and to whom (KYC, age, staff exclusions)",
+    "Tax withholding and reporting rules for rewards; payout via a CBN-licensed provider",
+    "Consent and cookie review; DPIA update; ARCON approval of member-facing materials",
+  ],
+});
+
 export const CHECKLIST: { group: string; items: { text: string; status: "done" | "in_progress" | "todo" }[] }[] = [
   { group: "Legal structure", items: [
     { text: "Engage Nigerian counsel with gaming, securities and payments expertise", status: "todo" },
@@ -111,6 +124,13 @@ export const CHECKLIST: { group: string; items: { text: string; status: "done" |
     { text: "NDPC registration", status: "todo" },
     { text: "AML/CFT programme and compliance officer", status: "todo" },
     { text: "Complaints handling and dispute resolution", status: "todo" },
+  ]},
+  { group: "Referral programme", items: [
+    { text: "Single-level design, immutable attribution and fraud review built", status: "done" },
+    { text: "Rewards engine gated behind funding confirmation and legal approval reference", status: "done" },
+    { text: "Legal opinion on referral rewards (pyramid / promotion / lottery / tax)", status: "todo" },
+    { text: "Founder approval of the 1% source (proposed: reserve 6% → 5%)", status: "todo" },
+    { text: "Email delivery provider and SMS OTP provider contracted", status: "todo" },
   ]},
   { group: "Platform", items: [
     { text: "Role-based access control and audit logging", status: "done" },

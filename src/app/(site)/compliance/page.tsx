@@ -22,7 +22,7 @@ export default function Compliance() {
             This is a scoping document prepared to brief qualified Nigerian counsel. It is not legal advice and may be incomplete. Laws, jurisdiction and regulator
             practice change — in particular, the division of lottery regulation between federal and state authorities. Every item must be confirmed by professional opinion.
           </Callout>
-          <SectionHeading className="mt-16" eyebrow="Regulatory map" title="Ten questions that decide whether — and how — we launch." />
+          <SectionHeading className="mt-16" eyebrow="Regulatory map" title="Eleven questions that decide whether — and how — we launch." />
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
             {REG_AREAS.map((r, i) => (
               <Card key={r.area} className="!p-7">
