@@ -33,3 +33,13 @@ Set `DATABASE_URL`, `AUTH_SECRET`, `NEXT_PUBLIC_SITE_URL` (and `SEED_DEMO_DATA=t
 - [ ] Independent penetration test and code review
 - [ ] DPIA, privacy notice, cookie notice, terms (legal sign-off)
 - [ ] All regulated modules remain disabled until compliance sign-off
+
+## Reverting the November 2026 upgrade
+
+A full copy of the platform before the upgrade is kept on the branch `backup/before-upgrade-2026-11-24` (commit `02309e2`). To restore it, either point Vercel's production branch at that backup branch, or reset the working branch:
+
+```bash
+git fetch origin backup/before-upgrade-2026-11-24
+git reset --hard FETCH_HEAD
+git push --force-with-lease origin claude/laughing-cerf-56gi3g
+```

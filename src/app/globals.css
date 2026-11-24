@@ -4,29 +4,29 @@
   --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
   --font-display: "Fraunces Variable", ui-serif, Georgia, "Times New Roman", serif;
 
-  --color-navy-50: #f2f5fb;
-  --color-navy-100: #e3e9f5;
-  --color-navy-200: #c3cfe6;
-  --color-navy-300: #94a7cd;
-  --color-navy-400: #5f79ad;
-  --color-navy-500: #3a5590;
-  --color-navy-600: #253f77;
-  --color-navy-700: #1a3061;
-  --color-navy-800: #12244c;
-  --color-navy-900: #0b1834;
-  --color-navy-950: #060e22;
+  --color-navy-50: #f3f5f9;
+  --color-navy-100: #e4e9f1;
+  --color-navy-200: #c6d0df;
+  --color-navy-300: #98a8c1;
+  --color-navy-400: #64799a;
+  --color-navy-500: #40557a;
+  --color-navy-600: #2b4064;
+  --color-navy-700: #1f3050;
+  --color-navy-800: #16243d;
+  --color-navy-900: #11203a;
+  --color-navy-950: #0d1b2b;
 
-  --color-gold-50: #fcf8ec;
-  --color-gold-100: #f7eed2;
-  --color-gold-200: #eedb9f;
-  --color-gold-300: #e3c46a;
-  --color-gold-400: #d8ae3f;
-  --color-gold-500: #c89a24;
-  --color-gold-600: #a67b18;
-  --color-gold-700: #845e15;
-  --color-gold-800: #6b4c17;
+  --color-gold-50: #fbf8ee;
+  --color-gold-100: #f6eed3;
+  --color-gold-200: #ede0ab;
+  --color-gold-300: #e5cf7e;
+  --color-gold-400: #dcbe55;
+  --color-gold-500: #d4af37;
+  --color-gold-600: #b4922a;
+  --color-gold-700: #8c7020;
+  --color-gold-800: #6b561b;
 
-  --color-ink: #0b1220;
+  --color-ink: #0d1b2b;
   --color-mist: #f6f7f9;
 
   /* Chart palette — validated (light surface) with the dataviz validator */
@@ -91,7 +91,7 @@
   .tabular { font-variant-numeric: tabular-nums; }
 
   .gold-text {
-    background: linear-gradient(100deg, #f3dc95 0%, #d8ae3f 40%, #f7e7b4 60%, #c89a24 100%);
+    background: linear-gradient(100deg, #f1dc9b 0%, #d4af37 42%, #f5e3a8 62%, #c4a030 100%);
     -webkit-background-clip: text; background-clip: text; color: transparent;
   }
   .hairline { border-color: color-mix(in oklab, var(--color-navy-900) 9%, transparent); }

@@ -7,7 +7,7 @@ export const metadata: Metadata = { title: "Brand & presentation kit", descripti
 
 const COLORS = [
   ["Logo navy", "#0d1b2b", "Logo background, primary"], ["Logo gold", "#d4af37", "Ring, monogram, wordmark"], ["Highlight", "#f5d06a", "The dot at twelve o'clock"],
-  ["Navy 900", "#0b1834", "Interface surfaces"], ["Gold 500", "#c89a24", "Buttons — use sparingly"], ["Mist", "#f6f7f9", "Section backgrounds"],
+  ["Navy 700", "#1f3050", "Interface accents"], ["Gold 700", "#8c7020", "Gold text on white (AA)"], ["Mist", "#f6f7f9", "Section backgrounds"],
 ];
 
 export default function Brand() {

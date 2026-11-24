@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowDown, Award, BadgeCheck, Briefcase, Building2, Eye, FileSearch, Landmark, Scale, ShieldCheck, Sprout, Users } from "lucide-react";
+import { ArrowDown, Award, BadgeCheck, Briefcase, Building2, Eye, FileSearch, Landmark, Link2, Scale, Share2, ShieldCheck, Sprout, Trophy, UserPlus, Users } from "lucide-react";
 import { Card, Eyebrow, LinkButton, SectionHeading, StatusBadge, Callout } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/Reveal";
 import { EcosystemDiagram } from "@/components/home/EcosystemDiagram";
 import { AllocationChart } from "@/components/charts/AllocationChart";
-import { ADOPTED, runModel, formatNaira, formatOdds } from "@/lib/finance/model";
+import { ADOPTED, runModel, formatCount, formatNaira, formatOdds } from "@/lib/finance/model";
 import { ROADMAP } from "@/lib/content/roadmap";
 import { HOW_IT_WORKS } from "@/lib/content/how";
+import { waitlistProgress } from "@/lib/referrals/server";
 
 export const metadata: Metadata = { title: { absolute: "The Billionaire Circle — 10 million people. One shared vision." } };
 
@@ -18,8 +19,15 @@ const targets = [
   { value: "60%", label: "Of every naira to winners", note: "40% builds the ecosystem" },
 ];
 
-export default function Home() {
+export const revalidate = 300; // live waitlist counter refreshes every 5 minutes
+
+const TARGET = 10_000_000;
+
+export default async function Home() {
   const r = runModel(ADOPTED.inputs);
+  const progress = await waitlistProgress().catch(() => null);
+  const verified = progress?.verified ?? null;
+  const pct = verified !== null ? Math.min(100, (verified / TARGET) * 100) : 0;
 
   return (
     <>
@@ -46,8 +54,8 @@ export default function Home() {
               businesses, creates jobs and transforms lives.
             </p>
             <div className="mt-9 flex animate-fade-up flex-col gap-3 [animation-delay:240ms] sm:flex-row">
-              <LinkButton href="#movement" variant="gold" arrow>Discover the Movement</LinkButton>
-              <LinkButton href="/how-it-works" variant="outline-light">Explore How It Works</LinkButton>
+              <LinkButton href="/join" variant="gold" arrow>Join the waitlist — free</LinkButton>
+              <LinkButton href="#movement" variant="outline-light">Discover the movement</LinkButton>
             </div>
             <p className="mt-8 flex max-w-xl animate-fade-up items-start gap-2 text-xs leading-relaxed text-navy-300 [animation-delay:320ms]">
               <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden />
@@ -72,25 +80,19 @@ export default function Home() {
                   </div>
                 ))}
               </dl>
-              <div className="mt-6 rounded-2xl border border-gold-400/20 bg-gold-500/[0.07] p-4">
-                <p className="text-sm text-gold-100">
-                  <span className="font-semibold">Members today: 0.</span> Every number above is a target. We will publish real,
-                  audited figures only once we are licensed and live.
+              <div className="mt-6 rounded-2xl border border-gold-400/25 bg-gold-500/[0.07] p-5">
+                <div className="flex items-baseline justify-between gap-3">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold-300">Founding community · live</p>
+                  <Link href="/join" className="text-xs font-semibold text-gold-200 underline-offset-2 hover:underline">Join →</Link>
+                </div>
+                <p className="mt-2 font-display text-3xl text-white tabular">
+                  {verified === null ? "—" : formatCount(verified)} <span className="text-base text-navy-300">verified members</span>
                 </p>
+                <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/10" role="progressbar" aria-valuemin={0} aria-valuemax={TARGET} aria-valuenow={verified ?? 0} aria-label="Progress towards 10 million verified waitlist members">
+                  <div className="h-full rounded-full bg-gradient-to-r from-gold-600 to-gold-300" style={{ width: `${Math.max(pct, verified ? 0.8 : 0)}%` }} />
+                </div>
+                <p className="mt-3 text-xs leading-relaxed text-navy-300">Real people who have verified their email — never sample data. All other figures above are targets; audited results will be published only once we are licensed and live.</p>
               </div>
-              <svg viewBox="0 0 300 70" className="mt-6 h-16 w-full" aria-hidden>
-                <defs>
-                  <linearGradient id="hero-g" x1="0" x2="1">
-                    <stop offset="0" stopColor="#c89a24" stopOpacity="0.1" />
-                    <stop offset="1" stopColor="#e3c46a" stopOpacity="0.9" />
-                  </linearGradient>
-                </defs>
-                {Array.from({ length: 30 }, (_, i) => {
-                  const h = 6 + Math.pow(i / 29, 1.6) * 58;
-                  return <rect key={i} x={i * 10 + 1} y={70 - h} width="6" height={h} rx="2" fill="url(#hero-g)" opacity={0.35 + i / 45} />;
-                })}
-              </svg>
-              <p className="text-[0.7rem] text-navy-400">Illustrative: a community growing towards its target — not real data.</p>
             </div>
           </div>
         </div>
@@ -183,6 +185,35 @@ export default function Home() {
               <footer className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Founding philosophy</footer>
             </blockquote>
           </Reveal>
+        </div>
+      </section>
+
+      {/* FOUNDING COMMUNITY */}
+      <section className="relative overflow-hidden bg-navy-950 py-24 text-white sm:py-28">
+        <div className="grid-bg absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_at_top_right,black,transparent_70%)]" aria-hidden />
+        <div className="container-x relative grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-center">
+          <div>
+            <SectionHeading tone="light" eyebrow="The founding community" title={<>Ten million verified people. <span className="gold-text">Built one invitation at a time.</span></>} lead="Before launch, we are building the community itself. Join free, get your personal link and invite the people you trust. Only verified, genuine members count." />
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <LinkButton href="/join" arrow>Join the waitlist</LinkButton>
+              <LinkButton href="/leaderboard" variant="outline-light">See the leaderboard</LinkButton>
+            </div>
+            <p className="mt-6 text-xs leading-relaxed text-navy-300">Free to join. Not an investment. Single-level referrals only — nobody earns from their referrals&apos; referrals. The proposed referral rewards are inactive until legally approved and funded from actual contributions.</p>
+          </div>
+          <ol className="grid gap-4 sm:grid-cols-2">
+            {[
+              { Icon: UserPlus, t: "Join in a minute", b: "Free registration. Verify your email to secure your place." },
+              { Icon: Link2, t: "Get your link", b: "Your personal code, link, QR code and branded invitation card." },
+              { Icon: Share2, t: "Invite your circle", b: "One tap to WhatsApp, Facebook, X, Telegram or email." },
+              { Icon: Trophy, t: "Rise through the levels", b: "From Circle Starter to TBC Growth Legend — verified referrals only." },
+            ].map((x, i) => (
+              <Reveal as="li" key={x.t} delay={i * 80} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
+                <div className="flex items-center justify-between"><x.Icon className="h-6 w-6 text-gold-300" aria-hidden /><span className="font-display text-sm text-gold-400 tabular">0{i + 1}</span></div>
+                <h3 className="mt-4 text-lg font-medium">{x.t}</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-navy-300">{x.b}</p>
+              </Reveal>
+            ))}
+          </ol>
         </div>
       </section>
 
@@ -319,7 +350,7 @@ export default function Home() {
             <p className="text-lg text-navy-200">Join the free founding-community waitlist, get your personal referral link and help us reach 10 million verified members before launch. No payment, ever, to join.</p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <LinkButton href="/join" arrow>Join the waitlist</LinkButton>
-              <LinkButton href="/leaderboard" variant="outline-light">Community leaderboard</LinkButton>
+              <LinkButton href="/how-it-works" variant="outline-light">How it works</LinkButton>
             </div>
             <Callout tone="gold" title="Protect yourself" className="!border-gold-400/30 !bg-white/5 [&_p]:!text-gold-100 [&_div]:!text-navy-200">
               We are not collecting money. Anyone asking you to pay to join The Billionaire Circle is not acting for us.

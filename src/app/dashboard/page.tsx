@@ -1,15 +1,21 @@
 import Link from "next/link";
-import { Activity, CalendarCheck, Flame, Hourglass, Megaphone, Wallet } from "lucide-react";
+import { Activity, ArrowRight, BadgeCheck, CalendarCheck, Flame, Gift, Hourglass, MailWarning, Megaphone, Trophy, Wallet } from "lucide-react";
 import { requirePermission } from "@/lib/auth/session";
 import { announcements, getMember, memberDaily, memberSummary, opportunities, ventures } from "@/lib/db/queries";
 import { DemoTag, Panel, Pill, Stat, fmtDate } from "@/components/app/ui";
 import { BarChart } from "@/components/charts/BarChart";
 import { formatNaira } from "@/lib/finance/model";
+import { getConfig, memberReferralView } from "@/lib/referrals/server";
+import { levelFor } from "@/lib/referrals/config";
+import { referralUrl } from "@/lib/referrals/codes";
+import { CopyBlock } from "@/components/waitlist/CopyBlock";
 
 export default async function MemberOverview({ searchParams }: { searchParams: Promise<{ welcome?: string; denied?: string }> }) {
   const sp = await searchParams;
   const s = await requirePermission("member:dashboard");
-  const [m, sum, daily, ann, opps, vens] = await Promise.all([getMember(s.sub), memberSummary(s.sub), memberDaily(s.sub, 30), announcements(4), opportunities(), ventures()]);
+  const [m, sum, daily, ann, opps, vens, ref, { config }] = await Promise.all([getMember(s.sub), memberSummary(s.sub), memberDaily(s.sub, 30), announcements(4), opportunities(), ventures(), memberReferralView(s.sub), getConfig()]);
+  const link = ref ? referralUrl(config.baseUrl, ref.user.referral_code) : "";
+  const lvl = levelFor(ref?.counts.verified ?? 0, config.levels);
   if (!m) return null;
 
   return (
@@ -32,6 +38,30 @@ export default async function MemberOverview({ searchParams }: { searchParams: P
         </div>
       </div>
 
+      {ref && (
+        <section aria-labelledby="fc-title" className="mb-8 grid gap-4 lg:grid-cols-[1.3fr_1fr]">
+          <div className="rounded-2xl border border-navy-100 bg-white p-5 sm:p-6">
+            <div className="flex flex-wrap items-center justify-between gap-2">
+              <h2 id="fc-title" className="flex items-center gap-2 font-sans text-base font-semibold tracking-normal text-navy-950"><Gift className="h-4 w-4 text-gold-600" aria-hidden />Your founding-community place</h2>
+              {ref.user.email_verified_at
+                ? <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-2.5 py-1 text-xs font-semibold text-emerald-800 ring-1 ring-inset ring-emerald-200"><BadgeCheck className="h-3.5 w-3.5" aria-hidden />Place secured</span>
+                : <Link href="/dashboard/referrals" className="inline-flex items-center gap-1 rounded-full bg-amber-50 px-2.5 py-1 text-xs font-semibold text-amber-900 ring-1 ring-inset ring-amber-200"><MailWarning className="h-3.5 w-3.5" aria-hidden />Verify your email</Link>}
+            </div>
+            <p className="mt-4 text-xs font-semibold uppercase tracking-[0.18em] text-gold-700">Your invitation link</p>
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+              <code className="min-w-0 flex-1 truncate rounded-xl bg-mist px-3 py-2.5 text-xs text-navy-900 sm:text-sm">{link}</code>
+              <CopyBlock text={link} channel="copy" label="Copy link" />
+            </div>
+            <Link href="/dashboard/referrals" className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-navy-900 hover:underline">Share on WhatsApp, download your card &amp; QR <ArrowRight className="h-4 w-4" aria-hidden /></Link>
+          </div>
+          <div className="grid grid-cols-2 gap-4">
+            <Stat tone="navy" label="Verified referrals" value={ref.counts.verified.toLocaleString("en-NG")} hint={`${ref.counts.pending} pending`} icon={<BadgeCheck className="h-4 w-4 text-gold-300" />} />
+            <Stat label="Level" value={<span className="text-xl">{lvl.current?.name ?? "—"}</span>} hint={lvl.next ? `${lvl.remaining} to ${lvl.next.name}` : "Top level"} icon={<Trophy className="h-4 w-4 text-gold-600" />} />
+          </div>
+        </section>
+      )}
+
+      <h2 className="mb-4 flex items-center gap-2 font-sans text-sm font-semibold uppercase tracking-[0.14em] text-navy-500">Contribution preview <DemoTag /></h2>
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
         <Stat label="Total recorded" value={formatNaira(sum.total)} hint={<>{sum.count} simulated entries <DemoTag /></>} icon={<Wallet className="h-4 w-4 text-gold-600" />} />
         <Stat label="Places held (30d)" value={`${sum.activeDays30}/30`} hint="Days you secured a daily place" icon={<CalendarCheck className="h-4 w-4 text-gold-600" />} />

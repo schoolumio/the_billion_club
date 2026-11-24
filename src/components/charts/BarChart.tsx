@@ -54,8 +54,8 @@ export function BarChart({
             const y = padT + innerH - (t / max) * innerH;
             return (
               <g key={t}>
-                <line x1={padL} x2={W - 8} y1={y} y2={y} stroke="#0b1834" strokeOpacity={t === 0 ? 0.25 : 0.07} />
-                <text x={padL - 8} y={y + 4} textAnchor="end" fontSize="11" fill="#5f79ad" className="tabular">{format(t)}</text>
+                <line x1={padL} x2={W - 8} y1={y} y2={y} stroke="#0d1b2b" strokeOpacity={t === 0 ? 0.25 : 0.07} />
+                <text x={padL - 8} y={y + 4} textAnchor="end" fontSize="11" fill="#64799a" className="tabular">{format(t)}</text>
               </g>
             );
           })}
@@ -75,7 +75,7 @@ export function BarChart({
                   />
                 )}
                 {i % everyNthLabel === 0 && (
-                  <text x={padL + i * step + step / 2} y={H - 6} textAnchor="middle" fontSize="10.5" fill="#5f79ad">{d.label}</text>
+                  <text x={padL + i * step + step / 2} y={H - 6} textAnchor="middle" fontSize="10.5" fill="#64799a">{d.label}</text>
                 )}
               </g>
             );

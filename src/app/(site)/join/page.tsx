@@ -12,11 +12,18 @@ import { one } from "@/lib/db";
 import { formatCount } from "@/lib/finance/model";
 import { WAITLIST_FAQ } from "@/lib/content/waitlist-faq";
 
-export const metadata: Metadata = {
-  title: "Join the waitlist",
-  description: "Join The Billionaire Circle founding community. Free to join, not an investment. Invite your circle and help build a movement of 10 million verified members.",
-  openGraph: { title: "Be part of the movement that builds wealth together.", description: "Join The Billionaire Circle founding community — free, with your own referral link." },
-};
+export async function generateMetadata({ searchParams }: { searchParams: Promise<{ ref?: string }> }): Promise<Metadata> {
+  const code = normalizeCode((await searchParams).ref);
+  const image = code ? `/api/og/invite?ref=${code}` : "/opengraph-image";
+  const title = "Be part of the movement that builds wealth together.";
+  const description = "Join The Billionaire Circle founding community — free, not an investment, with your own referral link.";
+  return {
+    title: "Join the waitlist",
+    description,
+    openGraph: { title, description, images: [{ url: image, width: 1200, height: 630 }] },
+    twitter: { card: "summary_large_image", title, description, images: [image] },
+  };
+}
 export const dynamic = "force-dynamic";
 
 const TARGET = 10_000_000;

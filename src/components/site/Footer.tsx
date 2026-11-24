@@ -8,7 +8,8 @@ export function Footer() {
       <div className="container-x grid gap-12 py-16 lg:grid-cols-[1.3fr_2fr]">
         <div>
           <Logo tone="light" />
-          <p className="mt-6 max-w-sm font-display text-2xl leading-snug text-white">Small daily. Shared prosperity.</p>
+          <p className="mt-6 max-w-sm font-display text-2xl leading-snug text-white">Be part of the movement that builds wealth together.</p>
+          <Link href="/join" className="mt-5 inline-flex items-center gap-2 rounded-full bg-gold-500 px-5 py-2.5 text-sm font-semibold text-navy-950 transition hover:bg-gold-400">Join the waitlist — free</Link>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-navy-300">
             A proposed community wealth creation initiative for Nigeria. Currently in pre-launch: no contributions are collected,
             no awards have been made and no licence has yet been granted.
@@ -31,7 +32,7 @@ export function Footer() {
       </div>
       <div className="border-t border-white/10">
         <div className="container-x flex flex-col gap-3 py-6 text-xs leading-relaxed text-navy-400 sm:flex-row sm:justify-between">
-          <p>© {new Date().getFullYear()} The Billionaire Circle (working name). All figures are targets or projections unless labelled otherwise.</p>
+          <p>© {new Date().getFullYear()} The Billionaire Circle. All figures are targets or projections unless labelled otherwise.</p>
           <p>Member contributions are not investments and carry no guaranteed return.</p>
         </div>
       </div>

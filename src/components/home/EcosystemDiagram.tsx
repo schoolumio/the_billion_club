@@ -36,16 +36,16 @@ export function EcosystemDiagram({ tone = "dark" }: { tone?: "dark" | "light" })
         <svg viewBox="0 0 100 100" className="absolute inset-0 h-full w-full" aria-hidden>
           <defs>
             <radialGradient id="eco-glow" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stopColor="#c89a24" stopOpacity={dark ? 0.28 : 0.18} />
-              <stop offset="100%" stopColor="#c89a24" stopOpacity="0" />
+              <stop offset="0%" stopColor="#d4af37" stopOpacity={dark ? 0.28 : 0.18} />
+              <stop offset="100%" stopColor="#d4af37" stopOpacity="0" />
             </radialGradient>
             <marker id="eco-arrow" viewBox="0 0 6 6" refX="3" refY="3" markerWidth="3" markerHeight="3" orient="auto">
-              <path d="M0,0 L6,3 L0,6 z" fill="#d8ae3f" />
+              <path d="M0,0 L6,3 L0,6 z" fill="#d4af37" />
             </marker>
           </defs>
           <circle cx="50" cy="50" r="30" fill="url(#eco-glow)" />
-          <circle cx="50" cy="50" r={R} fill="none" stroke={dark ? "#ffffff" : "#0b1834"} strokeOpacity="0.12" strokeWidth="0.3" />
-          <circle cx="50" cy="50" r={R} fill="none" stroke="#d8ae3f" strokeWidth="0.45" strokeDasharray="1.2 3.2" className="animate-spin-slow" style={{ transformBox: "view-box", transformOrigin: "50% 50%" }} />
+          <circle cx="50" cy="50" r={R} fill="none" stroke={dark ? "#ffffff" : "#0d1b2b"} strokeOpacity="0.12" strokeWidth="0.3" />
+          <circle cx="50" cy="50" r={R} fill="none" stroke="#d4af37" strokeWidth="0.45" strokeDasharray="1.2 3.2" className="animate-spin-slow" style={{ transformBox: "view-box", transformOrigin: "50% 50%" }} />
           {ECOSYSTEM.map((_, i) => {
             const a1 = ((i + 0.32) / ECOSYSTEM.length) * Math.PI * 2 - Math.PI / 2;
             const a2 = ((i + 0.68) / ECOSYSTEM.length) * Math.PI * 2 - Math.PI / 2;
@@ -54,7 +54,7 @@ export function EcosystemDiagram({ tone = "dark" }: { tone?: "dark" | "light" })
                 key={i}
                 d={`M ${50 + R * Math.cos(a1)} ${50 + R * Math.sin(a1)} A ${R} ${R} 0 0 1 ${50 + R * Math.cos(a2)} ${50 + R * Math.sin(a2)}`}
                 fill="none"
-                stroke="#d8ae3f"
+                stroke="#d4af37"
                 strokeWidth="0.6"
                 markerEnd="url(#eco-arrow)"
                 opacity={i === active ? 1 : 0.5}

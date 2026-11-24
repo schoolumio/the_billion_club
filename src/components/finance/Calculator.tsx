@@ -44,7 +44,7 @@ export function Calculator() {
                 <span className="text-navy-700">{f.label}</span>
                 <span className="font-semibold text-navy-950 tabular">{f.fmt(inputs[f.key])}</span>
               </span>
-              <input type="range" min={f.min} max={f.max} step={f.step} value={inputs[f.key]} onChange={(e) => setInputs((s) => ({ ...s, [f.key]: Number(e.target.value) }))} className="mt-3 w-full accent-[#c89a24]" />
+              <input type="range" min={f.min} max={f.max} step={f.step} value={inputs[f.key]} onChange={(e) => setInputs((s) => ({ ...s, [f.key]: Number(e.target.value) }))} className="mt-3 w-full accent-[#d4af37]" />
               {f.help && <span className="mt-1 block text-xs text-navy-400">{f.help}</span>}
             </label>
           ))}
@@ -53,7 +53,7 @@ export function Calculator() {
               <span className="text-navy-700">Winners&apos; share of money collected</span>
               <span className="font-semibold text-navy-950 tabular">{Math.round(share * 100)}% / {teamPct}%</span>
             </span>
-            <input type="range" min={0.3} max={0.95} step={0.01} value={share} onChange={(e) => setShare(Number(e.target.value))} className="mt-3 w-full accent-[#0b1834]" />
+            <input type="range" min={0.3} max={0.95} step={0.01} value={share} onChange={(e) => setShare(Number(e.target.value))} className="mt-3 w-full accent-[#0d1b2b]" />
             <span className="mt-1 block text-xs text-navy-400">Adopted: 60% winners / 40% team</span>
           </label>
         </div>
