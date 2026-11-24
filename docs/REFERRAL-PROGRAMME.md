@@ -17,7 +17,7 @@
 ## 2. Financial and mathematical findings
 
 1. **The formula reduces to ₦1 per contributing referral per day.** With the denominator = members who contributed that day and ₦100 per contribution: share = r/N × (N × ₦100 × 1%) = **r × ₦1**. That is easy to explain to members and always funded by actual inflow.
-2. **The 1% must come from somewhere in the 60/40 model.** *Proposed (awaiting founder approval):* the emergency reserve goes from 6% to 5%; winners keep 60%. Alternative: scale the other 99% proportionally (winners 59.4%). Implemented as `ADOPTED_ALLOCATION.referral = 1`, `reserve = 5`.
+2. **The 1% must come from somewhere in the 60/40 model.** **Decided by the founders (November 2026):** the emergency reserve goes from 6% to 5%; winners keep 60%. (The alternative considered was scaling the other 99% proportionally, which would have given winners 59.4%.) Implemented as `ADOPTED_ALLOCATION.referral = 1`, `reserve = 5`.
 3. **Organic members create an undistributed remainder.** Everyone who joined without a referrer sits in the denominator but credits nobody, so (organic share) × allocation is never claimed. Rounding to the kobo and any per-member cap add a little more. The engine reports this as `unallocated_kobo`; by default it **returns to the reserve** (configurable: carry forward).
 4. **The numerator and denominator must match.** Mixing "all verified referrals" with "members who paid today" could push shares above 100%. The settings screen therefore pairs them automatically:
    - **Members who paid that day** (default) → the member's verified referrals **who paid that day**

@@ -129,7 +129,7 @@ export const CHECKLIST: { group: string; items: { text: string; status: "done" |
     { text: "Single-level design, immutable attribution and fraud review built", status: "done" },
     { text: "Rewards engine gated behind funding confirmation and legal approval reference", status: "done" },
     { text: "Legal opinion on referral rewards (pyramid / promotion / lottery / tax)", status: "todo" },
-    { text: "Founder approval of the 1% source (proposed: reserve 6% → 5%)", status: "todo" },
+    { text: "Founder approval of the 1% source (reserve 6% → 5%)", status: "done" },
     { text: "Email delivery provider and SMS OTP provider contracted", status: "todo" },
   ]},
   { group: "Platform", items: [

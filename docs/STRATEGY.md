@@ -21,7 +21,8 @@
 | **Winners** | **60%** | **₦18.0bn** |
 | Business development fund | 12% | ₦3.6bn |
 | Government levies & taxes *(estimate)* | 8% | ₦2.4bn |
-| Emergency reserve | 6% | ₦1.8bn |
+| Emergency reserve | 5% | ₦1.5bn |
+| Referral rewards (inactive until legally approved) | 1% | ₦0.3bn |
 | Community development | 5% | ₦1.5bn |
 | Staff, technology, support | 5% | ₦1.5bn |
 | Bank & payment charges | 3% | ₦0.9bn |

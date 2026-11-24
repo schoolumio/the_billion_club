@@ -132,7 +132,7 @@ export const ADOPTED_ALLOCATION: Allocation = {
   awards: 60,
   business: 12,
   community: 5,
-  /** Reduced from 6% to fund the 1% referral allocation — PROPOSED, awaiting founder approval. */
+  /** Reduced from 6% to fund the 1% referral allocation — approved by the founders (November 2026). */
   reserve: 5,
   referral: 1,
   regulatory: 8,
