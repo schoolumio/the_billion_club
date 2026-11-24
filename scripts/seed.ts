@@ -107,10 +107,10 @@ await db.query(`
 
 console.log("→ announcements, opportunities, ventures");
 const ann = [
-  ["Pre-launch notice: no contributions are being collected", "The platform is in a pre-launch demonstration phase. No real money is being accepted. Any request for payment in our name is fraudulent — please report it via the Support Centre.", "Official"],
-  ["Regulatory engagement update", "Our legal advisers are preparing formal opinions on licensing structure, fund custody and consumer protection. We will publish milestones on the Transparency page as they are reached.", "Governance"],
-  ["Selection methodology consultation (draft)", "A draft beneficiary selection methodology will be published for public comment before any selection takes place. Independent observers will be invited.", "Transparency"],
-  ["Identity verification will use NIN and BVN checks", "When launched, verification will be performed through licensed identity partners. We will never ask for your PIN, OTP or password.", "Security"],
+  ["We are not taking any money yet", "TBC hasn't launched, so we are not accepting any payments. If anyone asks you to pay in our name, it's a scam — please report it in Help & support.", "Official"],
+  ["Our lawyers are working on approvals", "Our legal team is preparing formal opinions on licensing, how members' money will be held, and consumer protection. We'll share each milestone on the Transparency page.", "Governance"],
+  ["You'll see the draw rules first", "Before any draw happens, we'll publish exactly how winners are chosen and invite public comment. Independent observers will watch every draw.", "Transparency"],
+  ["ID checks will use your NIN or BVN", "After launch, we'll confirm members' identity through licensed partners. We will never ask for your PIN, OTP or password.", "Security"],
 ];
 for (const [i, a] of ann.entries()) {
   await db.query(`INSERT INTO announcements(title,body,category,published_at) VALUES($1,$2,$3, now() - ($4 || ' days')::interval)`, [a[0], a[1], a[2], String(i * 9 + 2)]);

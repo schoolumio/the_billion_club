@@ -12,16 +12,16 @@ export default async function Finance() {
   const recRate = k.txns ? (k.reconciled / (k.txns - k.failed)) * 100 : 0;
   return (
     <>
-      <PageTitle title="Finance & reconciliation" lead="Contribution monitoring, reconciliation status and fund allocation against the proposed policy." actions={<DemoTag />} />
+      <PageTitle eyebrow="Money" title="Payments & accounts" lead="Daily payments, checks against the bank, and how each month’s money is shared. All sample data until launch." actions={<DemoTag />} />
       <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-        <Stat label="Ledger total" value={formatNaira(k.contribTotal, { compact: true, decimals: 2 })} hint={`${k.txns.toLocaleString("en-NG")} entries`} />
+        <Stat label="Total (sample)" value={formatNaira(k.contribTotal, { compact: true, decimals: 2 })} hint={`${k.txns.toLocaleString("en-NG")} entries`} />
         <Stat label="Month to date" value={formatNaira(k.contribMtd, { compact: true, decimals: 2 })} />
-        <Stat label="Reconciled" value={`${recRate.toFixed(1)}%`} hint={`${k.unreconciled.toLocaleString("en-NG")} awaiting reconciliation`} />
-        <Stat label="Failed attempts" value={k.failed.toLocaleString("en-NG")} hint="Excluded from totals" />
+        <Stat label="Checked with bank" value={`${recRate.toFixed(1)}%`} hint={`${k.unreconciled.toLocaleString("en-NG")} still to check`} />
+        <Stat label="Failed payments" value={k.failed.toLocaleString("en-NG")} hint="Not counted in totals" />
       </div>
       <div className="mt-6 grid gap-6 xl:grid-cols-[1.3fr_1fr]">
-        <Panel title="Daily reconciliation · last 14 days">
-          <Table head={["Date", "Reconciled", "Pending", "Failed", "Amount"]} minWidth={520}>
+        <Panel title="Bank checks · last 14 days" description="Each payment is matched against the bank statement.">
+          <Table head={["Day", "Matched", "Still to check", "Failed", "Amount"]} minWidth={520}>
             {rec.map((r) => (
               <tr key={String(r.d)}>
                 <td className={td}>{fmtDate(r.d)}</td>
@@ -32,11 +32,11 @@ export default async function Finance() {
               </tr>
             ))}
           </Table>
-          <p className="mt-4 text-xs text-navy-500">Production: entries become “reconciled” only when matched to the custodian bank statement by the reconciliation service.</p>
+          <p className="mt-4 text-xs text-navy-500">After launch, a payment only counts as matched once it appears on the independent bank’s statement.</p>
         </Panel>
-        <Panel title="Fund allocation monitoring (month to date)">
+        <Panel title="How this month’s money would be shared" description="Using the agreed 60/40 split. Sample data — nothing has actually moved.">
           <AllocationChart allocation={policy} gross={k.contribMtd} />
-          <p className="mt-4 text-xs text-navy-500">Applies the adopted 60/40 policy to month-to-date simulated inflow. No funds have been allocated or moved.</p>
+          
         </Panel>
       </div>
     </>

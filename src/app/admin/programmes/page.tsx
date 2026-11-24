@@ -12,21 +12,21 @@ export default async function Programmes() {
   const sup = v.reduce((s, x) => s + x.suppliers_engaged, 0);
   return (
     <>
-      <PageTitle title="Beneficiaries, ventures & employment" lead="Beneficiary records, business development tracking and employment statistics." />
-      <Panel title="Beneficiary records">
+      <PageTitle eyebrow="Money" title="Winners & businesses" lead="Winners, the businesses we back and the jobs they create." />
+      <Panel title="Winners">
         <div className="flex flex-col items-center py-10 text-center">
           <span className="flex h-14 w-14 items-center justify-center rounded-full bg-navy-50"><Award className="h-6 w-6 text-navy-400" aria-hidden /></span>
-          <p className="mt-4 font-medium text-navy-950">No beneficiaries</p>
-          <p className="mt-1 max-w-md text-sm text-navy-500">No selection has taken place and none will until the selection methodology is approved. The beneficiary selection module is deliberately not implemented in this build.</p>
+          <p className="mt-4 font-medium text-navy-950">No winners yet</p>
+          <p className="mt-1 max-w-md text-sm text-navy-500">There has been no draw. Draws can only start once a regulator approves how winners are chosen, so this part of the system is deliberately switched off.</p>
         </div>
       </Panel>
       <div className="mt-6 grid gap-4 sm:grid-cols-3">
-        <Stat label="Ventures in pipeline" value={v.length} hint="Demonstration records" />
-        <Stat label="Jobs created" value={jobs} hint="Actual: none yet" />
-        <Stat label="Suppliers engaged" value={sup} hint="Actual: none yet" />
+        <Stat label="Businesses in the pipeline" value={v.length} hint="Examples only" />
+        <Stat label="Jobs created" value={jobs} hint="None yet" />
+        <Stat label="Local suppliers used" value={sup} hint="None yet" />
       </div>
-      <Panel className="mt-6" title={<span className="flex items-center gap-2">Business development tracking <DemoTag /></span>}>
-        <Table head={["Venture", "Sector", "State", "Stage", "Capital committed", "Jobs", "Updated"]} minWidth={760}>
+      <Panel className="mt-6" title={<span className="flex items-center gap-2">Businesses we’re working with <DemoTag /></span>}>
+        <Table head={["Business", "Sector", "State", "Stage", "Money invested", "Jobs", "Updated"]} minWidth={760}>
           {v.map((x) => (
             <tr key={x.id}>
               <td className={`${td} font-medium text-navy-950`}>{x.name}</td>

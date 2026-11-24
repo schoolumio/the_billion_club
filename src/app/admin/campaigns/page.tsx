@@ -19,7 +19,7 @@ export default async function Campaigns() {
 
   return (
     <>
-      <PageTitle title="Campaigns & promotional materials" lead="Publish approved messages and campaign links to every member's Promotion Kit — no developer needed." />
+      <PageTitle eyebrow="Growth" title="Campaigns & messages" lead="Write and publish ready-made messages and campaign links. They appear instantly in every member’s Promotion kit." />
       <div className="grid gap-6 xl:grid-cols-2">
         <Panel title="Campaigns">
           <ul className="divide-y divide-navy-50">
@@ -43,7 +43,7 @@ export default async function Campaigns() {
           </div>
         </Panel>
 
-        <Panel title="New promotional material">
+        <Panel title="New message" description="WhatsApp messages, captions, descriptions or emails for members to share.">
           <ActionForm action={savePromoAction} submit="Save material" reset>
             <div className="grid gap-3 sm:grid-cols-2">
               <label className="block text-sm text-navy-800">Type<select name="kind" className={f}><option value="whatsapp">WhatsApp message</option><option value="social">Social media caption</option><option value="description">Short description</option><option value="email">Email invitation</option></select></label>
@@ -57,7 +57,7 @@ export default async function Campaigns() {
         </Panel>
       </div>
 
-      <Panel className="mt-6" title={`Library (${materials.length})`}>
+      <Panel className="mt-6" title={`All messages (${materials.length})`}>
         <ul className="grid gap-4 lg:grid-cols-2">
           {materials.map((m) => (
             <li key={m.id} className="rounded-2xl border border-navy-100 p-4">

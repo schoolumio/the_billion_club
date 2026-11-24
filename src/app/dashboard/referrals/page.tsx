@@ -64,7 +64,7 @@ export default async function Referrals({ searchParams }: { searchParams: Promis
         </div>
       )}
 
-      <PageTitle title="Invite your circle" lead="Share your link. A referral counts once the person you invite verifies their account." actions={v.user.is_demo ? <DemoTag /> : undefined} />
+      <PageTitle eyebrow="Founding community" title="Invite your circle" lead="Share your link. A referral counts as soon as the person you invited confirms their email." actions={v.user.is_demo ? <DemoTag /> : undefined} />
 
       <Panel><ShareKit url={url} code={v.user.referral_code} firstName={v.user.full_name.split(" ")[0]} qr={qr} /></Panel>
 

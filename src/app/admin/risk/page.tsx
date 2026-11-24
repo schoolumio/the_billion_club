@@ -9,8 +9,8 @@ export default async function Risk() {
   const canAct = s.role === "admin";
   return (
     <>
-      <PageTitle title="Compliance & fraud" lead="Compliance register and fraud-detection alerts." />
-      <Panel title={<span className="flex items-center gap-2">Fraud detection alerts <DemoTag /></span>} action={!canAct && <span className="text-xs text-navy-500">Read-only for auditors</span>}>
+      <PageTitle eyebrow="Safety" title="Fraud & compliance" lead="Suspicious activity to investigate, and our progress on legal and licensing requirements." />
+      <Panel title={<span className="flex items-center gap-2">Suspicious activity <DemoTag /></span>} action={!canAct && <span className="text-xs text-navy-500">View only for auditors</span>}>
         <ul className="divide-y divide-navy-50">
           {alerts.map((a) => (
             <li key={a.id} className="flex flex-wrap items-start justify-between gap-4 py-4 first:pt-0">
@@ -32,8 +32,8 @@ export default async function Risk() {
           ))}
         </ul>
       </Panel>
-      <Panel className="mt-6" title="Compliance monitoring register">
-        <Table head={["Area", "Requirement", "Authority", "Owner", "Status", "Updated"]} minWidth={900}>
+      <Panel className="mt-6" title="Legal & licensing checklist" description="What we must have in place before launch, and who is responsible.">
+        <Table head={["Area", "What’s needed", "Regulator", "Owner", "Status", "Updated"]} minWidth={900}>
           {comp.map((c) => (
             <tr key={c.id} className="align-top">
               <td className={`${td} font-medium text-navy-950`}>{c.area}</td>

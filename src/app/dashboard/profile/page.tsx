@@ -16,7 +16,7 @@ export default async function Profile() {
   ];
   return (
     <>
-      <PageTitle title="Profile & verification" />
+      <PageTitle eyebrow="Account" title="Profile & verification" lead="Your details and where you are in the verification process." />
       <div className="grid gap-6 lg:grid-cols-2">
         <Panel title="Member profile">
           <dl className="grid gap-x-6 gap-y-4 text-sm sm:grid-cols-2">

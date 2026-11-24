@@ -7,7 +7,7 @@ export default async function Audit() {
   const logs = await auditLogs(150);
   return (
     <>
-      <PageTitle title="Audit log" lead="Append-only record of security and administrative events. Updates and deletions are blocked at the database level." />
+      <PageTitle eyebrow="Safety" title="Activity log" lead="A permanent record of sign-ins, changes and staff actions. Nothing here can be edited or deleted." />
       <Panel>
         <Table head={["Time", "Actor", "Action", "Entity", "Details", "IP"]} minWidth={860}>
           {logs.map((l) => (

@@ -9,7 +9,7 @@ export default async function Support() {
   const tickets = await memberTickets(s.sub);
   return (
     <>
-      <PageTitle title="Support centre" lead="Ask a question, report a problem or report suspected fraud." />
+      <PageTitle eyebrow="Account" title="Help & support" lead="Ask a question, report a problem or tell us about a scam." />
       <div className="mb-6 flex gap-3 rounded-2xl border border-red-200 bg-red-50 p-5 text-sm text-red-900">
         <ShieldAlert className="h-5 w-5 shrink-0" aria-hidden />
         <p><strong>We will never</strong> ask for your PIN, OTP, password or card details, and we are not collecting money during pre-launch. If anyone asks you to pay in our name, report it below using “Fraud report”.</p>

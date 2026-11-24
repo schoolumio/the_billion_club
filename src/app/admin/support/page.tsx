@@ -8,8 +8,8 @@ export default async function SupportDesk() {
   const tickets = await allTickets();
   return (
     <>
-      <PageTitle title="Support desk" lead="Customer support management. Fraud reports are automatically prioritised." />
-      <Panel>
+      <PageTitle eyebrow="People" title="Support desk" lead="Questions and problems from members. Fraud reports go to the top automatically." />
+      <Panel title="All requests" description="Newest and most urgent first.">
         <ul className="divide-y divide-navy-50">
           {tickets.map((t) => (
             <li key={t.id} className="grid gap-4 py-5 first:pt-0 md:grid-cols-[1fr_auto]">

@@ -12,7 +12,7 @@ export default async function Contributions({ searchParams }: { searchParams: Pr
   const pages = Math.max(1, Math.ceil(tx.total / tx.size));
   return (
     <>
-      <PageTitle title="Contribution history" lead="Your personal statement. Everything shown here is sample data — no real money has been taken." />
+      <PageTitle eyebrow="Opportunities & money" title="Payment history" lead="Your personal statement. Everything here is sample data — no real money has been taken." />
       <div className="grid gap-4 sm:grid-cols-3">
         <Stat label="Total recorded" value={formatNaira(sum.total)} hint="Simulated" />
         <Stat label="Entries" value={sum.count} hint={sum.first ? `Since ${fmtDate(sum.first)}` : "—"} />

@@ -69,8 +69,8 @@ export function levelFor(verified: number, levels: Level[]) {
 
 /** Why a live run is not allowed, or null when it is. */
 export function liveRunBlocker(c: ReferralConfig): string | null {
-  if (c.rewardsState !== "active") return "Rewards engine is not active.";
-  if (!c.fundingConfirmed) return "Funding has not been confirmed.";
-  if (!c.legalApprovalRef.trim()) return "No legal approval reference recorded.";
+  if (c.rewardsState !== "active") return "Rewards are switched off.";
+  if (!c.fundingConfirmed) return "No one has confirmed the money is in the bank yet.";
+  if (!c.legalApprovalRef.trim()) return "No legal approval reference has been entered.";
   return null;
 }

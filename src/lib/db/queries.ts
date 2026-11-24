@@ -115,11 +115,13 @@ export async function reconciliation(days = 14) {
 
 export const membersByState = () => query<{ state: string; n: string }>(`SELECT COALESCE(state,'Unknown') state, count(*) n FROM users WHERE role='member' GROUP BY 1 ORDER BY 2 DESC LIMIT 10`);
 
-export async function listMembers({ q, verification, page = 1, size = 20 }: { q?: string; verification?: string; page?: number; size?: number }) {
+export async function listMembers({ q, verification, email, page = 1, size = 20 }: { q?: string; verification?: string; email?: string; page?: number; size?: number }) {
   const where: string[] = ["u.role = 'member'"];
   const params: unknown[] = [];
   if (q) { params.push(`%${q}%`); where.push(`(u.full_name ILIKE $${params.length} OR u.email ILIKE $${params.length} OR u.member_no ILIKE $${params.length})`); }
   if (verification && ["unverified", "pending", "verified", "rejected"].includes(verification)) { params.push(verification); where.push(`u.verification = $${params.length}`); }
+  if (email === "unconfirmed") where.push("u.email_verified_at IS NULL AND u.created_at < now() - interval '2 days'");
+  if (email === "confirmed") where.push("u.email_verified_at IS NOT NULL");
   const w = where.join(" AND ");
   const total = await one<{ n: string }>(`SELECT count(*) n FROM users u WHERE ${w}`, params);
   params.push(size, (page - 1) * size);
@@ -136,3 +138,14 @@ export const fraudAlerts = () => query<{ id: string; rule: string; severity: str
 export const auditLogs = (limit = 100) => query<{ id: string; actor_email: string | null; action: string; entity: string | null; entity_id: string | null; metadata: Record<string, unknown>; ip: string | null; created_at: Date }>(
   `SELECT * FROM audit_logs ORDER BY created_at DESC LIMIT $1`, [limit]);
 export const allTickets = () => query<Ticket>(`SELECT t.*, u.full_name, u.member_no FROM support_tickets t JOIN users u ON u.id = t.user_id ORDER BY CASE t.status WHEN 'open' THEN 0 WHEN 'in_progress' THEN 1 ELSE 2 END, t.created_at DESC`);
+
+/** Small, indexed counts for the admin navigation badges and "needs attention" panel. */
+export async function attentionCounts() {
+  const r = await one<{ review: string; appeals: string; alerts: string; tickets: string; pending_verify: string }>(`
+    SELECT (SELECT count(*) FROM referrals WHERE status = 'under_review') review,
+           (SELECT count(*) FROM referral_appeals WHERE status = 'open') appeals,
+           (SELECT count(*) FROM fraud_alerts WHERE status = 'open') alerts,
+           (SELECT count(*) FROM support_tickets WHERE status IN ('open','in_progress')) tickets,
+           (SELECT count(*) FROM users WHERE role = 'member' AND email_verified_at IS NULL AND created_at < now() - interval '2 days') pending_verify`);
+  return { review: Number(r?.review ?? 0) + Number(r?.appeals ?? 0), appeals: Number(r?.appeals ?? 0), alerts: Number(r?.alerts ?? 0), tickets: Number(r?.tickets ?? 0), pendingVerify: Number(r?.pending_verify ?? 0) };
+}

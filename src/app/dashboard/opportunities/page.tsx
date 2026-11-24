@@ -14,7 +14,7 @@ export default async function Opportunities({ searchParams }: { searchParams: Pr
   const [opps, vens] = await Promise.all([opportunities(valid || undefined), ventures()]);
   return (
     <>
-      <PageTitle title="Opportunities" lead="Jobs, supplier contracts, training and business opportunities from the ecosystem. Members are notified first." />
+      <PageTitle eyebrow="Opportunities & money" title="Opportunities" lead="Jobs, supplier contracts, training and business opportunities from TBC-backed businesses. Members hear first." />
       <div className="mb-6 flex flex-wrap gap-2">
         {KINDS.map(([k, l]) => (
           <Link key={k} href={k ? `?kind=${k}` : "?"} className={clsx("rounded-full px-4 py-2 text-sm font-medium", (valid ?? "") === k ? "bg-navy-950 text-white" : "bg-white text-navy-700 ring-1 ring-navy-100 hover:bg-navy-50")}>{l}</Link>

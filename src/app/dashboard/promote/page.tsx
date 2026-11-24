@@ -24,7 +24,7 @@ export default async function Promote() {
 
   return (
     <>
-      <PageTitle title="Promotion kit" lead="Approved messages and materials. Your personal link is already inserted." />
+      <PageTitle eyebrow="Founding community" title="Promotion kit" lead="Ready-made messages, images and posters. Your personal link is already added — just copy and share." />
       <div className="grid gap-6 xl:grid-cols-[1.5fr_1fr]">
         <div className="space-y-6">
           {groups.length === 0 && <Panel><p className="text-sm text-navy-500">No materials have been published yet.</p></Panel>}
