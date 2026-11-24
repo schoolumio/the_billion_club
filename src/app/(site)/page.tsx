@@ -9,7 +9,7 @@ import { ADOPTED, runModel, formatNaira, formatOdds } from "@/lib/finance/model"
 import { ROADMAP } from "@/lib/content/roadmap";
 import { HOW_IT_WORKS } from "@/lib/content/how";
 
-export const metadata: Metadata = { title: { absolute: "The Billion Club — 10 million people. One shared vision." } };
+export const metadata: Metadata = { title: { absolute: "The Billionaire Circle — 10 million people. One shared vision." } };
 
 const targets = [
   { value: "10,000,000", label: "Daily places", note: "Unlimited registration" },
@@ -322,7 +322,7 @@ export default function Home() {
               <LinkButton href="/about#partner" variant="outline-light">Partner with us</LinkButton>
             </div>
             <Callout tone="gold" title="Protect yourself" className="!border-gold-400/30 !bg-white/5 [&_p]:!text-gold-100 [&_div]:!text-navy-200">
-              We are not collecting money. Anyone asking you to pay to join The Billion Club is not acting for us.
+              We are not collecting money. Anyone asking you to pay to join The Billionaire Circle is not acting for us.
             </Callout>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { RegisterForm } from "@/components/auth/forms";
 
-export const metadata: Metadata = { title: "Register interest", description: "Register your interest in The Billion Club. Free, no payment." };
+export const metadata: Metadata = { title: "Register interest", description: "Register your interest in The Billionaire Circle. Free, no payment." };
 
 export default function Register() {
   return (

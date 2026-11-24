@@ -15,7 +15,7 @@ export default async function MemberOverview({ searchParams }: { searchParams: P
   return (
     <>
       {sp.denied && <p role="alert" className="mb-6 rounded-xl bg-amber-50 px-4 py-3 text-sm text-amber-900">You do not have permission to view that area.</p>}
-      {sp.welcome && <p className="mb-6 rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-900">Welcome to The Billion Club. Your interest is registered — we will never ask you for payment during pre-launch.</p>}
+      {sp.welcome && <p className="mb-6 rounded-xl bg-emerald-50 px-4 py-3 text-sm text-emerald-900">Welcome to The Billionaire Circle. Your interest is registered — we will never ask you for payment during pre-launch.</p>}
 
       <div className="relative mb-8 overflow-hidden rounded-3xl bg-navy-950 p-6 text-white sm:p-8">
         <div className="absolute -right-20 -top-24 h-72 w-72 rounded-full bg-gold-500/20 blur-3xl" aria-hidden />

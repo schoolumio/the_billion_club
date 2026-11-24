@@ -31,7 +31,7 @@ export function Footer() {
       </div>
       <div className="border-t border-white/10">
         <div className="container-x flex flex-col gap-3 py-6 text-xs leading-relaxed text-navy-400 sm:flex-row sm:justify-between">
-          <p>© {new Date().getFullYear()} The Billion Club (working name). All figures are targets or projections unless labelled otherwise.</p>
+          <p>© {new Date().getFullYear()} The Billionaire Circle (working name). All figures are targets or projections unless labelled otherwise.</p>
           <p>Member contributions are not investments and carry no guaranteed return.</p>
         </div>
       </div>

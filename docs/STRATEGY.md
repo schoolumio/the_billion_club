@@ -84,15 +84,16 @@ Full map and checklist: `/compliance` page and `src/lib/content/compliance.ts`. 
 
 ## 4. Brand
 
-- **Name:** The Billion Club (working name) — descriptor *Community Wealth Initiative*.
-- **Primary tagline:** *Small daily. Shared prosperity.* Campaign line: *Together, we build wealth. Together, we change lives.*
+- **Name:** The Billionaire Circle (TBC).
+- **Logo:** supplied artwork (`public/brand/tbc-logo-supplied.webp`), redrawn as a vector in `src/components/ui/Logo.tsx`: the TBC monogram in a gold ring with an inner hairline and a highlight dot at twelve o'clock, beside the wordmark. On white backgrounds the wordmark switches to navy for legibility.
+- **Favicon:** the roundel alone (`src/app/icon.svg`, `src/app/apple-icon.png`).
+- **Logo tagline:** *Together, we build billionaires.* Supporting line: *Small daily. Shared prosperity.*
 - **Mission:** To unite millions of Nigerians in a transparent, well-governed community wealth system that funds awards, builds enduring businesses and creates jobs — beginning only once it is lawfully approved.
 - **Vision:** A Nigeria where every community can build and share in its own prosperity.
-- **Story:** Esusu and ajo, brought to national scale with professional management and radical transparency.
-- **Mark:** twelve members in a ring around three ascending bars. Never a coin.
-- **Palette:** Navy 950 `#060e22`, Navy 900 `#0b1834`, Gold 500 `#c89a24`, Gold 300 `#e3c46a`, Mist `#f6f7f9`.
+- **Palette:** Logo navy `#0d1b2b`, logo gold `#d4af37`, highlight `#f5d06a`; interface navy `#0b1834`, button gold `#c89a24`, mist `#f6f7f9`.
 - **Type:** Fraunces (display), Inter (interface, tabular figures).
 - **Voice:** say *target, projection, proposed, awaiting approval*; never *guaranteed, jackpot, win big, returns*.
+- **Advertising caution:** "we build billionaires" must always appear alongside the odds and the awards-follow-collections rule in campaigns; ARCON/FCCPC may treat an unqualified wealth promise as misleading.
 
 ## 5. Site architecture
 

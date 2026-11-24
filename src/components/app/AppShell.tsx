@@ -24,7 +24,7 @@ export function AppShell({ nav, user, area, children, logout, switchLink }: {
 
   const sidebar = (
     <div className="flex h-full flex-col">
-      <div className="px-5 py-6"><Link href="/"><Logo tone="light" /></Link></div>
+      <div className="px-5 py-6"><Link href="/"><Logo tone="light" stacked /></Link></div>
       <p className="px-6 pb-2 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-navy-400">{area}</p>
       <nav className="flex-1 space-y-0.5 px-3" aria-label={area}>
         {nav.map((n) => {

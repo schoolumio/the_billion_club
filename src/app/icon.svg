@@ -1,1 +1,7 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 40 40"><rect width="40" height="40" rx="9" fill="#060e22"/><rect x="11" y="22" width="4.5" height="8" rx="1" fill="#c89a24"/><rect x="17.75" y="16.5" width="4.5" height="13.5" rx="1" fill="#d8ae3f"/><rect x="24.5" y="11" width="4.5" height="19" rx="1" fill="#e3c46a"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <rect width="100" height="100" rx="22" fill="#0d1b2b"/>
+  <circle cx="50" cy="50" r="42" fill="none" stroke="#d4af37" stroke-width="4"/>
+  <circle cx="50" cy="50" r="35" fill="none" stroke="#d4af37" stroke-opacity="0.45" stroke-width="1.2"/>
+  <circle cx="50" cy="8.5" r="4.6" fill="#f5d06a"/>
+  <text x="50" y="51" text-anchor="middle" dominant-baseline="central" fill="#d4af37" font-family="Georgia, 'DejaVu Serif', serif" font-weight="700" font-size="27">TBC</text>
+</svg>

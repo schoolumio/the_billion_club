@@ -1,4 +1,4 @@
-# The Billion Club — Community Wealth Initiative
+# The Billionaire Circle — Community Wealth Initiative
 
 > **10 million people. One shared vision. A new generation of wealth.**
 > *Small daily. Shared prosperity.*

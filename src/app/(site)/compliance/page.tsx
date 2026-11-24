@@ -15,7 +15,7 @@ export default function Compliance() {
   const prog = all.filter((i) => i.status === "in_progress").length;
   return (
     <>
-      <PageHero eyebrow="Legal & regulatory readiness" title={<>Not licensed. <span className="gold-text">Not yet.</span> Here is the path.</>} lead="The Billion Club is not approved, licensed or certified as compliant by any authority. This page sets out the questions that must be answered and the approvals likely required before we accept a single naira." />
+      <PageHero eyebrow="Legal & regulatory readiness" title={<>Not licensed. <span className="gold-text">Not yet.</span> Here is the path.</>} lead="The Billionaire Circle is not approved, licensed or certified as compliant by any authority. This page sets out the questions that must be answered and the approvals likely required before we accept a single naira." />
       <section className="bg-white py-20 sm:py-28">
         <div className="container-x">
           <Callout tone="warning" title="Important notice">

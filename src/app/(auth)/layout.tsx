@@ -12,7 +12,7 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <div className="absolute -bottom-40 -left-40 h-96 w-96 rounded-full bg-gold-500/15 blur-3xl" aria-hidden />
           <Link href="/" className="relative"><Logo tone="light" /></Link>
           <div className="relative">
-            <p className="font-display text-4xl leading-tight">Small daily.<br /><span className="gold-text">Shared prosperity.</span></p>
+            <p className="font-display text-4xl leading-tight">Together, we build<br /><span className="gold-text">billionaires.</span></p>
             <p className="mt-4 max-w-md text-navy-200">Your member space: statements, verification, announcements and community opportunities — all in one secure place.</p>
           </div>
           <p className="relative text-xs text-navy-400">Pre-launch demonstration environment. No real money is processed.</p>
