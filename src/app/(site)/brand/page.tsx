@@ -13,7 +13,7 @@ const COLORS = [
 export default function Brand() {
   return (
     <>
-      <PageHero eyebrow="Brand & presentation kit" title={<>A movement for <span className="gold-text">shared prosperity.</span></>} lead="Not a lottery. Not a donation drive. A serious institution with a warm, ambitious, honest voice." />
+      <PageHero eyebrow="Brand & presentation kit" title={<>A movement for <span className="gold-text">shared prosperity.</span></>} lead="Not a lottery. Not a charity. A serious, ambitious movement that speaks warmly, simply and honestly." />
       <section className="bg-white py-20 sm:py-28">
         <div className="container-x grid gap-10 lg:grid-cols-2">
           <div>
@@ -57,7 +57,7 @@ export default function Brand() {
       </section>
       <section className="bg-white py-20 sm:py-28">
         <div className="container-x grid gap-6 lg:grid-cols-2">
-          <Card className="!p-8"><h3 className="text-xl font-medium text-navy-950">We say</h3><ul className="mt-4 space-y-2 text-navy-700"><li>✓ “Target”, “projection”, “proposed”, “awaiting approval”</li><li>✓ “Award”, “community”, “enterprise”, “opportunity”</li><li>✓ Plain odds and plain risks</li><li>✓ “We have not decided this yet.”</li></ul></Card>
+          <Card className="!p-8"><h3 className="text-xl font-medium text-navy-950">We say</h3><ul className="mt-4 space-y-2 text-navy-700"><li>✓ “Target”, “estimate”, “planned”, “starts after approval”</li><li>✓ “Award”, “community”, “enterprise”, “opportunity”</li><li>✓ Plain odds, plain risks, plain English</li><li>✓ “We have not decided this yet.”</li></ul></Card>
           <Card className="!p-8"><h3 className="text-xl font-medium text-navy-950">We never say</h3><ul className="mt-4 space-y-2 text-navy-700"><li>✗ “Guaranteed”, “get rich”, “jackpot”, “win big”</li><li>✗ “Investment returns” for member contributions</li><li>✗ Unlabelled figures, invented testimonials, stock “winners”</li><li>✗ Casino imagery: coins, slots, confetti, dice</li></ul></Card>
         </div>
       </section>

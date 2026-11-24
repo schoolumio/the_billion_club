@@ -106,7 +106,7 @@ export default async function Referrals({ searchParams }: { searchParams: Promis
           <div className="mt-5 rounded-xl border border-gold-200 bg-gold-50/60 p-4 text-sm text-navy-800">
             <p className="flex items-center gap-2 font-semibold"><AlertTriangle className="h-4 w-4 text-gold-700" aria-hidden /> Your estimated share today: {formatNaira(estimate.amountKobo / 100)} <span className="font-normal text-navy-500">(estimate — {v.eligibleToday} eligible referral{v.eligibleToday === 1 ? "" : "s"} contributed today)</span></p>
             <p className="mt-1 text-xs leading-relaxed text-navy-600">Only real contributions actually received count. Before launch there is no contribution pool, so there is nothing to share. After launch, if approved, each of your verified referrals who contributes on a day would count — at ₦100 a day that works out to about ₦1 per contributing referral per day. An estimate is never a payable reward.</p>
-            <div className="mt-3"><StatusBadge kind="pending" label={config.rewardsState === "active" ? "Rewards active" : "Rewards inactive — awaiting approval"} /></div>
+            <div className="mt-3"><StatusBadge kind="pending" label={config.rewardsState === "active" ? "Rewards active" : "Rewards start after approval"} /></div>
           </div>
         </Panel>
       </div>

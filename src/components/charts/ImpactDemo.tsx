@@ -16,7 +16,7 @@ export function ImpactDemo() {
   return (
     <div className="rounded-3xl border border-navy-100 bg-white p-6 sm:p-8">
       <div className="flex flex-wrap items-center justify-between gap-4">
-        <p className="font-medium text-navy-950">By state — demonstration data</p>
+        <p className="font-medium text-navy-950">By state — example numbers</p>
         <div className="flex rounded-full bg-navy-50 p-1" role="tablist">
           {(Object.keys(DEMO) as (keyof typeof DEMO)[]).map((key) => (
             <button key={key} role="tab" aria-selected={k === key} onClick={() => setK(key)} className={clsx("rounded-full px-4 py-1.5 text-xs font-semibold capitalize transition", k === key ? "bg-navy-950 text-white" : "text-navy-600 hover:text-navy-900")}>
@@ -26,7 +26,7 @@ export function ImpactDemo() {
         </div>
       </div>
       <div className="mt-6">
-        <BarChart title={`${m.label} by state`} data={m.data.map(([l, v]) => ({ label: l, value: v, detail: `${l} · demonstration` }))} format="number" />
+        <BarChart title={`${m.label} by state`} data={m.data.map(([l, v]) => ({ label: l, value: v, detail: `${l} · example` }))} format="number" />
       </div>
     </div>
   );

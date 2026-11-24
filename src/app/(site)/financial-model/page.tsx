@@ -6,23 +6,23 @@ import { Calculator } from "@/components/finance/Calculator";
 import { ADOPTED, AWARD_TIERS, DAILY_PLACES, SCENARIOS, adoptedAwards, formatCount, formatNaira, formatOdds, runModel } from "@/lib/finance/model";
 
 export const metadata: Metadata = {
-  title: "Financial model & sustainability",
+  title: "Where the money goes",
   description: "The adopted 60/40 model: 30 winners a month (3 × ₦1bn + 27 × ₦556m), 10 million daily places, and a fully funded business and jobs ecosystem.",
 };
 
 const verdictStyle: Record<string, string> = {
-  "Not viable": "bg-red-50 text-red-800 ring-red-200",
-  "Viable with conditions": "bg-sky-50 text-sky-800 ring-sky-200",
-  Adopted: "bg-gold-50 text-gold-800 ring-gold-300",
+  "Doesn’t work": "bg-red-50 text-red-800 ring-red-200",
+  "Works, but": "bg-sky-50 text-sky-800 ring-sky-200",
+  "Our choice": "bg-gold-50 text-gold-800 ring-gold-300",
 };
 
 const MONEY_TYPES = [
-  { Icon: Coins, t: "Member contribution", b: "The ₦100 paid for a daily place. Not a deposit, loan, savings product or investment, and carries no promised return." },
-  { Icon: HandCoins, t: "Prize or award", b: "Paid to members selected under the approved process — 60% of each month's verified inflow. Its legal treatment depends on the licensing route." },
-  { Icon: Layers, t: "Business investment", b: "The 12% business fund. Risk-bearing capital in a separately regulated vehicle — never mixed with the award pool." },
-  { Icon: Landmark, t: "Community development fund", b: "The 5% community fund. Non-repayable grants for skills and local projects. Not a return to members." },
-  { Icon: Coins, t: "Referral reward (proposed)", b: "1% of each day's actual pool, shared in proportion to verified direct referrals. Not a commission on anyone's money beyond that day, never multi-level, inactive until approved." },
-  { Icon: Receipt, t: "Operating expense", b: "Bank charges, staff, technology, audit. Capped at 9% of inflow and published in full." },
+  { Icon: Coins, t: "Your daily payment", b: "The ₦100 you pay for a daily place. It is not a deposit, a loan, savings or an investment, and it earns no return." },
+  { Icon: HandCoins, t: "Winners’ awards", b: "60% of each month’s money, paid to the 30 winners chosen in the approved draw." },
+  { Icon: Layers, t: "Business fund", b: "12% that backs new businesses. It can lose money, so it is managed separately by regulated professionals." },
+  { Icon: Landmark, t: "Community fund", b: "5% for training and local projects. These are grants — not loans, and not returns to members." },
+  { Icon: Coins, t: "Referral rewards", b: "1% of each day’s money, shared by members based on the real people they personally invited. Only one level. Starts only after approval." },
+  { Icon: Receipt, t: "Running costs", b: "Bank charges, staff, technology and auditors. Capped at 9% and published in full." },
 ];
 
 const PARTICIPATION = [1, 0.8, 0.6];
@@ -36,9 +36,9 @@ export default function FinancialModel() {
   return (
     <>
       <PageHero
-        eyebrow="Financial model & sustainability"
+        eyebrow="Where the money goes"
         title={<>60% to winners. 40% to <span className="gold-text">build what lasts.</span></>}
-        lead="Thirty winners every month — three of them receiving ₦1 billion — funded only from money already collected, with a ring-fenced business fund that creates jobs whatever winners decide to do with their awards."
+        lead="30 winners every month — three of them win ₦1 billion each. Paid only from money we have actually received. Plus a business fund that creates jobs for everyone else."
       >
         <StatusBadge kind="proposed" label="Adopted by founders · subject to legal, tax and regulatory review" />
       </PageHero>
@@ -46,10 +46,10 @@ export default function FinancialModel() {
       {/* HEADLINE */}
       <section className="bg-white py-20 sm:py-28">
         <div className="container-x">
-          <SectionHeading eyebrow="The model at full capacity" title="One month, every place sold." lead={`${formatCount(DAILY_PLACES)} daily places × ₦100 × 30 days = ${formatNaira(r.grossMonthly, { compact: true })}.`} />
+          <SectionHeading eyebrow="A full month" title="What happens when every place is taken." lead={`${formatCount(DAILY_PLACES)} daily places × ₦100 × 30 days = ${formatNaira(r.grossMonthly, { compact: true })}.`} />
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
             <Card className="!border-gold-300 !bg-gold-50/50 !p-8">
-              <div className="flex items-baseline justify-between"><p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-800">Winners · 60%</p><p className="font-display text-3xl tabular text-navy-950">{formatNaira(r.grossMonthly * 0.6, { compact: true })}</p></div>
+              <div className="flex items-baseline justify-between"><p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-800">For winners · 60%</p><p className="font-display text-3xl tabular text-navy-950">{formatNaira(r.grossMonthly * 0.6, { compact: true })}</p></div>
               <table className="mt-6 w-full text-sm">
                 <thead className="text-xs uppercase tracking-wider text-navy-500"><tr><th className="pb-2 text-left font-medium">Level</th><th className="pb-2 text-right font-medium">Winners</th><th className="pb-2 text-right font-medium">Each</th><th className="pb-2 text-right font-medium">Total</th></tr></thead>
                 <tbody className="divide-y divide-gold-200/60">
@@ -60,17 +60,17 @@ export default function FinancialModel() {
               </table>
             </Card>
             <Card className="!bg-navy-950 !p-8 text-white">
-              <div className="flex items-baseline justify-between"><p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Team · 40%</p><p className="font-display text-3xl tabular">{formatNaira(teamShare, { compact: true })}</p></div>
+              <div className="flex items-baseline justify-between"><p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Everything else · 40%</p><p className="font-display text-3xl tabular">{formatNaira(teamShare, { compact: true })}</p></div>
               <ul className="mt-6 space-y-2.5 text-sm">
                 {[
-                  ["Business development fund", 12, "Jobs whatever winners decide"],
-                  ["Government levies & taxes", 8, "Estimate — pending tax opinion"],
-                  ["Emergency reserve", 5, "Protects winners in slow months"],
-                  ["Referral rewards (proposed)", 1, "Shared by verified direct referrals"],
-                  ["Community development", 5, "Training & local projects"],
-                  ["Staff, technology, support", 5, "Running the organisation"],
+                  ["Business fund", 12, "Backs businesses that create jobs"],
+                  ["Taxes & government levies", 8, "Our estimate — to be confirmed"],
+                  ["Emergency reserve", 5, "Savings for slow months"],
+                  ["Referral rewards", 1, "For members who invite others"],
+                  ["Community projects", 5, "Training & local projects"],
+                  ["Staff & technology", 5, "Running TBC"],
                   ["Bank & payment charges", 3, "On every payment"],
-                  ["Auditors & oversight", 1, "Independent checks"],
+                  ["Auditors & oversight", 1, "Outside checks"],
                 ].map(([l, p, n]) => (
                   <li key={l as string} className="grid grid-cols-[1fr_auto_auto] items-baseline gap-3 border-b border-white/10 pb-2.5 last:border-0">
                     <span><span className="font-medium">{l}</span><span className="block text-xs text-navy-300">{n}</span></span>
@@ -82,7 +82,7 @@ export default function FinancialModel() {
             </Card>
           </div>
           <Card className="mt-6 !p-8">
-            <div className="flex flex-wrap items-center justify-between gap-3"><p className="font-medium text-navy-950">Complete allocation of every naira</p><StatusBadge kind="projection" /></div>
+            <div className="flex flex-wrap items-center justify-between gap-3"><p className="font-medium text-navy-950">Every naira, accounted for</p><StatusBadge kind="projection" /></div>
             <div className="mt-6"><AllocationChart allocation={ADOPTED.allocation} gross={r.grossMonthly} /></div>
           </Card>
         </div>
@@ -92,20 +92,20 @@ export default function FinancialModel() {
       <section className="bg-navy-950 py-20 text-white sm:py-28">
         <div className="container-x grid gap-12 lg:grid-cols-2 lg:items-center">
           <div>
-            <SectionHeading tone="light" eyebrow="Daily places" title="Unlimited members. 10 million places a day." lead="Anyone can register. Each day, the first 10 million verified members to take a place are in — then the day closes, and opens again tomorrow." />
+            <SectionHeading tone="light" eyebrow="Daily places" title="Anyone can join. 10 million places a day." lead="Each day, the first 10 million members to take a place are in. When they’re gone, the day closes — and opens again tomorrow." />
             <ul className="mt-8 space-y-3 text-sm text-navy-200">
-              <li className="flex gap-3"><DoorClosed className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden />One place per verified person per day — no bulk buying, no agents.</li>
-              <li className="flex gap-3"><DoorClosed className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden />Each day you hold a place counts as one entry in that month&apos;s selection. <StatusBadge kind="pending" className="ml-1" /></li>
-              <li className="flex gap-3"><DoorClosed className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden />Monthly inflow can never exceed {formatNaira(r.grossMonthly, { compact: true })}, so the award pool is predictable and easy to audit.</li>
-              <li className="flex gap-3"><DoorClosed className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden />If demand exceeds 10 million, every place sells — removing the biggest risk to the model.</li>
+              <li className="flex gap-3"><DoorClosed className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden />One place per person per day. No bulk buying. No agents.</li>
+              <li className="flex gap-3"><DoorClosed className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden />Every day you hold a place is one entry into that month&apos;s draw. <StatusBadge kind="pending" className="ml-1" /></li>
+              <li className="flex gap-3"><DoorClosed className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden />The month can never collect more than {formatNaira(r.grossMonthly, { compact: true })}, so the prize money is predictable and easy to check.</li>
+              <li className="flex gap-3"><DoorClosed className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden />If more than 10 million people want a place, every place is taken — which keeps the awards at full size.</li>
             </ul>
           </div>
           <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-6 sm:p-8">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Today&apos;s places · illustration</p>
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Today&apos;s places · example only</p>
             <p className="mt-4 font-display text-4xl tabular">7,240,118 <span className="text-lg text-navy-300">/ 10,000,000</span></p>
             <div className="mt-4 h-3 rounded-full bg-white/10"><div className="h-3 w-[72.4%] rounded-full bg-gold-400" /></div>
             <p className="mt-3 text-sm text-navy-300">2,759,882 places remaining today</p>
-            <p className="mt-6 rounded-xl bg-white/5 p-4 text-xs leading-relaxed text-navy-300">Illustration only — not live data. We will show factual availability, never countdown pressure or &ldquo;last chance&rdquo; messaging. Advertising and consumer-protection regulators scrutinise pressure selling, and members&apos; trust matters more than urgency.</p>
+            <p className="mt-6 rounded-xl bg-white/5 p-4 text-xs leading-relaxed text-navy-300">Example only — not live data. We&apos;ll show you honestly how many places are left. No countdown clocks, no &ldquo;last chance&rdquo; pressure.</p>
           </div>
         </div>
       </section>
@@ -113,10 +113,10 @@ export default function FinancialModel() {
       {/* AWARDS FOLLOW COLLECTIONS */}
       <section className="bg-white py-20 sm:py-28">
         <div className="container-x">
-          <SectionHeading eyebrow="The golden rule" title="Awards follow money already collected." lead="Winners receive 60% of what was actually collected that month — never a fixed promise. This keeps the initiative solvent and lawful." />
+          <SectionHeading eyebrow="Our golden rule" title="We only pay out money we’ve actually received." lead="Winners share 60% of what was really collected that month — never a fixed promise. That keeps TBC safe, fair and legal." />
           <div className="mt-10 grid gap-6 lg:grid-cols-2">
             <Card>
-              <p className="font-medium text-navy-950">If not every place is sold</p>
+              <p className="font-medium text-navy-950">If not every place is taken</p>
               <div className="mt-4 overflow-x-auto">
                 <table className="w-full min-w-[420px] text-sm">
                   <thead className="text-xs uppercase tracking-wider text-navy-500"><tr className="border-b border-navy-100"><th className="py-2 text-left font-medium">Places sold</th><th className="py-2 text-right font-medium">Collected</th><th className="py-2 text-right font-medium">Grand (×3)</th><th className="py-2 text-right font-medium">Enterprise (×27)</th></tr></thead>
@@ -127,7 +127,7 @@ export default function FinancialModel() {
               </div>
             </Card>
             <Card>
-              <p className="font-medium text-navy-950">While the community is growing</p>
+              <p className="font-medium text-navy-950">While we’re still growing</p>
               <div className="mt-4 overflow-x-auto">
                 <table className="w-full min-w-[420px] text-sm">
                   <thead className="text-xs uppercase tracking-wider text-navy-500"><tr className="border-b border-navy-100"><th className="py-2 text-left font-medium">Daily members</th><th className="py-2 text-right font-medium">Collected</th><th className="py-2 text-right font-medium">Award structure</th></tr></thead>
@@ -140,9 +140,9 @@ export default function FinancialModel() {
             </Card>
           </div>
           <div className="mt-6 grid gap-4 md:grid-cols-3">
-            <Callout title="Chance of selection">With 30 winners among 10 million daily places, a member holding a place every day has roughly a <strong>{formatOdds(r.monthlySelectionOdds)}</strong> chance each month. We will state this plainly.</Callout>
-            <Callout title="Why the business fund matters">Winners own their awards and cannot be forced to invest. The 12% fund (≈₦3.6bn/month) means businesses and jobs are created regardless.</Callout>
-            <Callout tone="warning" title="Still to confirm">The 8% for levies and taxes is an estimate. If a tax opinion finds it higher, the team&apos;s 40% becomes tight — confirm early.</Callout>
+            <Callout title="Your chance of winning">With 30 winners and 10 million daily places, if you take a place every day your chance is about <strong>{formatOdds(r.monthlySelectionOdds)}</strong> a month. We&apos;ll always say so plainly.</Callout>
+            <Callout title="Why the business fund matters">Winners can spend their awards however they like. The business fund (about ₦3.6bn a month) makes sure new businesses and jobs happen anyway.</Callout>
+            <Callout tone="warning" title="Still being confirmed">The 8% for taxes and government levies is our best estimate. We&apos;ll update it once tax experts give their formal ruling.</Callout>
           </div>
         </div>
       </section>
@@ -150,12 +150,12 @@ export default function FinancialModel() {
       {/* SCENARIOS */}
       <section className="bg-mist py-20 sm:py-28">
         <div className="container-x">
-          <SectionHeading eyebrow="How we got here" title="Four models considered." lead="The original concept, and the alternatives tested before adopting the 60/40 model." />
+          <SectionHeading eyebrow="How we chose this model" title="We tested four options." lead="Here’s what we looked at — and why we chose 60/40." />
           <div className="mt-12 grid gap-6 lg:grid-cols-2">
             {SCENARIOS.map((s) => {
               const sr = runModel(s.inputs);
               return (
-                <Card key={s.id} className={`!p-7 ${s.verdict === "Adopted" ? "ring-2 ring-gold-400" : ""}`}>
+                <Card key={s.id} className={`!p-7 ${s.verdict === "Our choice" ? "ring-2 ring-gold-400" : ""}`}>
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div><h3 className="text-xl font-medium text-navy-950">{s.name}</h3><p className="mt-1 text-sm text-navy-500">{s.tagline}</p></div>
                     <span className={`rounded-full px-3 py-1 text-xs font-semibold ring-1 ring-inset ${verdictStyle[s.verdict]}`}>{s.verdict}</span>
@@ -171,28 +171,28 @@ export default function FinancialModel() {
               );
             })}
           </div>
-          <Callout tone="warning" title="Why the original 30 × ₦1bn could not work" className="mt-8">
-            <span className="flex gap-2"><AlertTriangle className="h-4 w-4 shrink-0" aria-hidden />It needs 100% of inflow, leaving nothing for costs. Promising awards that exceed money actually collected means paying earlier promises with later money — the structure of a Ponzi scheme, which Nigerian law prohibits.</span>
+          <Callout tone="warning" title="Why 30 winners of ₦1 billion each didn’t work" className="mt-8">
+            <span className="flex gap-2"><AlertTriangle className="h-4 w-4 shrink-0" aria-hidden />It would take every naira collected, leaving nothing for bank charges, taxes or staff. And promising more than we collect would mean paying old promises with new members’ money — that’s how Ponzi schemes work, and it’s illegal.</span>
           </Callout>
         </div>
       </section>
 
       <section className="bg-white py-20 sm:py-28">
         <div className="container-x">
-          <SectionHeading eyebrow="Interactive model" title="Test the assumptions yourself." lead="Change registrations, participation and contribution to see how the 60/40 model responds." />
+          <SectionHeading eyebrow="Try it yourself" title="Play with the numbers." lead="Change how many people join and how often they take a place, and see what happens to the awards." />
           <div className="mt-12"><Calculator /></div>
         </div>
       </section>
 
       <section className="bg-mist py-20 sm:py-28">
         <div className="container-x">
-          <SectionHeading eyebrow="Clear definitions" title="Six kinds of money. Never blurred." lead="Confusing these categories is how well-meaning schemes become illegal ones. We keep them legally, operationally and in reporting completely separate." />
+          <SectionHeading eyebrow="Kept separate" title="Six kinds of money. Never mixed." lead="Mixing these up is how good ideas turn into bad schemes. We keep each one separate — in law, in our accounts and in our reports." />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {MONEY_TYPES.map((m) => (
               <Card key={m.t} className="!p-6"><m.Icon className="h-6 w-6 text-gold-600" aria-hidden /><h3 className="mt-4 text-lg font-medium text-navy-950">{m.t}</h3><p className="mt-2 text-sm leading-relaxed text-navy-600">{m.b}</p></Card>
             ))}
           </div>
-          <p className="mt-8 flex items-center gap-2 text-xs text-navy-500"><PiggyBank className="h-4 w-4" aria-hidden /> All figures are projections from stated assumptions and are not forecasts of actual results.</p>
+          <p className="mt-8 flex items-center gap-2 text-xs text-navy-500"><PiggyBank className="h-4 w-4" aria-hidden /> All figures are estimates based on the assumptions shown. They are not forecasts of actual results.</p>
         </div>
       </section>
     </>

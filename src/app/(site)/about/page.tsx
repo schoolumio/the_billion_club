@@ -2,28 +2,28 @@ import type { Metadata } from "next";
 import { UserRound } from "lucide-react";
 import { Callout, Card, PageHero, SectionHeading, StatusBadge } from "@/components/ui/primitives";
 
-export const metadata: Metadata = { title: "About us", description: "Our vision, mission, philosophy, leadership and governance." };
+export const metadata: Metadata = { title: "About us", description: "Who we are, what we believe, and the people and checks that keep us accountable." };
 
-const LEADERS = ["Founder & Chief Executive", "Chair of the Board (independent)", "Chief Financial Officer", "Chief Compliance & Risk Officer", "Head of Investment & Business Development", "Chief Technology Officer"];
+const LEADERS = ["Founder & Chief Executive", "Independent Chair of the Board", "Chief Financial Officer", "Head of Compliance & Risk", "Head of Business Support", "Chief Technology Officer"];
 const GOV = [
-  { t: "Independent board", b: "Majority independent non-executive directors with finance, law, development and technology expertise." },
-  { t: "Audit & risk committee", b: "Oversees auditors, internal controls, fraud risk and the reserve policy." },
-  { t: "Investment committee", b: "Approves business development capital with independent members and published criteria." },
-  { t: "Selection oversight panel", b: "Independent observers who verify every selection." },
-  { t: "Member advisory council", b: "Elected member representatives who review reports and raise concerns directly with the board." },
-  { t: "Trustee & custodian", b: "Regulated third parties holding funds and protecting member interests." },
+  { t: "An independent board", b: "Most directors are independent experts in finance, law, business and technology — not insiders." },
+  { t: "Audit & risk committee", b: "Works with the auditors, watches for fraud and protects the emergency reserve." },
+  { t: "Investment committee", b: "Independent experts decide which businesses get funding, using published rules." },
+  { t: "Draw observers", b: "Independent people who watch every draw and confirm it was fair." },
+  { t: "Members’ council", b: "Members elected by members, who review our reports and can raise concerns directly with the board." },
+  { t: "Independent bank & trustee", b: "Regulated outsiders who hold the money and protect members’ interests." },
 ];
 
 export default function About() {
   return (
     <>
-      <PageHero eyebrow="About us" title={<>An economic empowerment institution, <span className="gold-text">owned in spirit by its community.</span></>} lead="We believe ordinary Nigerians, acting together with discipline and transparency, can build capital that transforms communities. Our job is to make that collective effort safe, fair and productive." />
+      <PageHero eyebrow="About us" title={<>Built by Nigerians. <span className="gold-text">For Nigerians.</span></>} lead="We believe ordinary Nigerians, working together, can build wealth that changes whole communities. Our job is to make that safe, fair and open for everyone to see." />
       <section className="bg-white py-20 sm:py-28">
         <div className="container-x grid gap-6 lg:grid-cols-3">
           {[
-            ["Our vision", "A Nigeria where every community can build and share in its own prosperity."],
-            ["Our mission", "To unite millions of Nigerians in a transparent, well-governed community wealth system that funds awards, builds enduring businesses and creates jobs — beginning only once it is lawfully approved."],
-            ["Our philosophy", "Wealth that creates more wealth. Your opportunity to become wealthy should not be the only reason you join; the growth of the community should benefit you too."],
+            ["Our vision", "A Nigeria where every community builds — and shares in — its own wealth."],
+            ["Our mission", "Bring millions of Nigerians together to fund life-changing awards, build lasting businesses and create jobs — openly, fairly, and only once we are fully approved."],
+            ["What we believe", "Wealth should create more wealth. Winning shouldn’t be the only reason to join — when the community grows, you should grow too."],
           ].map(([t, b]) => (
             <Card key={t} className="!p-8">
               <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-700">{t}</p>
@@ -35,26 +35,26 @@ export default function About() {
       <section className="bg-mist py-20 sm:py-28">
         <div className="container-x">
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <SectionHeading eyebrow="Leadership" title="The people accountable to you." />
-            <StatusBadge kind="pending" label="Appointments to be announced" />
+            <SectionHeading eyebrow="Our leadership" title="The people answerable to you." />
+            <StatusBadge kind="pending" label="To be announced soon" />
           </div>
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {LEADERS.map((r) => (
               <Card key={r} className="flex items-center gap-4">
                 <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full border-2 border-dashed border-navy-200 bg-navy-50 text-navy-300"><UserRound className="h-7 w-7" aria-hidden /></div>
                 <div>
-                  <p className="font-medium text-navy-950">[Name to be confirmed]</p>
+                  <p className="font-medium text-navy-950">To be announced</p>
                   <p className="text-sm text-navy-500">{r}</p>
                 </div>
               </Card>
             ))}
           </div>
-          <p className="mt-6 text-sm text-navy-500">Profiles will include qualifications, prior roles and declared interests. We will not display any person here without their verified consent.</p>
+          <p className="mt-6 text-sm text-navy-500">Each profile will show the person’s experience and any personal interests they must declare. We’ll only show people who have agreed.</p>
         </div>
       </section>
       <section className="bg-white py-20 sm:py-28">
         <div className="container-x">
-          <SectionHeading eyebrow="Governance structure" title="Checks and balances by design." />
+          <SectionHeading eyebrow="How we’re held accountable" title="Nobody marks their own homework." />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {GOV.map((g) => (
               <Card key={g.t}><div className="flex items-start justify-between gap-2"><h3 className="text-lg font-medium text-navy-950">{g.t}</h3><StatusBadge kind="proposed" /></div><p className="mt-2 text-sm leading-relaxed text-navy-600">{g.b}</p></Card>
@@ -62,16 +62,16 @@ export default function About() {
           </div>
           <div className="mt-14 grid gap-6 lg:grid-cols-2">
             <Card className="!p-8">
-              <h3 className="text-2xl font-medium text-navy-950">Commitment to transparency</h3>
-              <p className="mt-3 leading-relaxed text-navy-600">We publish what we know, label what we project and admit what we have not yet decided. Every financial figure will trace back to an audited record.</p>
+              <h3 className="text-2xl font-medium text-navy-950">Our promise to be open</h3>
+              <p className="mt-3 leading-relaxed text-navy-600">We tell you what we know, label what is only a plan, and admit what we haven’t decided yet. Every real figure will be backed by audited records.</p>
             </Card>
             <Card className="!p-8">
-              <h3 className="text-2xl font-medium text-navy-950">Long-term development goals</h3>
+              <h3 className="text-2xl font-medium text-navy-950">Where we&apos;re heading</h3>
               <ul className="mt-3 list-disc space-y-1 pl-5 text-navy-600">
-                <li>A national portfolio of well-governed, job-creating enterprises</li>
-                <li>A trusted, member-governed institution recognised by regulators</li>
-                <li>Measurable improvement in incomes in member communities</li>
-                <li>A model that can responsibly expand across Africa</li>
+                <li>Well-run businesses in every region, creating jobs</li>
+                <li>An organisation members trust and regulators respect</li>
+                <li>Higher incomes in the communities our members live in</li>
+                <li>A model other African countries can follow</li>
               </ul>
             </Card>
           </div>
@@ -79,9 +79,9 @@ export default function About() {
       </section>
       <section id="partner" className="scroll-mt-28 bg-navy-950 py-20 text-white">
         <div className="container-x grid gap-8 lg:grid-cols-2 lg:items-center">
-          <SectionHeading tone="light" eyebrow="Partner with us" title="Institutions, investors and governments." lead="We are seeking legal, banking, custodial, audit, impact and development partners to help build this responsibly." />
+          <SectionHeading tone="light" eyebrow="Work with us" title="Banks, investors, governments and partners." lead="We’re looking for legal, banking, audit and development partners to help us build this the right way." />
           <Callout tone="gold" title="Contact" className="!border-white/10 !bg-white/5 [&_p]:!text-white [&_div]:!text-navy-200">
-            Partnership enquiries: <strong className="text-white">[partnerships email to be confirmed]</strong>. Please do not send funds of any kind.
+            Partnership enquiries: <strong className="text-white">email address coming soon</strong>. Please never send money to anyone claiming to represent us.
           </Callout>
         </div>
       </section>

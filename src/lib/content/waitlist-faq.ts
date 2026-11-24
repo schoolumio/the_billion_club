@@ -1,10 +1,10 @@
 export const WAITLIST_FAQ = [
-  { q: "Is joining the waitlist free?", a: "Yes. Joining is completely free. We will never ask for payment to join the waitlist, and anyone who does is not acting for TBC." },
-  { q: "Is this an investment?", a: "No. The waitlist is not an investment, savings product or financial product. It does not guarantee any financial return, and it does not automatically enrol you in any future paid programme. If TBC launches, taking part will be a separate, optional decision made under published, approved terms." },
-  { q: "What counts as a verified referral?", a: "Someone who registers using your link or code, is 18 or over, is a real and unique person, and verifies their email (and phone, if required). Referrals flagged as duplicates, automated sign-ups or self-referrals do not count." },
-  { q: "How is my referral link attributed?", a: "When someone opens your link, your code is remembered on their device for 30 days and pre-filled in the sign-up form. The code in the form when they submit is the one that counts. They can see it and change it. Once they have joined, it can never be changed." },
-  { q: "Do I earn from my referrals' referrals?", a: "No. There are no multi-level commissions. Only people you invite directly ever count towards your referral share." },
-  { q: "Can I earn money from referrals now?", a: "No. Before launch there are no contributions, so there is no referral pool and nothing to distribute. The proposed 1% referral allocation will only operate after legal approval and only from money actually received." },
-  { q: "What if one of my referrals is rejected?", a: "You will see the reason in your dashboard, and you can appeal once. A reviewer, not an algorithm, makes the final decision." },
-  { q: "Do I have to appear on the leaderboard?", a: "No. Leaderboard display is off unless you switch it on. If you opt in, only your first name and the initial of your surname are shown." },
+  { q: "Does it cost anything to join?", a: "No. Joining the waitlist is completely free. We will never ask you to pay to join — anyone who does is not from TBC." },
+  { q: "Is this an investment?", a: "No. The waitlist isn't an investment or a savings plan, it pays no returns, and joining doesn't sign you up for anything paid. If TBC launches, taking part will be a separate choice, under rules you'll see first." },
+  { q: "When does a referral count?", a: "When someone joins with your link or code, is 18 or over, is a real person who hasn't joined before, and confirms their email. Duplicate accounts, fake sign-ups and signing up yourself don't count." },
+  { q: "How do you know someone came from my link?", a: "When they open your link, your code is filled in on the sign-up form for them (and remembered on their phone for 30 days). Whatever code is in the form when they press join is the one that counts. After that, it can never be changed." },
+  { q: "Do I earn when my referrals invite people?", a: "No. Only the people you invite yourself count. There's no 'downline' and nothing from your referrals' referrals." },
+  { q: "Can I earn money from referrals right now?", a: "No. Before launch, nobody is paying anything, so there's nothing to share. Referral rewards will only start after launch, after legal approval, and only from money actually received." },
+  { q: "What if one of my referrals is turned down?", a: "You'll see why in your dashboard, and you can ask us to look again once. A real person — not a computer — makes the final decision." },
+  { q: "Do I have to be on the leaderboard?", a: "No. You're hidden unless you switch it on. If you do, we only show your first name and the first letter of your surname." },
 ];

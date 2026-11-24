@@ -6,24 +6,24 @@ import { ImpactDemo } from "@/components/charts/ImpactDemo";
 export const metadata: Metadata = { title: "Community impact", description: "The long-term economic empowerment vision and how impact will be measured." };
 
 const INDICATORS = [
-  { Icon: Briefcase, t: "Jobs created", d: "Direct, full-time-equivalent roles in ecosystem businesses, sustained for at least 6 months." },
-  { Icon: Building2, t: "Businesses established", d: "New, registered enterprises supported through the business development arm." },
-  { Icon: Expand, t: "Businesses expanded", d: "Existing enterprises that grew revenue or headcount with ecosystem support." },
-  { Icon: Users, t: "Members reached", d: "Verified members with access to opportunities, training or reporting." },
-  { Icon: Truck, t: "Local suppliers engaged", d: "Nigerian suppliers with paid contracts from ecosystem businesses." },
-  { Icon: MapPin, t: "Communities supported", d: "LGAs receiving community development fund grants." },
-  { Icon: HandHeart, t: "Beneficiaries supported", d: "Award recipients who opted into business development support." },
+  { Icon: Briefcase, t: "Jobs created", d: "Full-time jobs in TBC-backed businesses that last at least six months." },
+  { Icon: Building2, t: "New businesses", d: "Registered businesses started with help from our business team." },
+  { Icon: Expand, t: "Businesses grown", d: "Existing businesses that grew their sales or hired more people with our help." },
+  { Icon: Users, t: "Members reached", d: "Verified members who received opportunities, training or updates." },
+  { Icon: Truck, t: "Local suppliers paid", d: "Nigerian suppliers with paid contracts from TBC-backed businesses." },
+  { Icon: MapPin, t: "Communities supported", d: "Local government areas that received community project grants." },
+  { Icon: HandHeart, t: "Winners supported", d: "Winners who chose help from our business team." },
 ];
 
 export default function Impact() {
   return (
     <>
-      <PageHero eyebrow="Community impact" title={<>Measured in jobs, enterprises <span className="gold-text">and lives changed.</span></>} lead="Our success will not be measured by how much we collect, but by the businesses built, the people employed and the communities strengthened. Here is how we will measure it." />
+      <PageHero eyebrow="Our impact" title={<>Success means jobs, <span className="gold-text">not just winners.</span></>} lead="We won’t judge ourselves by how much money we collect. We’ll judge ourselves by the businesses built, the jobs created and the communities made stronger." />
       <section className="bg-white py-20 sm:py-28">
         <div className="container-x">
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <SectionHeading eyebrow="Impact indicators" title="Seven numbers that matter." />
-            <p className="text-sm text-navy-500">Actual values · pre-launch</p>
+            <SectionHeading eyebrow="What we’ll count" title="Seven numbers that matter." />
+            <p className="text-sm text-navy-500">Real figures today — we haven’t launched yet</p>
           </div>
           <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {INDICATORS.map((x) => (
@@ -32,11 +32,11 @@ export default function Impact() {
                 <p className="mt-4 font-display text-4xl text-navy-950 tabular">0</p>
                 <p className="mt-1 font-medium text-navy-900">{x.t}</p>
                 <p className="mt-2 text-xs leading-relaxed text-navy-500">{x.d}</p>
-                <p className="mt-4 text-xs text-navy-400">Target: to be set with independent impact advisers</p>
+                <p className="mt-4 text-xs text-navy-400">Target: to be set with independent experts</p>
               </Card>
             ))}
             <Card className="flex flex-col justify-between !bg-navy-950 !p-6 text-white">
-              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Community target</p>
+              <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Our goal</p>
               <p className="mt-4 font-display text-4xl tabular">10,000,000</p>
               <p className="mt-1 text-sm text-navy-200">members</p>
               <StatusBadge kind="target" className="mt-4 w-fit" />
@@ -47,11 +47,11 @@ export default function Impact() {
       <section className="bg-mist py-20 sm:py-28">
         <div className="container-x">
           <div className="flex flex-wrap items-end justify-between gap-4">
-            <SectionHeading eyebrow="Dashboard preview" title="How impact will be reported." lead="A working preview of the impact dashboard, populated with clearly labelled demonstration data." />
+            <SectionHeading eyebrow="Sneak preview" title="How we’ll show our impact." lead="A working preview, filled with example numbers so you can see how it will look." />
             <StatusBadge kind="demo" />
           </div>
           <div className="mt-10"><ImpactDemo /></div>
-          <Callout title="Methodology" className="mt-8">Impact data will be collected from venture management accounts and payroll records, verified by sampling, and reviewed by an independent evaluator. Definitions will follow recognised impact-measurement standards.</Callout>
+          <Callout title="How we&apos;ll count" className="mt-8">We&apos;ll use each business&apos;s accounts and payroll records, spot-check them, and have an independent reviewer confirm the numbers using recognised standards.</Callout>
         </div>
       </section>
     </>

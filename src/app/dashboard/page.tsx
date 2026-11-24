@@ -66,13 +66,13 @@ export default async function MemberOverview({ searchParams }: { searchParams: P
         <Stat label="Total recorded" value={formatNaira(sum.total)} hint={<>{sum.count} simulated entries <DemoTag /></>} icon={<Wallet className="h-4 w-4 text-gold-600" />} />
         <Stat label="Places held (30d)" value={`${sum.activeDays30}/30`} hint="Days you secured a daily place" icon={<CalendarCheck className="h-4 w-4 text-gold-600" />} />
         <Stat label="Current streak" value={`${sum.streak} days`} hint={sum.last ? `Last entry ${fmtDate(sum.last)}` : "No entries yet"} icon={<Flame className="h-4 w-4 text-gold-600" />} />
-        <Stat tone="navy" label="Entries this month" value={sum.monthEntries} hint="Proposed: one entry per day you hold a place · selection rules awaiting approval" icon={<Hourglass className="h-4 w-4 text-gold-300" />} />
+        <Stat tone="navy" label="Entries this month" value={sum.monthEntries} hint="One entry for every day you hold a place (planned — starts after approval)" icon={<Hourglass className="h-4 w-4 text-gold-300" />} />
       </div>
 
       <div className="mt-6 grid gap-6 xl:grid-cols-[1.6fr_1fr]">
         <Panel title={<span className="flex items-center gap-2">Contribution activity · last 30 days <DemoTag /></span>} action={<Link href="/dashboard/contributions" className="text-xs font-semibold text-navy-600 hover:text-navy-950">View statement →</Link>}>
           <BarChart title="Daily recorded contributions, last 30 days (simulated)" data={daily.map((d) => ({ label: d.date.getDate().toString(), value: d.value, detail: fmtDate(d.date) }))} format="naira" everyNthLabel={3} height={200} />
-          <p className="mt-3 text-xs text-navy-500">Simulated ledger entries for demonstration. No real money has been collected.</p>
+          <p className="mt-3 text-xs text-navy-500">Sample data only. No real money has been taken.</p>
         </Panel>
         <Panel title={<span className="flex items-center gap-2"><Megaphone className="h-4 w-4 text-gold-600" aria-hidden /> Official announcements</span>}>
           <ul className="space-y-4">

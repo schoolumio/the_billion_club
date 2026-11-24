@@ -81,12 +81,12 @@ export function Button({ variant = "gold", className, ...rest }: ComponentProps<
  */
 export type StatusKind = "target" | "demo" | "proposed" | "pending" | "live" | "projection";
 const status: Record<StatusKind, { label: string; cls: string; Icon: typeof Target }> = {
-  target: { label: "Target", cls: "bg-gold-50 text-gold-800 ring-gold-200", Icon: Target },
-  projection: { label: "Projection", cls: "bg-gold-50 text-gold-800 ring-gold-200", Icon: Target },
-  demo: { label: "Demonstration data", cls: "bg-violet-50 text-violet-800 ring-violet-200", Icon: FlaskConical },
-  proposed: { label: "Proposed", cls: "bg-sky-50 text-sky-800 ring-sky-200", Icon: Lightbulb },
-  pending: { label: "Awaiting approval", cls: "bg-amber-50 text-amber-800 ring-amber-200", Icon: Hourglass },
-  live: { label: "Built in this release", cls: "bg-emerald-50 text-emerald-800 ring-emerald-200", Icon: ShieldCheck },
+  target: { label: "Target — not yet reached", cls: "bg-gold-50 text-gold-800 ring-gold-200", Icon: Target },
+  projection: { label: "Estimate", cls: "bg-gold-50 text-gold-800 ring-gold-200", Icon: Target },
+  demo: { label: "Sample data", cls: "bg-violet-50 text-violet-800 ring-violet-200", Icon: FlaskConical },
+  proposed: { label: "Planned", cls: "bg-sky-50 text-sky-800 ring-sky-200", Icon: Lightbulb },
+  pending: { label: "Starts after approval", cls: "bg-amber-50 text-amber-800 ring-amber-200", Icon: Hourglass },
+  live: { label: "Ready now", cls: "bg-emerald-50 text-emerald-800 ring-emerald-200", Icon: ShieldCheck },
 };
 
 export function StatusBadge({ kind, label, className }: { kind: StatusKind; label?: string; className?: string }) {

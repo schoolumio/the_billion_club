@@ -13,10 +13,10 @@ import { waitlistProgress } from "@/lib/referrals/server";
 export const metadata: Metadata = { title: { absolute: "The Billionaire Circle — 10 million people. One shared vision." } };
 
 const targets = [
-  { value: "10,000,000", label: "Daily places", note: "Unlimited registration" },
-  { value: "₦100", label: "Per daily place", note: "Proposed contribution" },
-  { value: "30", label: "Winners every month", note: "3 × ₦1bn + 27 × ₦556m" },
-  { value: "60%", label: "Of every naira to winners", note: "40% builds the ecosystem" },
+  { value: "10,000,000", label: "Places every day", note: "Anyone can join" },
+  { value: "₦100", label: "For a daily place", note: "Planned price" },
+  { value: "30", label: "Winners every month", note: "3 of them win ₦1bn" },
+  { value: "60%", label: "Goes to winners", note: "40% builds jobs & runs TBC" },
 ];
 
 export const revalidate = 300; // live waitlist counter refreshes every 5 minutes
@@ -40,7 +40,7 @@ export default async function Home() {
         <div className="container-x relative grid gap-14 pb-20 lg:grid-cols-[1.25fr_1fr] lg:items-center lg:pb-28">
           <div>
             <div className="animate-fade-up">
-              <Eyebrow tone="light">A movement for shared prosperity</Eyebrow>
+              <Eyebrow tone="light">Nigeria&apos;s community wealth movement</Eyebrow>
             </div>
             <h1 className="mt-6 animate-fade-up text-[2.6rem] font-medium leading-[1.02] [animation-delay:80ms] sm:text-6xl lg:text-[4.6rem]">
               10 million people.
@@ -50,16 +50,16 @@ export default async function Home() {
               <span className="gold-text">A new generation of wealth.</span>
             </h1>
             <p className="mt-7 max-w-xl animate-fade-up text-lg leading-relaxed text-navy-200 [animation-delay:160ms]">
-              Imagine a community where a small daily contribution helps build extraordinary opportunities, supports new
-              businesses, creates jobs and transforms lives.
+              ₦100 a day. 10 million people. 30 life-changing winners every month — and new businesses that create jobs for
+              everyone else. Join the founding community free, today.
             </p>
             <div className="mt-9 flex animate-fade-up flex-col gap-3 [animation-delay:240ms] sm:flex-row">
               <LinkButton href="/join" variant="gold" arrow>Join the waitlist — free</LinkButton>
-              <LinkButton href="#movement" variant="outline-light">Discover the movement</LinkButton>
+              <LinkButton href="#movement" variant="outline-light">See how it works</LinkButton>
             </div>
             <p className="mt-8 flex max-w-xl animate-fade-up items-start gap-2 text-xs leading-relaxed text-navy-300 [animation-delay:320ms]">
               <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-gold-300" aria-hidden />
-              Pre-launch. We are not collecting money, have not made any awards and do not yet hold the licences required to operate.
+              We haven&apos;t launched yet. We are not taking any money, no one has won anything yet, and we won&apos;t start until we are fully licensed.
             </p>
           </div>
 
@@ -68,8 +68,8 @@ export default async function Home() {
             <div className="absolute -inset-4 rounded-[2rem] bg-gradient-to-br from-gold-400/20 via-transparent to-navy-400/10 blur-2xl" aria-hidden />
             <div className="relative overflow-hidden rounded-[1.75rem] border border-white/10 bg-gradient-to-b from-white/[0.08] to-white/[0.02] p-6 backdrop-blur-xl sm:p-8">
               <div className="flex items-center justify-between">
-                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">The ambition</p>
-                <StatusBadge kind="target" label="Targets — not achievements" />
+                <p className="text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">The plan at full size</p>
+                <StatusBadge kind="target" label="Targets — not yet reached" />
               </div>
               <dl className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-2xl bg-white/10">
                 {targets.map((t) => (
@@ -82,16 +82,16 @@ export default async function Home() {
               </dl>
               <div className="mt-6 rounded-2xl border border-gold-400/25 bg-gold-500/[0.07] p-5">
                 <div className="flex items-baseline justify-between gap-3">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold-300">Founding community · live</p>
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-gold-300">Joined so far · live</p>
                   <Link href="/join" className="text-xs font-semibold text-gold-200 underline-offset-2 hover:underline">Join →</Link>
                 </div>
                 <p className="mt-2 font-display text-3xl text-white tabular">
-                  {verified === null ? "—" : formatCount(verified)} <span className="text-base text-navy-300">verified members</span>
+                  {verified === null ? "—" : formatCount(verified)} <span className="text-base text-navy-300">verified people</span>
                 </p>
                 <div className="mt-3 h-2 overflow-hidden rounded-full bg-white/10" role="progressbar" aria-valuemin={0} aria-valuemax={TARGET} aria-valuenow={verified ?? 0} aria-label="Progress towards 10 million verified waitlist members">
                   <div className="h-full rounded-full bg-gradient-to-r from-gold-600 to-gold-300" style={{ width: `${Math.max(pct, verified ? 0.8 : 0)}%` }} />
                 </div>
-                <p className="mt-3 text-xs leading-relaxed text-navy-300">Real people who have verified their email — never sample data. All other figures above are targets; audited results will be published only once we are licensed and live.</p>
+                <p className="mt-3 text-xs leading-relaxed text-navy-300">Only real people who have confirmed their email are counted. The numbers above are goals — we&apos;ll publish real, audited results once we launch.</p>
               </div>
             </div>
           </div>
@@ -99,7 +99,7 @@ export default async function Home() {
 
         <div className="container-x relative pb-10">
           <a href="#movement" className="mx-auto flex w-fit items-center gap-2 text-xs font-medium uppercase tracking-[0.2em] text-navy-300 hover:text-white">
-            Scroll to explore <ArrowDown className="h-3.5 w-3.5 animate-bounce" aria-hidden />
+            Scroll to learn more <ArrowDown className="h-3.5 w-3.5 animate-bounce" aria-hidden />
           </a>
         </div>
       </section>
@@ -108,10 +108,10 @@ export default async function Home() {
       <section className="border-b border-navy-100 bg-white">
         <div className="container-x grid grid-cols-2 gap-6 py-8 text-sm text-navy-700 lg:grid-cols-4">
           {[
-            { Icon: Landmark, t: "Independent custody of funds" },
-            { Icon: FileSearch, t: "Independent annual audit" },
-            { Icon: Eye, t: "Published selection methodology" },
-            { Icon: Scale, t: "Launch only after regulatory approval" },
+            { Icon: Landmark, t: "Money held by an independent bank" },
+            { Icon: FileSearch, t: "Checked by outside auditors" },
+            { Icon: Eye, t: "Draw rules published in advance" },
+            { Icon: Scale, t: "No launch without approval" },
           ].map(({ Icon, t }) => (
             <div key={t} className="flex items-center gap-3">
               <Icon className="h-5 w-5 shrink-0 text-gold-600" aria-hidden />
@@ -125,9 +125,9 @@ export default async function Home() {
       <section id="movement" className="scroll-mt-28 bg-white py-24 sm:py-32">
         <div className="container-x">
           <SectionHeading
-            eyebrow="The big idea"
-            title={<>Small, affordable, daily. <span className="text-gold-600">Together, extraordinary.</span></>}
-            lead="₦100 is within reach of most Nigerian adults. Multiplied across a community of ten million, it becomes one of the largest pools of locally owned development capital in Africa — if it is governed with absolute integrity."
+            eyebrow="The idea"
+            title={<>Small on your own. <span className="text-gold-600">Unstoppable together.</span></>}
+            lead="Almost anyone can spare ₦100. When 10 million people do it together, it adds up to ₦1 billion a day — owned by Nigerians, working for Nigerians, and run in the open."
           />
           <Reveal className="mt-14">
             <div className="grid items-stretch gap-4 lg:grid-cols-[1fr_auto_1fr_auto_1.2fr]">
@@ -136,7 +136,7 @@ export default async function Home() {
                 { k: "×", l: "" },
                 { k: "₦100", l: "per day" },
                 { k: "=", l: "" },
-                { k: "₦1,000,000,000", l: "potential daily inflow" },
+                { k: "₦1,000,000,000", l: "every single day" },
               ].map((x, i) =>
                 x.l ? (
                   <Card key={i} className="flex flex-col justify-center !p-8">
@@ -148,7 +148,7 @@ export default async function Home() {
                 ),
               )}
             </div>
-            <p className="mt-4 flex items-center gap-2 text-xs text-navy-500"><StatusBadge kind="projection" /> Maximum daily inflow when every place is sold, before any costs. Registration is unlimited; places are capped at 10 million a day.</p>
+            <p className="mt-4 flex items-center gap-2 text-xs text-navy-500"><StatusBadge kind="projection" /> When all 10 million daily places are taken, before costs. Anyone can join; places are limited to 10 million a day.</p>
           </Reveal>
         </div>
       </section>
@@ -157,15 +157,15 @@ export default async function Home() {
       <section className="bg-mist py-24 sm:py-32">
         <div className="container-x">
           <SectionHeading
-            eyebrow="Why it is different"
-            title="Being selected should not be the only reason to join."
-            lead="Most schemes reward a lucky few and leave everyone else with nothing. We are designing the opposite: an ecosystem in which the economic growth created by the community flows back to its members."
+            eyebrow="What makes us different"
+            title="You don’t have to win to benefit."
+            lead="Most schemes reward a lucky few and leave everyone else with nothing. We’re building the opposite: when the community grows, members grow with it."
           />
           <div className="mt-14 grid gap-6 md:grid-cols-3">
             {[
-              { Icon: Award, title: "Life-changing awards", body: "Members selected under an approved, independently observed process receive substantial awards — with a headline ambition of ₦1 billion.", tag: "Award" },
-              { Icon: Building2, title: "Enterprises that last", body: "Our investment and business development arm helps beneficiaries turn awards into well-governed businesses rather than one-off spending.", tag: "Business investment" },
-              { Icon: Briefcase, title: "Jobs and contracts for members", body: "Those businesses hire, buy and contract locally. Members get first notice of jobs, supplier opportunities and training.", tag: "Community benefit" },
+              { Icon: Award, title: "Life-changing awards", body: "30 winners every month, chosen fairly in a public draw. Three of them receive ₦1 billion each.", tag: "For winners" },
+              { Icon: Building2, title: "Businesses that last", body: "Our business team helps winners turn their money into real, well-run businesses — not one-off spending.", tag: "For the economy" },
+              { Icon: Briefcase, title: "Jobs for members", body: "Those businesses hire and buy locally — and members hear about jobs, contracts and training first.", tag: "For everyone" },
             ].map((p, i) => (
               <Reveal key={p.title} delay={i * 100}>
                 <Card className="h-full !p-8 transition-transform duration-500 hover:-translate-y-1">
@@ -180,9 +180,9 @@ export default async function Home() {
           <Reveal className="mt-10">
             <blockquote className="rounded-3xl bg-navy-950 px-8 py-10 text-center sm:px-16">
               <p className="mx-auto max-w-3xl font-display text-2xl leading-snug text-white sm:text-3xl">
-                “Your opportunity to become wealthy should not be the only reason you join. The economic growth of the community should benefit you too.”
+                “Winning shouldn’t be the only reason to join. When the community grows, you should grow too.”
               </p>
-              <footer className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">Founding philosophy</footer>
+              <footer className="mt-5 text-xs font-semibold uppercase tracking-[0.2em] text-gold-300">What we believe</footer>
             </blockquote>
           </Reveal>
         </div>
@@ -193,19 +193,19 @@ export default async function Home() {
         <div className="grid-bg absolute inset-0 opacity-50 [mask-image:radial-gradient(ellipse_at_top_right,black,transparent_70%)]" aria-hidden />
         <div className="container-x relative grid gap-12 lg:grid-cols-[1fr_1.15fr] lg:items-center">
           <div>
-            <SectionHeading tone="light" eyebrow="The founding community" title={<>Ten million verified people. <span className="gold-text">Built one invitation at a time.</span></>} lead="Before launch, we are building the community itself. Join free, get your personal link and invite the people you trust. Only verified, genuine members count." />
+            <SectionHeading tone="light" eyebrow="Join the founding community" title={<>10 million people. <span className="gold-text">One invitation at a time.</span></>} lead="Right now, we’re building the community. Join free, get your own invite link, and bring the people you trust. Every real person counts." />
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
               <LinkButton href="/join" arrow>Join the waitlist</LinkButton>
               <LinkButton href="/leaderboard" variant="outline-light">See the leaderboard</LinkButton>
             </div>
-            <p className="mt-6 text-xs leading-relaxed text-navy-300">Free to join. Not an investment. Single-level referrals only — nobody earns from their referrals&apos; referrals. The proposed referral rewards are inactive until legally approved and funded from actual contributions.</p>
+            <p className="mt-6 text-xs leading-relaxed text-navy-300">Free to join. Not an investment. Only people you invite yourself count — never their invites. Referral rewards are planned, but won’t start until we’re approved and launched.</p>
           </div>
           <ol className="grid gap-4 sm:grid-cols-2">
             {[
-              { Icon: UserPlus, t: "Join in a minute", b: "Free registration. Verify your email to secure your place." },
-              { Icon: Link2, t: "Get your link", b: "Your personal code, link, QR code and branded invitation card." },
-              { Icon: Share2, t: "Invite your circle", b: "One tap to WhatsApp, Facebook, X, Telegram or email." },
-              { Icon: Trophy, t: "Rise through the levels", b: "From Circle Starter to TBC Growth Legend — verified referrals only." },
+              { Icon: UserPlus, t: "Join in a minute", b: "It’s free. Confirm your email and your place is secured." },
+              { Icon: Link2, t: "Get your invite link", b: "Plus your own QR code and a ready-made invitation card." },
+              { Icon: Share2, t: "Share with your circle", b: "Send it on WhatsApp, Facebook, X, Telegram or email in one tap." },
+              { Icon: Trophy, t: "Climb the levels", b: "From Circle Starter to TBC Growth Legend. Only real, confirmed people count." },
             ].map((x, i) => (
               <Reveal as="li" key={x.t} delay={i * 80} className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
                 <div className="flex items-center justify-between"><x.Icon className="h-6 w-6 text-gold-300" aria-hidden /><span className="font-display text-sm text-gold-400 tabular">0{i + 1}</span></div>
@@ -221,8 +221,8 @@ export default async function Home() {
       <section className="bg-white py-24 sm:py-32">
         <div className="container-x">
           <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
-            <SectionHeading eyebrow="How it works" title="Seven clear steps from member to movement." />
-            <LinkButton href="/how-it-works" variant="outline" arrow>See the full journey</LinkButton>
+            <SectionHeading eyebrow="How it works" title="Seven simple steps." lead="From joining to building businesses that create jobs." />
+            <LinkButton href="/how-it-works" variant="outline" arrow>See every step</LinkButton>
           </div>
           <ol className="mt-14 grid gap-px overflow-hidden rounded-3xl border border-navy-100 bg-navy-100 sm:grid-cols-2 lg:grid-cols-4">
             {HOW_IT_WORKS.map((s, i) => (
@@ -234,8 +234,8 @@ export default async function Home() {
               </Reveal>
             ))}
             <li className="hidden bg-navy-950 p-7 text-white lg:block">
-              <p className="font-display text-xl leading-snug">And the cycle begins again — with a stronger community each time.</p>
-              <Link href="/ecosystem" className="mt-6 inline-block text-sm font-semibold text-gold-300 hover:text-gold-200">Explore the ecosystem →</Link>
+              <p className="font-display text-xl leading-snug">Then it starts again — with a stronger community every month.</p>
+              <Link href="/ecosystem" className="mt-6 inline-block text-sm font-semibold text-gold-300 hover:text-gold-200">See how it all connects →</Link>
             </li>
           </ol>
         </div>
@@ -245,7 +245,7 @@ export default async function Home() {
       <section className="relative overflow-hidden bg-navy-950 py-24 text-white sm:py-32">
         <div className="grid-bg absolute inset-0 opacity-60 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]" aria-hidden />
         <div className="container-x relative">
-          <SectionHeading tone="light" eyebrow="The community wealth ecosystem" title="Wealth creation that creates more wealth creation." lead="Select any part of the flywheel to see what happens at each stage — and what kind of money is involved." />
+          <SectionHeading tone="light" eyebrow="How it all connects" title="Wealth that keeps creating wealth." lead="Tap any step to see what happens — and where the money goes." />
           <div className="mt-14"><EcosystemDiagram /></div>
         </div>
       </section>
@@ -255,35 +255,35 @@ export default async function Home() {
         <div className="container-x grid gap-14 lg:grid-cols-2 lg:items-start">
           <div>
             <SectionHeading
-              eyebrow="Financial integrity"
-              title="We did the maths. In public."
-              lead="Sixty percent of every month's collections goes to thirty winners. Forty percent pays the costs of running honestly — and funds businesses, jobs and community projects so members benefit even if they are never selected. Awards always follow money already collected, never promises."
+              eyebrow="Where the money goes"
+              title="Clear numbers. Nothing hidden."
+              lead="60% of every month’s money goes to the 30 winners. The other 40% runs the organisation properly and pays for businesses, jobs and community projects. We only pay out money we have actually received."
             />
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
               <Card className="border-gold-300 !bg-gold-50/60">
                 <p className="text-xs font-semibold uppercase tracking-wider text-gold-800">Winners · 60%</p>
                 <p className="mt-3 font-display text-3xl text-navy-950">₦18bn</p>
-                <p className="mt-1 text-sm text-navy-600">3 × ₦1bn grand awards + 27 × ₦556m enterprise awards.</p>
+                <p className="mt-1 text-sm text-navy-600">3 winners get ₦1bn each. 27 winners get about ₦556m each.</p>
               </Card>
               <Card className="!border-navy-900 !bg-navy-950 text-white">
-                <p className="text-xs font-semibold uppercase tracking-wider text-gold-300">Team · 40%</p>
+                <p className="text-xs font-semibold uppercase tracking-wider text-gold-300">Everything else · 40%</p>
                 <p className="mt-3 font-display text-3xl">₦12bn</p>
-                <p className="mt-1 text-sm text-navy-200">Including a ₦3.6bn business fund that creates jobs whatever winners decide.</p>
+                <p className="mt-1 text-sm text-navy-200">Including ₦3.6bn a month to back businesses that create jobs.</p>
               </Card>
             </div>
             <p className="mt-6 text-sm text-navy-600">
-              With every daily place sold, a member who holds a place every day has about a <strong className="tabular">{formatOdds(r.monthlySelectionOdds)}</strong> chance of selection each month.
-              That is exactly why the ecosystem — jobs, contracts, community investment — must benefit the members who are never selected.
+              Let&apos;s be honest: if you take a place every day, your chance of winning in a month is about <strong className="tabular">{formatOdds(r.monthlySelectionOdds)}</strong>.
+              That&apos;s exactly why the jobs, contracts and community projects matter so much.
             </p>
-            <LinkButton href="/financial-model" variant="navy" arrow className="mt-8">Explore the financial model</LinkButton>
+            <LinkButton href="/financial-model" variant="navy" arrow className="mt-8">See the full numbers</LinkButton>
           </div>
           <Reveal>
             <Card className="!p-8">
               <div className="flex flex-wrap items-center justify-between gap-3">
-                <p className="font-medium text-navy-950">Monthly allocation · 60/40 model</p>
-                <StatusBadge kind="proposed" label="Adopted · pending approval" />
+                <p className="font-medium text-navy-950">How each month’s money is shared</p>
+                <StatusBadge kind="pending" />
               </div>
-              <p className="mt-1 text-sm text-navy-500">Of a projected {formatNaira(r.grossMonthly, { compact: true })} monthly inflow when all 10 million daily places are sold</p>
+              <p className="mt-1 text-sm text-navy-500">Based on {formatNaira(r.grossMonthly, { compact: true })} a month — every daily place taken</p>
               <div className="mt-6"><AllocationChart allocation={ADOPTED.allocation} gross={r.grossMonthly} /></div>
             </Card>
           </Reveal>
@@ -293,15 +293,15 @@ export default async function Home() {
       {/* TRANSPARENCY */}
       <section className="bg-mist py-24 sm:py-32">
         <div className="container-x">
-          <SectionHeading align="center" eyebrow="Transparency & accountability" title="Trust is designed in, not promised." lead="Every safeguard below is a design commitment for launch. None is in operation yet, and we label them that way." />
+          <SectionHeading align="center" eyebrow="Built on trust" title="Don’t just trust us. Check us." lead="These protections are planned for launch. None is running yet — and we’ll always tell you which is which." />
           <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {[
-              { Icon: Landmark, t: "Independent custody", b: "Contributions held by a regulated custodian in segregated accounts, never by the operating company." },
-              { Icon: FileSearch, t: "Independent audit", b: "Annual audited financial statements and quarterly reconciliation reports, published in full." },
-              { Icon: Eye, t: "Observed selection", b: "Methodology published in advance; each selection independently observed and verifiable." },
-              { Icon: BadgeCheck, t: "Verified awards", b: "Every award paid only after identity verification, with anonymised payment confirmation published." },
-              { Icon: Users, t: "Member governance", b: "Member representatives on an advisory council; conflicts of interest declared and published." },
-              { Icon: Sprout, t: "Impact reporting", b: "Jobs, businesses and suppliers measured with a published methodology and external review." },
+              { Icon: Landmark, t: "Your money, held safely", b: "An independent, regulated bank holds members’ money in a separate account — not us." },
+              { Icon: FileSearch, t: "Checked by outsiders", b: "Outside auditors check our accounts every year. We publish their full report." },
+              { Icon: Eye, t: "A draw you can check", b: "Rules published in advance. Independent observers at every draw. Results anyone can verify." },
+              { Icon: BadgeCheck, t: "Real winners, real payments", b: "Awards go only to verified bank accounts, and every payment is confirmed publicly." },
+              { Icon: Users, t: "Members have a voice", b: "Elected members sit on an advisory council and can raise concerns directly with the board." },
+              { Icon: Sprout, t: "Results you can see", b: "We count the jobs and businesses created — and an outside reviewer checks our numbers." },
             ].map((x, i) => (
               <Reveal key={x.t} delay={i * 60}>
                 <Card className="h-full">
@@ -315,14 +315,14 @@ export default async function Home() {
               </Reveal>
             ))}
           </div>
-          <div className="mt-10 text-center"><LinkButton href="/transparency" variant="outline" arrow>Visit the transparency centre</LinkButton></div>
+          <div className="mt-10 text-center"><LinkButton href="/transparency" variant="outline" arrow>See what we’ll publish</LinkButton></div>
         </div>
       </section>
 
       {/* ROADMAP */}
       <section className="bg-white py-24 sm:py-32">
         <div className="container-x">
-          <SectionHeading eyebrow="Roadmap" title="Approval first. Scale second." lead="We will not collect a single naira before the legal structure, licences and custodial arrangements are in place." />
+          <SectionHeading eyebrow="Our roadmap" title="Approval first. Then we grow." lead="We won’t collect a single naira until we’re licensed and an independent bank is in place to hold the money." />
           <ol className="relative mt-14 grid gap-6 lg:grid-cols-5">
             <div className="absolute left-0 right-0 top-5 hidden h-px bg-gradient-to-r from-gold-500 via-navy-200 to-navy-100 lg:block" aria-hidden />
             {ROADMAP.map((p, i) => (
@@ -343,17 +343,17 @@ export default async function Home() {
         <div className="absolute -left-40 top-0 h-96 w-96 rounded-full bg-gold-500/15 blur-3xl" aria-hidden />
         <div className="container-x relative grid gap-10 lg:grid-cols-2 lg:items-center">
           <div>
-            <Eyebrow tone="light">Be part of the founding community</Eyebrow>
+            <Eyebrow tone="light">Your place is waiting</Eyebrow>
             <h2 className="mt-5 text-4xl font-medium leading-tight sm:text-5xl">Together, we build wealth. <span className="gold-text">Together, we change lives.</span></h2>
           </div>
           <div className="space-y-5">
-            <p className="text-lg text-navy-200">Join the free founding-community waitlist, get your personal referral link and help us reach 10 million verified members before launch. No payment, ever, to join.</p>
+            <p className="text-lg text-navy-200">Join the founding community today. It’s free, it takes a minute, and you’ll get your own link to invite the people you care about.</p>
             <div className="flex flex-col gap-3 sm:flex-row">
               <LinkButton href="/join" arrow>Join the waitlist</LinkButton>
               <LinkButton href="/how-it-works" variant="outline-light">How it works</LinkButton>
             </div>
             <Callout tone="gold" title="Protect yourself" className="!border-gold-400/30 !bg-white/5 [&_p]:!text-gold-100 [&_div]:!text-navy-200">
-              We are not collecting money. Anyone asking you to pay to join The Billionaire Circle is not acting for us.
+              We are not taking any money. If anyone asks you to pay to join The Billionaire Circle, it’s a scam — please report it.
             </Callout>
           </div>
         </div>

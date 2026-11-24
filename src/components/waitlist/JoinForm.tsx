@@ -39,11 +39,11 @@ export function JoinForm({ prefill, linkRef, campaign, inviter }: { prefill: str
       <div className="!mt-1"><Password name="password" autoComplete="new-password" /><FieldError e={fe.password} /></div>
 
       <div>
-        <label className="block text-sm font-medium text-navy-800">Referral code <span className="font-normal text-navy-500">(optional)</span>
+        <label className="block text-sm font-medium text-navy-800">Invite code <span className="font-normal text-navy-500">(optional)</span>
           <input name="ref" value={code} onChange={(e) => setCode(e.target.value.toUpperCase())} placeholder="TBC…" autoComplete="off" className={input + " font-mono uppercase tracking-wider"} />
         </label>
         {inviter && code === prefill && prefill && (
-          <p className="mt-1.5 flex items-center gap-1.5 text-xs text-good"><BadgeCheck className="h-3.5 w-3.5" aria-hidden />Invited by {inviter}. You can change or clear this code before joining.</p>
+          <p className="mt-1.5 flex items-center gap-1.5 text-xs text-good"><BadgeCheck className="h-3.5 w-3.5" aria-hidden />Invited by {inviter}. You can change or remove this code.</p>
         )}
         <FieldError e={fe.ref} />
       </div>
@@ -51,10 +51,10 @@ export function JoinForm({ prefill, linkRef, campaign, inviter }: { prefill: str
       <fieldset className="space-y-2.5 rounded-2xl bg-mist p-4 text-sm text-navy-800">
         <legend className="sr-only">Confirmations</legend>
         <label className="flex gap-3"><input type="checkbox" name="adult" className="mt-0.5 h-4 w-4 shrink-0 accent-[#0d1b2b]" /><span>I am 18 years or older.</span></label>
-        <label className="flex gap-3"><input type="checkbox" name="consentNotInvestment" className="mt-0.5 h-4 w-4 shrink-0 accent-[#0d1b2b]" /><span>I understand joining is <strong>free</strong>, is <strong>not an investment</strong>, guarantees <strong>no financial return</strong> and does not enrol me in any future paid programme.</span></label>
+        <label className="flex gap-3"><input type="checkbox" name="consentNotInvestment" className="mt-0.5 h-4 w-4 shrink-0 accent-[#0d1b2b]" /><span>I understand joining is <strong>free</strong>, is <strong>not an investment</strong> and <strong>doesn&apos;t promise me any money</strong>.</span></label>
         <label className="flex gap-3"><input type="checkbox" name="consentTerms" className="mt-0.5 h-4 w-4 shrink-0 accent-[#0d1b2b]" /><span>I accept the <Link href="/terms" className="underline" target="_blank">terms</Link>, <Link href="/privacy" className="underline" target="_blank">privacy notice</Link> and <Link href="/referral-policy" className="underline" target="_blank">referral policy</Link>.</span></label>
-        <label className="flex gap-3 text-navy-600"><input type="checkbox" name="leaderboardOptIn" className="mt-0.5 h-4 w-4 shrink-0 accent-[#0d1b2b]" /><span>Optional: show my first name on the public referral leaderboard.</span></label>
-        <label className="flex gap-3 text-navy-600"><input type="checkbox" name="marketingConsent" className="mt-0.5 h-4 w-4 shrink-0 accent-[#0d1b2b]" /><span>Optional: send me updates about TBC by email or SMS.</span></label>
+        <label className="flex gap-3 text-navy-600"><input type="checkbox" name="leaderboardOptIn" className="mt-0.5 h-4 w-4 shrink-0 accent-[#0d1b2b]" /><span>Optional: show my first name on the leaderboard.</span></label>
+        <label className="flex gap-3 text-navy-600"><input type="checkbox" name="marketingConsent" className="mt-0.5 h-4 w-4 shrink-0 accent-[#0d1b2b]" /><span>Optional: send me TBC news by email or SMS.</span></label>
       </fieldset>
       {(fe.adult || fe.consentNotInvestment || fe.consentTerms) && <FieldError e={fe.adult ?? fe.consentNotInvestment ?? fe.consentTerms} />}
 

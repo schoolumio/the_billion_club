@@ -179,7 +179,7 @@ export interface Scenario {
   tagline: string;
   inputs: ModelInputs;
   allocation: Allocation;
-  verdict: "Not viable" | "Viable with conditions" | "Adopted";
+  verdict: "Doesn’t work" | "Works, but" | "Our choice";
   awards: { count: number; amount: number; label: string }[];
   tradeOffs: string[];
 }
@@ -187,62 +187,62 @@ export interface Scenario {
 export const SCENARIOS: Scenario[] = [
   {
     id: "concept",
-    name: "A · Original concept",
-    tagline: "30 awards of ₦1 billion from ₦30 billion",
+    name: "A · 30 winners of ₦1bn each",
+    tagline: "Uses all ₦30bn on awards",
     inputs: CONCEPT_INPUTS,
     allocation: { awards: 100, business: 0, community: 0, reserve: 0, referral: 0, regulatory: 0, processing: 0, operations: 0, assurance: 0 },
-    verdict: "Not viable",
+    verdict: "Doesn’t work",
     awards: [{ count: 30, amount: 1_000_000_000, label: "Grand awards" }],
     tradeOffs: [
-      "Consumes 100% of inflow — nothing left for bank charges, taxes, staff, audit or reserves.",
-      "No funding for the business and jobs ecosystem that makes the initiative different.",
-      "Any day with unsold places creates an unfunded promise.",
+      "Uses every naira — nothing left for bank charges, taxes, staff, auditors or savings.",
+      "No money for the businesses and jobs that make TBC different.",
+      "Any day with empty places means a promise we can’t pay.",
     ],
   },
   {
     id: "ninety",
     name: "B · 90% to winners",
-    tagline: "30 awards of ₦900 million, 10% charge",
+    tagline: "30 winners of ₦900m, 10% kept",
     inputs: { ...CONCEPT_INPUTS, awardAmount: 900_000_000 },
     allocation: { awards: 90, business: 0, community: 0, reserve: 0, referral: 0, regulatory: 7, processing: 3, operations: 0, assurance: 0 },
-    verdict: "Not viable",
+    verdict: "Doesn’t work",
     awards: [{ count: 30, amount: 900_000_000, label: "Awards" }],
     tradeOffs: [
-      "₦3bn left is consumed by bank charges and estimated levies before any staff are paid.",
-      "No reserve, no audit budget, no business fund — the scheme becomes a plain lottery.",
+      "The ₦3bn left is used up by bank charges and taxes before anyone is paid to run TBC.",
+      "No savings, no auditors, no business fund — it becomes a plain lottery.",
     ],
   },
   {
     id: "conservative",
     name: "C · 40% to winners",
-    tagline: "3 × ₦1 billion + 27 × ₦333 million",
+    tagline: "3 × ₦1bn + 27 × ₦333m",
     inputs: { ...CONCEPT_INPUTS, awardAmount: 400_000_000 },
     allocation: { awards: 40, business: 20, community: 10, reserve: 8, referral: 0, regulatory: 8, processing: 3, operations: 9, assurance: 2 },
-    verdict: "Viable with conditions",
+    verdict: "Works, but",
     awards: [
       { count: 3, amount: 1_000_000_000, label: "Grand awards" },
       { count: 27, amount: 333_333_333, label: "Enterprise awards" },
     ],
     tradeOffs: [
-      "Strongest funding for businesses, jobs and community projects.",
-      "Smaller awards make the proposition less compelling to members.",
+      "The most money for businesses, jobs and community projects.",
+      "Smaller awards make it less exciting for members.",
     ],
   },
   {
     id: "adopted",
-    name: "D · 60% winners / 40% team",
-    tagline: "3 × ₦1 billion + 27 × ₦556 million every month",
+    name: "D · 60% to winners — our choice",
+    tagline: "3 × ₦1bn + 27 × ₦556m every month",
     inputs: { ...CONCEPT_INPUTS, awardAmount: 600_000_000 },
     allocation: ADOPTED_ALLOCATION,
-    verdict: "Adopted",
+    verdict: "Our choice",
     awards: [
       { count: 3, amount: 1_000_000_000, label: "Grand awards" },
       { count: 27, amount: 555_555_556, label: "Enterprise awards" },
     ],
     tradeOffs: [
-      "Keeps 30 winners every month and three ₦1 billion grand awards.",
-      "Funds a ₦3.6bn/month business fund so jobs are created whatever winners decide.",
-      "Award amounts follow money actually collected — smaller in months with unsold places.",
+      "30 winners every month, three of them winning ₦1 billion.",
+      "₦3.6bn a month for businesses, so jobs get created whatever winners decide.",
+      "Awards follow what’s actually collected — smaller in quieter months.",
     ],
   },
 ];

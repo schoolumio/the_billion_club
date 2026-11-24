@@ -11,8 +11,8 @@ export function Footer() {
           <p className="mt-6 max-w-sm font-display text-2xl leading-snug text-white">Be part of the movement that builds wealth together.</p>
           <Link href="/join" className="mt-5 inline-flex items-center gap-2 rounded-full bg-gold-500 px-5 py-2.5 text-sm font-semibold text-navy-950 transition hover:bg-gold-400">Join the waitlist — free</Link>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-navy-300">
-            A proposed community wealth creation initiative for Nigeria. Currently in pre-launch: no contributions are collected,
-            no awards have been made and no licence has yet been granted.
+            A community wealth movement for Nigeria. We haven&apos;t launched yet: we aren&apos;t taking any money,
+            no one has won anything yet, and we&apos;re not licensed yet.
           </p>
         </div>
         <div className="grid gap-10 sm:grid-cols-3">
@@ -33,7 +33,7 @@ export function Footer() {
       <div className="border-t border-white/10">
         <div className="container-x flex flex-col gap-3 py-6 text-xs leading-relaxed text-navy-400 sm:flex-row sm:justify-between">
           <p>© {new Date().getFullYear()} The Billionaire Circle. All figures are targets or projections unless labelled otherwise.</p>
-          <p>Member contributions are not investments and carry no guaranteed return.</p>
+          <p>Payments to TBC are not investments and earn no return.</p>
         </div>
       </div>
     </footer>

@@ -13,7 +13,7 @@ export default function FaqPage() {
   };
   return (
     <>
-      <PageHero eyebrow="FAQ" title={<>Straight answers. <span className="gold-text">Including “not yet decided”.</span></>} lead="Where a policy depends on legal or regulatory approval, we say so rather than guess." />
+      <PageHero eyebrow="Questions & answers" title={<>Straight answers <span className="gold-text">to real questions.</span></>} lead="If something still needs a regulator’s approval, we say so — we never guess." />
       <section className="bg-white py-20 sm:py-28">
         <div className="container-x max-w-4xl">
           <div className="divide-y divide-navy-100 rounded-3xl border border-navy-100">

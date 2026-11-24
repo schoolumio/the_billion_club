@@ -3,31 +3,31 @@ import { BarChart3, Briefcase, Building, ClipboardCheck, FileSignature, Gauge, G
 import { Callout, Card, PageHero, SectionHeading, StatusBadge } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/Reveal";
 
-export const metadata: Metadata = { title: "Investment & business development arm", description: "How beneficiaries are supported to build sustainable, well-governed businesses that create jobs." };
+export const metadata: Metadata = { title: "Business support for winners", description: "How our business team helps winners turn their awards into businesses that last and create jobs." };
 
 const SERVICES = [
-  { Icon: Search, t: "Feasibility studies", b: "Market, operational and financial feasibility before any capital is committed. Ideas that do not pass are not funded — protecting the beneficiary." },
-  { Icon: LineChart, t: "Investment advisory", b: "Independent, conflict-declared advice on allocation, risk and diversification, including options that do not involve our fund." },
-  { Icon: Building, t: "Registration & structuring", b: "CAC registration, shareholder agreements, tax registration and the right legal form for each venture." },
-  { Icon: ShieldCheck, t: "Corporate governance", b: "Boards or advisory boards, controls, signatory rules and conflict-of-interest policies proportionate to the business." },
-  { Icon: BarChart3, t: "Financial management", b: "Bookkeeping, budgeting, banking controls and quarterly management accounts." },
-  { Icon: GraduationCap, t: "Mentorship", b: "Sector mentors and peer networks of business leaders committed to the community." },
-  { Icon: Briefcase, t: "Recruitment & employment", b: "Member-first job advertising, fair hiring practices and skills pathways." },
-  { Icon: Gauge, t: "Performance monitoring", b: "Agreed KPIs, quarterly reviews and early-warning support when a venture struggles." },
-  { Icon: ClipboardCheck, t: "Impact measurement", b: "Jobs, wages, suppliers and community outcomes measured against a published methodology." },
+  { Icon: Search, t: "Test the idea first", b: "Before you spend a naira, we check whether the idea can really work — the market, the costs and the risks." },
+  { Icon: LineChart, t: "Honest money advice", b: "Independent advice on how to use your award wisely — including options that have nothing to do with us." },
+  { Icon: Building, t: "Set up properly", b: "Company registration with CAC, tax registration and the right legal agreements from day one." },
+  { Icon: ShieldCheck, t: "Good management", b: "Simple, sensible controls — who signs for what, who checks the books — sized to the business." },
+  { Icon: BarChart3, t: "Keep the books", b: "Bookkeeping, budgets and regular accounts, so you always know where the business stands." },
+  { Icon: GraduationCap, t: "Mentors who’ve done it", b: "Experienced business leaders in your sector, plus a network of other TBC business owners." },
+  { Icon: Briefcase, t: "Hire well", b: "Fair hiring, with jobs advertised to TBC members first." },
+  { Icon: Gauge, t: "Regular check-ins", b: "Quarterly reviews, and early help if the business starts to struggle." },
+  { Icon: ClipboardCheck, t: "Count the impact", b: "We track the jobs, wages and local suppliers each business creates — and publish them." },
 ];
 
-const STAGES = ["Onboarding & financial literacy", "Opportunity discovery", "Feasibility study", "Investment committee", "Structuring & agreements", "Launch or expansion", "Monitoring & reporting"];
+const STAGES = ["Money basics for winners", "Find the right opportunity", "Test the idea", "Independent review", "Agree terms in writing", "Launch or grow", "Track and report"];
 
 export default function BusinessDevelopment() {
   return (
     <>
-      <PageHero eyebrow="Investment & business development arm" title={<>Turning awards into <span className="gold-text">enterprises that last.</span></>} lead="A substantial award can change one life. A well-built business can change hundreds. Our professional team will work with beneficiaries who choose support, to identify, build and grow viable businesses." >
-        <StatusBadge kind="proposed" label="Proposed service — team and partners not yet appointed" />
+      <PageHero eyebrow="Business support" title={<>Turn a win into a business <span className="gold-text">that lasts.</span></>} lead="A big award can change one life. A well-run business can change hundreds. Our team will help winners who want it to start or grow a business that creates jobs." >
+        <StatusBadge kind="proposed" label="Planned — team not yet hired" />
       </PageHero>
       <section className="bg-white py-20 sm:py-28">
         <div className="container-x">
-          <SectionHeading eyebrow="What we will provide" title="Institutional-grade support, sized for Nigerian entrepreneurs." />
+          <SectionHeading eyebrow="What winners get" title="World-class support, built for Nigerian business." />
           <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {SERVICES.map((s, i) => (
               <Reveal key={s.t} delay={(i % 3) * 80}>
@@ -43,7 +43,7 @@ export default function BusinessDevelopment() {
       </section>
       <section className="bg-navy-950 py-20 text-white sm:py-28">
         <div className="container-x">
-          <SectionHeading tone="light" eyebrow="The venture pathway" title="Seven disciplined stages." />
+          <SectionHeading tone="light" eyebrow="From idea to business" title="Seven careful steps." />
           <ol className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-7">
             {STAGES.map((s, i) => (
               <li key={s} className="rounded-2xl border border-white/10 bg-white/[0.04] p-5">
@@ -57,22 +57,22 @@ export default function BusinessDevelopment() {
       <section className="bg-white py-20 sm:py-28">
         <div className="container-x grid gap-10 lg:grid-cols-2">
           <div>
-            <SectionHeading eyebrow="Beneficiary rights" title="Support is offered. Never imposed." />
+            <SectionHeading eyebrow="Your rights as a winner" title="Our help is offered. Never forced." />
             <ul className="mt-8 space-y-4 text-navy-700">
               {[
-                "An award belongs to the beneficiary under the approved rules. Using our business support is voluntary.",
-                "Every engagement is governed by a written agreement, with fees, equity, profit-share or co-investment terms disclosed in full before signing.",
-                "Beneficiaries are encouraged — and where appropriate funded — to obtain independent legal and financial advice.",
-                "Conflicts of interest of advisers, staff and directors are declared and recorded.",
-                "Beneficiaries may exit support arrangements under clear, pre-agreed terms.",
+                "Your award is yours. Using our business help is completely up to you.",
+                "Everything is agreed in writing. You see every fee and every term before you sign.",
+                "We encourage you to get your own lawyer and adviser — and may pay for it.",
+                "If any of our people has a personal interest, they must declare it.",
+                "You can step away from our support on terms agreed at the start.",
               ].map((t) => (
                 <li key={t} className="flex gap-3"><FileSignature className="mt-1 h-5 w-5 shrink-0 text-gold-600" aria-hidden />{t}</li>
               ))}
             </ul>
           </div>
           <div className="space-y-5">
-            <Callout title="Business investment is risky">Businesses can fail. Any co-investment from the business development fund carries risk of loss and will be managed through a separately regulated vehicle — never presented to members as a guaranteed return.</Callout>
-            <Callout tone="gold" title="Target sectors under consideration">Agro-processing · logistics & cold chain · renewable energy · light manufacturing · healthcare services · construction materials · digital services. Final sector strategy will be set by an independent investment committee.</Callout>
+            <Callout title="Businesses can fail">Not every business succeeds. Money from our business fund can be lost, so it is managed separately, by regulated professionals — and it is never promised to members as a return.</Callout>
+            <Callout tone="gold" title="Sectors we&apos;re looking at">Food processing · logistics &amp; cold storage · solar energy · manufacturing · healthcare · building materials · digital services. An independent committee will make the final choice.</Callout>
           </div>
         </div>
       </section>

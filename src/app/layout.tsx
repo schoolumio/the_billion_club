@@ -7,15 +7,15 @@ const site = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
 
 export const metadata: Metadata = {
   metadataBase: new URL(site),
-  title: { default: "The Billionaire Circle — Community Wealth Initiative", template: "%s · The Billionaire Circle" },
+  title: { default: "The Billionaire Circle — Together, we build billionaires", template: "%s · The Billionaire Circle" },
   description:
-    "10 million people. ₦100 a day. A transparently governed community wealth initiative that funds awards, builds businesses and creates jobs across Nigeria. Pre-launch.",
+    "10 million people. ₦100 a day. 30 life-changing winners every month — and businesses that create jobs for everyone else. Join the founding community free.",
   keywords: ["community wealth", "Nigeria", "economic empowerment", "business development", "transparency", "job creation"],
   openGraph: {
     type: "website",
     siteName: "The Billionaire Circle",
     title: "10 million people. One shared vision. A new generation of wealth.",
-    description: "A proposed, transparently governed community wealth creation initiative for Nigeria.",
+    description: "Join the founding community of Nigeria’s community wealth movement. Free to join.",
     locale: "en_NG",
   },
   twitter: { card: "summary_large_image" },

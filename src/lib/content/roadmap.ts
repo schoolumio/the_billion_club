@@ -1,7 +1,7 @@
 export const ROADMAP = [
-  { phase: "Phase 0", title: "Foundation", status: "In progress", body: "Concept, financial model, brand, platform prototype and legal scoping. This website is part of Phase 0.", when: "Now" },
-  { phase: "Phase 1", title: "Regulatory approvals", status: "Not started", body: "Formal legal opinions, licensing, trustee and custodian appointments, payment partners, tax opinion and audited policies.", when: "Before any collection" },
-  { phase: "Phase 2", title: "Capped pilot", status: "Not started", body: "A small, closely monitored pilot in approved jurisdictions with capped membership and published results.", when: "After approval" },
-  { phase: "Phase 3", title: "National roll-out", status: "Not started", body: "State-by-state expansion as approvals are secured, with award tiers scaling to verified inflow.", when: "Milestone-based" },
-  { phase: "Phase 4", title: "Ten million members", status: "Target", body: "The full ambition: 10 million members, a national enterprise portfolio and measurable job creation.", when: "Long-term target" },
+  { phase: "Phase 0", title: "Build the foundation", status: "Happening now", body: "Plan the model, design the platform, start the founding-community waitlist and prepare for approval. You are looking at Phase 0.", when: "Now" },
+  { phase: "Phase 1", title: "Get approved", status: "Not started", body: "Legal opinions, licences, an independent bank to hold the money, licensed payment partners and a tax ruling.", when: "Before we collect any money" },
+  { phase: "Phase 2", title: "Small, careful pilot", status: "Not started", body: "A limited pilot in approved states, closely watched, with every result published.", when: "After approval" },
+  { phase: "Phase 3", title: "Nationwide launch", status: "Not started", body: "Open state by state as approvals come through. Awards grow as more places are taken.", when: "Step by step" },
+  { phase: "Phase 4", title: "10 million strong", status: "Target", body: "10 million daily places, a national network of businesses and thousands of new jobs.", when: "Long-term goal" },
 ];

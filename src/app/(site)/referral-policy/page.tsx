@@ -7,8 +7,8 @@ export default function ReferralPolicy() {
   return (
     <PolicyLayout
       eyebrow="Referral programme policy"
-      title="Fair, single-level and verified."
-      lead="How the TBC founding community referral programme works — including what is proposed, what is not yet decided and what we will never do."
+      title="Fair, simple and one level only."
+      lead="How inviting people to TBC works — what counts, how rewards are planned to work, and what we will never do."
       version="Draft v0.1 · November 2026"
       sections={[
         { h: "Who can participate", body: <><p>Any person aged 18 or over who has joined the TBC waitlist with accurate details and accepted this policy. Staff, directors, contractors working on the programme and their household members may refer people for awareness but are not eligible for referral rewards.</p><p>One account per person. Additional accounts are closed and any referrals connected to them are void.</p></> },

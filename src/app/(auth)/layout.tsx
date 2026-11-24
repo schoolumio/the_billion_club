@@ -11,9 +11,9 @@ export default function AuthLayout({ children }: { children: React.ReactNode }) 
           <Link href="/" className="relative"><Logo tone="light" /></Link>
           <div className="relative">
             <p className="font-display text-4xl leading-tight">Together, we build<br /><span className="gold-text">billionaires.</span></p>
-            <p className="mt-4 max-w-md text-navy-200">Your member space: statements, verification, announcements and community opportunities — all in one secure place.</p>
+            <p className="mt-4 max-w-md text-navy-200">Your invite link, your referrals, your updates and your opportunities — all in one safe place.</p>
           </div>
-          <p className="relative text-xs text-navy-400">Pre-launch demonstration environment. No real money is processed.</p>
+          <p className="relative text-xs text-navy-400">We haven&apos;t launched yet. No real money is taken.</p>
         </aside>
         <div className="flex items-center justify-center px-4 py-12 sm:px-8">
           <div className="w-full max-w-md">

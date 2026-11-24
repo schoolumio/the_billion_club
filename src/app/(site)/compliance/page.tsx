@@ -15,14 +15,14 @@ export default function Compliance() {
   const prog = all.filter((i) => i.status === "in_progress").length;
   return (
     <>
-      <PageHero eyebrow="Legal & regulatory readiness" title={<>Not licensed. <span className="gold-text">Not yet.</span> Here is the path.</>} lead="The Billionaire Circle is not approved, licensed or certified as compliant by any authority. This page sets out the questions that must be answered and the approvals likely required before we accept a single naira." />
+      <PageHero eyebrow="Legal & licensing" title={<>We’re not licensed yet. <span className="gold-text">Here’s our plan.</span></>} lead="The Billionaire Circle has not yet been approved or licensed by any authority. This page shows the legal questions we must answer — and the approvals we need — before we accept a single naira." />
       <section className="bg-white py-20 sm:py-28">
         <div className="container-x">
-          <Callout tone="warning" title="Important notice">
-            This is a scoping document prepared to brief qualified Nigerian counsel. It is not legal advice and may be incomplete. Laws, jurisdiction and regulator
-            practice change — in particular, the division of lottery regulation between federal and state authorities. Every item must be confirmed by professional opinion.
+          <Callout tone="warning" title="Please note">
+            This is our working list to brief Nigerian lawyers. It isn&apos;t legal advice and may not be complete. Laws change — including which authorities (federal or state)
+            regulate lotteries — so every point here will be confirmed by qualified professionals.
           </Callout>
-          <SectionHeading className="mt-16" eyebrow="Regulatory map" title="Eleven questions that decide whether — and how — we launch." />
+          <SectionHeading className="mt-16" eyebrow="The big questions" title="11 legal questions we must answer before launch." />
           <div className="mt-10 grid gap-5 lg:grid-cols-2">
             {REG_AREAS.map((r, i) => (
               <Card key={r.area} className="!p-7">
@@ -32,9 +32,9 @@ export default function Compliance() {
                 </div>
                 <p className="mt-4 font-medium text-navy-800">{r.question}</p>
                 <dl className="mt-5 space-y-4 text-sm">
-                  <div><dt className="text-xs font-semibold uppercase tracking-wider text-gold-700">Relevant authorities</dt><dd className="mt-1 text-navy-700">{r.authorities.join(" · ")}</dd></div>
-                  <div><dt className="text-xs font-semibold uppercase tracking-wider text-gold-700">Key instruments to review</dt><dd className="mt-1 text-navy-700">{r.instruments.join(" · ")}</dd></div>
-                  <div><dt className="text-xs font-semibold uppercase tracking-wider text-gold-700">Approvals / opinions likely needed</dt>
+                  <div><dt className="text-xs font-semibold uppercase tracking-wider text-gold-700">Who regulates this</dt><dd className="mt-1 text-navy-700">{r.authorities.join(" · ")}</dd></div>
+                  <div><dt className="text-xs font-semibold uppercase tracking-wider text-gold-700">Laws to check</dt><dd className="mt-1 text-navy-700">{r.instruments.join(" · ")}</dd></div>
+                  <div><dt className="text-xs font-semibold uppercase tracking-wider text-gold-700">What we’ll likely need</dt>
                     <dd className="mt-1"><ul className="list-disc space-y-1 pl-5 text-navy-700">{r.needed.map((n) => <li key={n}>{n}</li>)}</ul></dd>
                   </div>
                 </dl>
@@ -47,7 +47,7 @@ export default function Compliance() {
       <section className="bg-mist py-20 sm:py-28">
         <div className="container-x">
           <div className="flex flex-wrap items-end justify-between gap-6">
-            <SectionHeading eyebrow="Compliance readiness checklist" title="Where we actually are." />
+            <SectionHeading eyebrow="Our progress" title="Where we honestly stand today." />
             <div className="flex gap-6 text-sm">
               <p><span className="font-display text-3xl text-navy-950 tabular">{done}</span> <span className="text-navy-500">complete</span></p>
               <p><span className="font-display text-3xl text-navy-950 tabular">{prog}</span> <span className="text-navy-500">in progress</span></p>
@@ -76,11 +76,11 @@ export default function Compliance() {
             <div className="flex items-start gap-4">
               <Scale className="h-8 w-8 shrink-0 text-gold-300" aria-hidden />
               <div>
-                <h3 className="text-2xl font-medium">Our proposed solution: separate the money by law, not just by label.</h3>
+                <h3 className="text-2xl font-medium">Our plan: keep each kind of money legally separate.</h3>
                 <p className="mt-3 leading-relaxed text-navy-200">
-                  We propose a multi-entity structure for counsel to test: (1) a licensed award vehicle (or licensed-operator partnership) that runs selection and pays awards;
-                  (2) a separately regulated business development fund managed by an SEC-registered manager with an independent trustee; (3) a foundation (incorporated trustees)
-                  for community development grants; and (4) an operating company paid a capped, published fee. An independent custodian holds all funds; an external auditor reports on each.
+                  We plan to set up four separate parts, for our lawyers to test: (1) a licensed body that runs the draw and pays winners; (2) a business fund run by an
+                  SEC-registered manager, with an independent trustee; (3) a foundation for community grants; and (4) a company that runs TBC for a capped, published fee.
+                  An independent bank holds all the money, and outside auditors check every part.
                 </p>
               </div>
             </div>

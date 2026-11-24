@@ -69,7 +69,7 @@ export function AppShell({ nav, user, area, children, logout, switchLink }: {
           <button className="rounded-lg p-2 text-navy-800 lg:hidden" onClick={() => setOpen(true)} aria-label="Open menu"><Menu className="h-5 w-5" /></button>
           <p className="hidden text-sm text-navy-500 lg:block">Signed in as <span className="font-medium text-navy-900">{user.email}</span></p>
           <span className="inline-flex items-center gap-1.5 rounded-full bg-violet-50 px-3 py-1 text-xs font-semibold text-violet-800 ring-1 ring-inset ring-violet-200">
-            <FlaskConical className="h-3 w-3" aria-hidden /> Demonstration environment
+            <FlaskConical className="h-3 w-3" aria-hidden /> Demo version
           </span>
         </header>
         <main id="main" className="px-4 py-8 sm:px-8">{children}</main>

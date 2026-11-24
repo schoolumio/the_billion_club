@@ -25,7 +25,7 @@ export default async function Leaderboard({ searchParams }: { searchParams: Prom
 
   return (
     <>
-      <PageHero eyebrow="Community leaderboard" title={<>The people <span className="gold-text">building the circle.</span></>} lead="Ranked only by verified referrals. Members choose whether their name appears; everyone else is shown anonymously.">
+      <PageHero eyebrow="Leaderboard" title={<>Meet the people <span className="gold-text">building the circle.</span></>} lead="Ranked by the number of real, confirmed people each member has invited. Names only appear if members choose to show them.">
         <LinkButton href="/join" arrow>Join and start inviting</LinkButton>
       </PageHero>
       <section className="bg-white py-16 sm:py-20">
@@ -38,7 +38,7 @@ export default async function Leaderboard({ searchParams }: { searchParams: Prom
               {SIZES.map((n) => <Link key={n} href={`?b=${kind}&n=${n}`} className={clsx("rounded-full px-3 py-2 text-xs font-semibold", size === n ? "bg-[#d4af37] text-[#0d1b2b]" : "text-navy-600")}>Top {n.toLocaleString()}</Link>)}
             </div>
           </div>
-          {anyDemo && <StatusBadge kind="demo" label="Sample data — demonstration environment" className="mt-6" />}
+          {anyDemo && <StatusBadge kind="demo" label="Sample data — demo version" className="mt-6" />}
           <ol className="mt-6 divide-y divide-navy-100 overflow-hidden rounded-3xl border border-navy-100">
             {(data?.rows ?? []).map((r, i) => {
               const name = r.leaderboard_opt_in ? (r.leaderboard_alias || maskName(r.full_name)) : `Anonymous member · ${r.referral_code.slice(0, 5)}•••`;
@@ -56,9 +56,9 @@ export default async function Leaderboard({ searchParams }: { searchParams: Prom
                 </li>
               );
             })}
-            {(!data || data.rows.length === 0) && <li className="px-5 py-12 text-center text-navy-500">{data ? "No verified referrals yet — be the first." : "The leaderboard is unavailable right now."}</li>}
+            {(!data || data.rows.length === 0) && <li className="px-5 py-12 text-center text-navy-500">{data ? "No one is on the board yet — be the first." : "The leaderboard is unavailable right now."}</li>}
           </ol>
-          <p className="mt-4 text-xs text-navy-500">Updated {data?.updatedAt ? new Date(data.updatedAt).toLocaleString("en-NG", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "—"}. Rankings count verified, eligible referrals only; pending, under-review and rejected referrals never count. Rankings carry no financial entitlement.</p>
+          <p className="mt-4 text-xs text-navy-500">Updated {data?.updatedAt ? new Date(data.updatedAt).toLocaleString("en-NG", { day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "—"}. Only confirmed referrals count. Rankings are for recognition — they don’t entitle anyone to money.</p>
         </div>
       </section>
     </>

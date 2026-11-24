@@ -68,8 +68,8 @@ const joinSchema = z.object({
   ref: z.string().trim().max(20).optional().default(""),
   linkRef: z.string().max(20).optional().default(""),
   campaign: z.string().max(40).optional().default(""),
-  consentTerms: z.literal("on", { message: "Please accept the terms, privacy notice and referral policy" }),
-  consentNotInvestment: z.literal("on", { message: "Please confirm you understand the waitlist is free and is not an investment" }),
+  consentTerms: z.literal("on", { message: "Please tick to accept the terms, privacy notice and referral policy" }),
+  consentNotInvestment: z.literal("on", { message: "Please tick to confirm you understand joining is free and not an investment" }),
   adult: z.literal("on", { message: "You must be 18 or older to join" }),
   leaderboardOptIn: z.string().optional(),
   marketingConsent: z.string().optional(),
@@ -102,7 +102,7 @@ export async function joinAction(_: FormState, form: FormData): Promise<FormStat
     let referrer: { id: string; full_name: string; signup_ip_hash: string | null; signup_device_hash: string | null; status: string; role: string } | null = null;
     if (att.code && config.referralsEnabled) {
       referrer = await one(`SELECT id, full_name, signup_ip_hash, signup_device_hash, status, role FROM users WHERE referral_code = $1`, [att.code]);
-      if (!referrer) return { fieldErrors: { ref: ["We couldn't find that referral code. Check it, or clear the field to join without one."] } };
+      if (!referrer) return { fieldErrors: { ref: ["We couldn’t find that invite code. Check it, or remove it to join without one."] } };
       if (referrer.status !== "active" || referrer.role !== "member") referrer = null; // inactive/staff codes credit nobody
     }
 

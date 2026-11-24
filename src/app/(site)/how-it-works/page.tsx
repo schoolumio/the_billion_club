@@ -1,15 +1,29 @@
 import type { Metadata } from "next";
-import { Check } from "lucide-react";
+import { Check, Hourglass, Lightbulb } from "lucide-react";
 import { Callout, LinkButton, PageHero, SectionHeading, StatusBadge } from "@/components/ui/primitives";
 import { Reveal } from "@/components/ui/Reveal";
 import { HOW_IT_WORKS } from "@/lib/content/how";
 
-export const metadata: Metadata = { title: "How it works", description: "Seven simple steps from joining the community to building businesses and jobs for everyone." };
+export const metadata: Metadata = { title: "How it works", description: "Join free, take a ₦100 daily place, and every month 30 members win — while a business fund creates jobs for everyone else. Seven simple steps." };
 
 export default function HowItWorks() {
   return (
     <>
-      <PageHero eyebrow="How it works" title={<>From ₦100 a day to a <span className="gold-text">nation of opportunity.</span></>} lead="A simple journey for members, governed by rules that are published, approved and independently checked. Steps marked “Awaiting approval” will not operate until the relevant regulator has approved them." />
+      <PageHero
+        eyebrow="How it works"
+        title={<>Seven simple steps. <span className="gold-text">One big idea.</span></>}
+        lead="Join for free. Take a ₦100 daily place. Every month, 30 members win — and part of the money builds businesses that create jobs for everyone else."
+      >
+        <LinkButton href="/join" arrow>Join the waitlist — free</LinkButton>
+      </PageHero>
+
+      <section className="border-b border-navy-100 bg-mist">
+        <div className="container-x grid gap-4 py-8 sm:grid-cols-2">
+          <div className="flex gap-3 text-sm text-navy-700"><Lightbulb className="mt-0.5 h-5 w-5 shrink-0 text-sky-700" aria-hidden /><p><StatusBadge kind="proposed" /> <span className="mt-1 block">How we plan to do it. Details may change before launch.</span></p></div>
+          <div className="flex gap-3 text-sm text-navy-700"><Hourglass className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" aria-hidden /><p><StatusBadge kind="pending" /> <span className="mt-1 block">Needs a regulator&apos;s approval first. It won&apos;t happen until we have it.</span></p></div>
+        </div>
+      </section>
+
       <section className="bg-white py-20 sm:py-28">
         <div className="container-x">
           <ol className="relative mx-auto max-w-4xl">
@@ -20,10 +34,11 @@ export default function HowItWorks() {
                   <s.Icon className="h-5 w-5 sm:h-7 sm:w-7" aria-hidden />
                 </span>
                 <div className="flex flex-wrap items-center gap-3">
-                  <p className="font-display text-sm text-gold-600 tabular">Step {String(i + 1).padStart(2, "0")}</p>
+                  <p className="font-display text-sm text-gold-700 tabular">Step {i + 1}</p>
                   <StatusBadge kind={s.status} />
                 </div>
                 <h2 className="mt-2 text-2xl font-medium text-navy-950 sm:text-3xl">{s.title}</h2>
+                <p className="mt-1 font-medium text-navy-800">{s.short}</p>
                 <p className="mt-3 max-w-2xl leading-relaxed text-navy-600">{s.long}</p>
                 <ul className="mt-5 grid gap-2 sm:grid-cols-3">
                   {s.safeguards.map((g) => (
@@ -37,12 +52,12 @@ export default function HowItWorks() {
           </ol>
         </div>
       </section>
+
       <section className="bg-mist py-20">
         <div className="container-x grid gap-8 lg:grid-cols-2 lg:items-center">
-          <SectionHeading eyebrow="Contribution design" title="Daily accounting. Practical payment." lead="Collecting ₦100 every single day is costly for members and the system. We propose flexible pre-funding — a day, a week or a month at a time — with every day recorded individually in your statement." />
-          <Callout tone="warning" title="Not yet operating">
-            No contribution, selection or award process is active. The contribution model, refund rights, eligibility rules and selection methodology will be
-            finalised with regulators and published before launch.
+          <SectionHeading eyebrow="Paying made easy" title="Pay daily, weekly or monthly." lead="Paying ₦100 every single day costs you time and bank charges. So we plan to let you pay for a day, a week or a month at a time — and every day still shows up separately on your statement." />
+          <Callout tone="warning" title="Nothing is running yet">
+            We are not taking payments or running draws yet. Before we do, we&apos;ll publish the full rules — how to pay, how refunds work, who can win and how winners are chosen — once a regulator has approved them.
             <div className="mt-4"><LinkButton href="/faq" variant="navy" arrow>Read the FAQ</LinkButton></div>
           </Callout>
         </div>
